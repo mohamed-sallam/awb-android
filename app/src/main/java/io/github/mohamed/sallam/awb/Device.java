@@ -144,6 +144,7 @@ public class Device {
      *
      */
     public void deleteGroup(UUID groupGuid) {
+        groups.removeIf(group -> group.getUuid().equals(groupGuid));
     }
 
     /**
