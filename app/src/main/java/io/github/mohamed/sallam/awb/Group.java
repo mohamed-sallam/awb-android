@@ -1,121 +1,124 @@
 package io.github.mohamed.sallam.awb;
+import java.util.ArrayList;
 import java.util.UUID;
 
+	/**
+	 * This class contains the groups of apps which the user wants to block them
+	 * @author Mohamed Sherif
+	 */
+
 public class Group {
-	private String softwares;
-	private String websites;
+
+	// Fields
+
+	private ArrayList<String> softwares;
+	private ArrayList<String> websites;
 	private String name;
 	private UUID uuid;
 	public Group () { }
 
 	// Methods
 
+	// Mutator Methods
 	/**
-	 * Set the value of softwares
-	 * @param newVar the new value of softwares
+	 * Adds software
+	 * @param software the new blocked software
 	 */
-	public void setSoftwares(String newVar) {
-		softwares = newVar;
+	public void addSoftware(String software) {
+		this.softwares.add(software);
 	}
 
 	/**
-	 * Get the value of softwares
-	 * @return the value of softwares
+	 * Adds website
+	 * @param website the new blocked website
 	 */
-	public String getSoftwares() {
-		return softwares;
+	public void addWebsite(String website) {
+		this.websites.add(website);
 	}
 
 	/**
-	 * Set the value of websites
-	 * @param newVar the new value of websites
-	 */
-	public void setWebsites(String newVar) {
-		websites = newVar;
-	}
-
-	/**
-	 * Get the value of websites
-	 * @return the value of websites
-	 */
-	public String getWebsites() {
-		return websites;
-	}
-
-	/**
-	 * Set the value of name
-	 * @param newVar the new value of name
-	 */
-	public void setName (String newVar) {
-		name = newVar;
-	}
-
-	/**
-	 * Get the value of name
-	 * @return the value of name
-	 */
-	public String getName () {
-		return name;
-	}
-
-	/**
-	 * Set the value of uuid
-	 * @param newVar the new value of uuid
+	 * Sets the value of uuid
+	 * @param newVar the value of uuid
 	 */
 	public void setUuid(UUID newVar) {
-		uuid = newVar;
+		this.uuid = newVar;
 	}
 
 	/**
-	 * Get the value of uuid
+	 */
+	}
+
+	// Accessor Methods
+
+	/**
+	 * Gets the value of softwares
+	 * @return array of the blocked softwares
+	 */
+	public ArrayList<String> getSoftwares() {
+		return this.softwares;
+	}
+
+	/**
+	 * Gets the value of websites
+	 * @return array of the blocked websites
+	 */
+	public ArrayList<String> getWebsites() {
+		return this.websites;
+	}
+
+	/**
+	 */
+	}
+
+	/**
+	 * Renames the group
+	 * @param newName the new value of group name
+	 */
+	public void rename(String newName) {
+		this.name = newName;
+	}
+
+	/**
+	 * Gets group name
+	 * @return the value of name
+	 */
+	public String getName() {
+		return this.name;
+	}
+
+	/**
+	 * Gets the value of uuid
 	 * @return the value of uuid
 	 */
 	public UUID getUuid() {
-		return uuid;
+		return this.uuid;
 	}
+
+	// Other Methods
 
 	/**
 	 */
-	public void clone()
-	{
+	}
+
+	/**
+	 * Deletes Software
+	 * @param index of the software desired to be deleted
+	 */
+	public void deleteSoftware(int index) {
+		this.softwares.remove(index);
+	}
+
+	/**
+	 * Deletes Website
+	 * @param index of the website desired to be deleted
+	 */
+	public void deleteWebsite(int index) {
+		this.websites.remove(index);
 	}
 
 	/**
 	 * Deletes App
 	 * @param index of the app desired to be deleted
 	 */
-	public void deleteApp( int index)
-	{
-	}
-
-	/**
-	 * Adds App
-	 * @param app
-	 */
-	public void addApp(String app)
-	{
-	}
-
-	/**
-	 * Adds Website
-	 * @param website
-	 */
-	public void addWebsite(String website)
-	{
-	}
-
-	/**
-	 * Deletes Website
-	 * @param index of the app desired to be deleted
-	 */
-	public void deleteWebsite( int index)
-	{
-	}
-
-	/**
-	 * Renames the Group of Apps
-	 */
-	public void rename()
-	{
 	}
 }
