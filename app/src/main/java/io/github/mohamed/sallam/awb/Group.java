@@ -13,6 +13,7 @@ public class Group {
 
 	private ArrayList<String> softwares;
 	private ArrayList<String> websites;
+	private ArrayList<String> apps;
 	private String name;
 	private UUID uuid;
 	public Group () { }
@@ -45,7 +46,11 @@ public class Group {
 	}
 
 	/**
+	 * Adds App
+	 * @param app desired to be added
 	 */
+	public void addApp(String app) {
+		this.apps.add(app);
 	}
 
 	// Accessor Methods
@@ -67,7 +72,11 @@ public class Group {
 	}
 
 	/**
+	 * Gets the value of apps
+	 * @return array of the blocked apps
 	 */
+	public ArrayList<String> getApps() {
+		return this.apps;
 	}
 
 	/**
@@ -97,7 +106,17 @@ public class Group {
 	// Other Methods
 
 	/**
+	 * Makes a copy of the current group
+	 * @return newGroup
 	 */
+	public Group clone() {
+		Group newGroup = new Group();
+		newGroup.softwares = this.getSoftwares();
+		newGroup.websites = this.getWebsites();
+		newGroup.apps = this.getApps();
+		newGroup.setUuid(this.uuid);
+		newGroup.rename(this.name);
+		return newGroup;
 	}
 
 	/**
@@ -120,5 +139,7 @@ public class Group {
 	 * Deletes App
 	 * @param index of the app desired to be deleted
 	 */
+	public void deleteApp(int index) {
+		this.apps.remove(index);
 	}
 }
