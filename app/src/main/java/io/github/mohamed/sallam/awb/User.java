@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * Class User that has methods to generate a unique secret key for every user
- * and add devices in the devices list using Singleton Design Pattern.
+ * User class has methods to generate a unique secret key for a user
+ * and add devices in the devices list and this class uses
+ * Singleton Design Pattern.
  * Sources: https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm
  *
  * @author Yousef Ahmed
@@ -15,7 +16,7 @@ public class User {
 	private ArrayList<Device> devices = new ArrayList<>();
 	private String secretKey;
 
-	// Creating an object of User
+	// Creating an object of User class
 	private static User instance;
 
 	/// Make the constructor private so that this class cannot be instantiated
@@ -25,7 +26,8 @@ public class User {
 
 	// Accessor Methods
 	/**
-	 * Gets the devices from device list
+	 * Gets the devices from device list.
+	 *
 	 * @author Yousef Ahmed
 	 */
 	public ArrayList<Device> getDevices () {
@@ -33,8 +35,10 @@ public class User {
 	}
 
 	/**
-	 * Gets the secret key
-	 * @return the value of secret key
+	 * Gets the user's secret key.
+	 *
+	 * @return the user's secret key.
+	 *
 	 * @author Yousef Ahmed
 	 */
 	public String getSecretKey() {
@@ -44,7 +48,8 @@ public class User {
 
 	// Mutator Method
 	/**
-	 * Generates the secret key
+	 * Generates new user's secret key.
+	 *
 	 * @author Yousef Ahmed
 	 */
 	public void generateSecretKey() {
@@ -52,8 +57,10 @@ public class User {
 	}
 
 	/**
-	 * Adds a new device
-	 * @param device the value of Device
+	 * Adds a new device to devices list.
+	 *
+	 * @param device to be added to the devices list.
+	 *
 	 * @author Yousef Ahmed
 	 */
 	public void addDevice(Device device) {
@@ -63,8 +70,10 @@ public class User {
 
 	// Other Methods
 	/**
-	 * Deletes the device in device list
-	 * @param deviceUuid the value of deleted device
+	 * Deletes a device from devices list using its UUID.
+	 *
+	 * @param deviceUuid the value of deleted device.
+	 *
 	 * @author Yousef Ahmed
 	 */
 	public void deleteDevice(UUID deviceUuid) {
@@ -77,8 +86,10 @@ public class User {
 	}
 
 	/**
-	 * Get the only object available
-	 * @return the only instance of User class
+	 * Gets the only object available.
+	 *
+	 * @return the only instance of User class.
+	 *
 	 * @author Yousef Ahmed
 	 */
 	public static User getInstance() {
