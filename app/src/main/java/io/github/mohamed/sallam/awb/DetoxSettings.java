@@ -1,46 +1,43 @@
-
+package io.github.mohamed.sallam.awb;
 abstract public class DetoxSettings {
 
 	static private String AWB_VERSION = "0.1.0v";
-	private GUID groupGuid;	
-	public DetoxSettings () { };
-	
-	//
-	// Methods
-	//
-
-
-	/**
-	 * Get the value of AWB_VERSION
-	 * @return the value of AWB_VERSION
-	 */
-	public String getAWB_VERSION () {
-		return AWB_VERSION;
+	private GUID groupGuid;
+	public  DetoxSettings()
+	{
+		// Methods
 	}
 
-	/**
-	 * Set the value of groupGuid
-	 * @param newVar the new value of groupGuid
-	 */
-	public void setGroupGuid (GUID newVar) {
-		groupGuid = newVar;
-	}
 
-	/**
-	 * Get the value of groupGuid
-	 * @return the value of groupGuid
-	 */
-	public GUID getGroupGuid () {
-		return groupGuid;
-	}
+		/**
+		 * Get the value of AWB_VERSION
+		 * @return the value of AWB_VERSION
+		 */
+		public String getAWB_VERSION ()
+		{
+			return AWB_VERSION;
+		}
 
-	//
-	// Other methods
-	//
+		/**
+		 * Set the value of groupGuid
+		 * @param newVar the new value of groupGuid
+		 */
+		public void setGroupGuid (GUID newVar)
+		{
+			groupGuid = newVar;
+		}
 
-	/**
-	 */
-	abstract public void lock();
+		/**
+		 * Get the value of groupGuid
+		 * @return the value of groupGuid
+		 */
+		public GUID getGroupGuid ()
+		{
+			return groupGuid;
+		}
 
-
+		/**
+		 * * lock the phone according to detox setting
+		 */
+		abstract public void lock();
 }

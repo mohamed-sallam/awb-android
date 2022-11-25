@@ -1,3 +1,4 @@
+package io.github.mohamed.sallam.awb;
 
 public class DetoxSchedule extends DetoxSettings {
 
@@ -5,18 +6,17 @@ public class DetoxSchedule extends DetoxSettings {
 	private long startDate;
 	private long endDate;
 	private RepeatSchedule repeatSchedule;	
-	public DetoxSchedule () { };
-	
-	//
-	// Methods
-	//
-
+	public DetoxSchedule()
+	{
+		// Methods
+	}
 
 	/**
 	 * Set the value of title
 	 * @param newVar the new value of title
 	 */
-	public void setTitle (String newVar) {
+	public void setTitle(String newVar)
+	{
 		title = newVar;
 	}
 
@@ -24,7 +24,8 @@ public class DetoxSchedule extends DetoxSettings {
 	 * Get the value of title
 	 * @return the value of title
 	 */
-	public String getTitle () {
+	public String getTitle()
+	{
 		return title;
 	}
 
@@ -32,7 +33,8 @@ public class DetoxSchedule extends DetoxSettings {
 	 * Set the value of startDate
 	 * @param newVar the new value of startDate
 	 */
-	public void setStartDate (long newVar) {
+	public void setStartDate(long newVar)
+	{
 		startDate = newVar;
 	}
 
@@ -40,7 +42,8 @@ public class DetoxSchedule extends DetoxSettings {
 	 * Get the value of startDate
 	 * @return the value of startDate
 	 */
-	public long getStartDate () {
+	public long getStartDate()
+	{
 		return startDate;
 	}
 
@@ -48,7 +51,8 @@ public class DetoxSchedule extends DetoxSettings {
 	 * Set the value of endDate
 	 * @param newVar the new value of endDate
 	 */
-	public void setEndDate (long newVar) {
+	public void setEndDate(long newVar)
+	{
 		endDate = newVar;
 	}
 
@@ -56,7 +60,8 @@ public class DetoxSchedule extends DetoxSettings {
 	 * Get the value of endDate
 	 * @return the value of endDate
 	 */
-	public long getEndDate () {
+	public long getEndDate()
+	{
 		return endDate;
 	}
 
@@ -64,7 +69,8 @@ public class DetoxSchedule extends DetoxSettings {
 	 * Set the value of repeatSchedule
 	 * @param newVar the new value of repeatSchedule
 	 */
-	public void setRepeatSchedule (RepeatSchedule newVar) {
+	public void setRepeatSchedule(RepeatSchedule newVar)
+	{
 		repeatSchedule = newVar;
 	}
 
@@ -72,7 +78,8 @@ public class DetoxSchedule extends DetoxSettings {
 	 * Get the value of repeatSchedule
 	 * @return the value of repeatSchedule
 	 */
-	public RepeatSchedule getRepeatSchedule () {
+	public RepeatSchedule getRepeatSchedule()
+	{
 		return repeatSchedule;
 	}
 
@@ -81,10 +88,10 @@ public class DetoxSchedule extends DetoxSettings {
 	//
 
 	/**
+	 * * lock the phone according to detox setting
 	 */
 	public void lock()
 	{
+		// methods
 	}
-
-
 }
