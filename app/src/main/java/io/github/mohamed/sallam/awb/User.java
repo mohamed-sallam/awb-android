@@ -77,12 +77,7 @@ public class User {
 	 * @author Yousef Ahmed
 	 */
 	public void deleteDevice(UUID deviceUuid) {
-		for (Device list : devices) {
-			if (list.getUuid() == deviceUuid) {
-				devices.remove(list);
-				break;
-			}
-		}
+		devices.removeIf(device -> device.getUuid().equals(deviceUuid));
 	}
 
 	/**
