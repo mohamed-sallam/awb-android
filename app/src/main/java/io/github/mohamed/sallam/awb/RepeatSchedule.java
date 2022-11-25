@@ -5,9 +5,9 @@ package io.github.mohamed.sallam.awb;
  */
 public class RepeatSchedule {
 	// Fields
+	private Duration   duration   = new Duration.FOREVER();
 
 	private Repetition repetition = NONE;
-	private Duration duration = FOREVER;	
 	// Methods
 
 	// Accessor methods
