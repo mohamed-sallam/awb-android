@@ -1,5 +1,7 @@
 package io.github.mohamed.sallam.awb;
 
+import androidx.annotation.NonNull;
+import static io.github.mohamed.sallam.awb.Device.Os.UNKOWN;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -14,11 +16,38 @@ public class Device {
     // Fields
     private String name;
     private String operatingSystemName;
-    private undef operatingSystemType = null;
+    private Os operatingSystemType = UNKOWN;
     public static final String AWB_VERSION = "0.1.0v";
     private String ipAddressV4 = "127.0.0.1";
     private UUID uuid;
     private ArrayList<Group> groups = new ArrayList<>();
+
+    /**
+     * Enum to optimize the interactions with operating system names by
+     * assigning constant names to a group of numeric integer values. It makes
+     * constant values more readable.
+     *
+     * @author Abdalrhman Hemida
+     *
+     */
+    enum Os {
+        UNKOWN(0),
+        UNIX(1),
+        ANDROID(2),
+        WINDOWS(3);
+
+        private final int osNum;
+
+        Os(int osNum){
+            this.osNum = osNum;
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return Integer.toString(osNum);
+        }
+    }
 
     // Constructor
     public Device() {}
@@ -50,7 +79,7 @@ public class Device {
      * @param newVar the new value of operatingSystemType.
      *
      */
-    public void setOperatingSystemType(undef newVar) {
+    public void setOperatingSystemType(Os newVar) {
         operatingSystemType = newVar;
     }
 
@@ -70,7 +99,6 @@ public class Device {
      *
      */
     public void generateUuid() {}
-
 
     // Accessors
     /**
@@ -104,7 +132,7 @@ public class Device {
     }
 
     /**
-     * Gets the value of GUID.
+     * Gets the value of UUID.
      *
      * @return device UUID.
      *
@@ -138,13 +166,13 @@ public class Device {
      * Deletes a group of apps which user has defined from a particular device
      * using the UUID of the group.
      *
-     * @param groupGuid the group id.
+     * @param groupUuid the group id.
      *
      * @author Abdalrhman Hemida.
      *
      */
-    public void deleteGroup(UUID groupGuid) {
-        groups.removeIf(group -> group.getUuid().equals(groupGuid));
+    public void deleteGroup(UUID groupUuid) {
+        groups.removeIf(group -> group.getUuid().equals(groupUuid));
     }
 
     /**
@@ -158,5 +186,4 @@ public class Device {
     public void addGroup(Group group) {
         groups.add(group);
     }
-
 }
