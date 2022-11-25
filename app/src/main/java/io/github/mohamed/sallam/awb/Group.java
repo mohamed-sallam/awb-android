@@ -1,47 +1,45 @@
+package io.github.mohamed.sallam.awb;
+import java.util.UUID;
 
 public class Group {
-
-	private String software_;
-	private String websites_;
+	private String softwares;
+	private String websites;
 	private String name;
-	private GUID guid;	
+	private UUID uuid;
 	public Group () { }
-	
-	//
+
 	// Methods
-	//
-
 
 	/**
-	 * Set the value of software_
-	 * @param newVar the new value of software_
+	 * Set the value of softwares
+	 * @param newVar the new value of softwares
 	 */
-	public void setSoftware_ (String newVar) {
-		software_ = newVar;
+	public void setSoftwares(String newVar) {
+		softwares = newVar;
 	}
 
 	/**
-	 * Get the value of software_
-	 * @return the value of software_
+	 * Get the value of softwares
+	 * @return the value of softwares
 	 */
-	public String getSoftware_ () {
-		return software_;
+	public String getSoftwares() {
+		return softwares;
 	}
 
 	/**
-	 * Set the value of websites_
-	 * @param newVar the new value of websites_
+	 * Set the value of websites
+	 * @param newVar the new value of websites
 	 */
-	public void setWebsites_ (String newVar) {
-		websites_ = newVar;
+	public void setWebsites(String newVar) {
+		websites = newVar;
 	}
 
 	/**
-	 * Get the value of websites_
-	 * @return the value of websites_
+	 * Get the value of websites
+	 * @return the value of websites
 	 */
-	public String getWebsites_ () {
-		return websites_;
+	public String getWebsites() {
+		return websites;
 	}
 
 	/**
@@ -61,24 +59,20 @@ public class Group {
 	}
 
 	/**
-	 * Set the value of guid
-	 * @param newVar the new value of guid
+	 * Set the value of uuid
+	 * @param newVar the new value of uuid
 	 */
-	public void setGuid (GUID newVar) {
-		guid = newVar;
+	public void setUuid(UUID newVar) {
+		uuid = newVar;
 	}
 
 	/**
-	 * Get the value of guid
-	 * @return the value of guid
+	 * Get the value of uuid
+	 * @return the value of uuid
 	 */
-	public GUID getGuid () {
-		return guid;
+	public UUID getUuid() {
+		return uuid;
 	}
-
-	//
-	// Other methods
-	//
 
 	/**
 	 */
@@ -86,44 +80,42 @@ public class Group {
 	{
 	}
 
-
 	/**
-	 * @param        index
+	 * Deletes App
+	 * @param index of the app desired to be deleted
 	 */
 	public void deleteApp( int index)
 	{
 	}
 
-
 	/**
-	 * @param        app
+	 * Adds App
+	 * @param app
 	 */
 	public void addApp(String app)
 	{
 	}
 
-
 	/**
-	 * @param        website
+	 * Adds Website
+	 * @param website
 	 */
 	public void addWebsite(String website)
 	{
 	}
 
-
 	/**
-	 * @param        index
+	 * Deletes Website
+	 * @param index of the app desired to be deleted
 	 */
 	public void deleteWebsite( int index)
 	{
 	}
 
-
 	/**
+	 * Renames the Group of Apps
 	 */
 	public void rename()
 	{
 	}
-
-
 }
