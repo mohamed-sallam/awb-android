@@ -1,43 +1,47 @@
 package io.github.mohamed.sallam.awb;
+import java.util.UUID;
 abstract public class DetoxSettings {
 
-	static private String AWB_VERSION = "0.1.0v";
-	private GUID groupGuid;
-	public  DetoxSettings()
-	{
+	public static final String AWB_VERSION = "0.1.0v";
+	private UUID groupGuid;
+	public  DetoxSettings()	{
 		// Methods
 	}
 
+	/**
+	 * Set the value of groupGuid
+	 *
+	 * @param newVar the new value of groupGuid
+	 *
+	 * @author Mohamed Yehia
+	 */
+	public void setGroupGuid (UUID newVar) {
+		groupGuid = newVar;
+	}
 
-		/**
-		 * Get the value of AWB_VERSION
-		 * @return the value of AWB_VERSION
-		 */
-		public String getAWB_VERSION ()
-		{
-			return AWB_VERSION;
-		}
+	/**
+	 * Generates new value of groupGuid
+	 *
+	 * @author mohamed yehia
+	 */
+	public void generateGroupGuid () {
 
-		/**
-		 * Set the value of groupGuid
-		 * @param newVar the new value of groupGuid
-		 */
-		public void setGroupGuid (GUID newVar)
-		{
-			groupGuid = newVar;
-		}
+	}
 
-		/**
-		 * Get the value of groupGuid
-		 * @return the value of groupGuid
-		 */
-		public GUID getGroupGuid ()
-		{
-			return groupGuid;
-		}
+	/**
+	 * Get the value of groupGuid
+	 *
+	 * @return the value of groupGuid
+	 *
+	 * @author Mohamed Yehia
+	 */
+	public UUID getGroupGuid () {
+		return groupGuid;
+	}
 
-		/**
-		 * * lock the phone according to detox setting
-		 */
-		abstract public void lock();
+	/**
+	 * * lock the phone according to detox setting
+	 * @author Mohamed Yehia
+	 */
+	abstract public void lock();
 }
