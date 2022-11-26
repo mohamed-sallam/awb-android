@@ -72,7 +72,7 @@ public class User {
 	/**
 	 * Deletes a device from devices list using its UUID.
 	 *
-	 * @param deviceUuid the value of deleted device.
+	 * @param deviceUuid of the device to be deleted.
 	 *
 	 * @author Yousef Ahmed
 	 */
