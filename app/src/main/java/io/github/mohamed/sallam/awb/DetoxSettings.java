@@ -5,11 +5,11 @@ abstract public class DetoxSettings {
 	public static final String AWB_VERSION = "0.1.0v";
 	private UUID groupGuid;
 	public  DetoxSettings()	{
-		// Methods
+		// implementation
 	}
 
 	/**
-	 * Set the value of groupGuid
+	 * Sets the value of groupGuid
 	 *
 	 * @param newVar the new value of groupGuid
 	 *
@@ -22,14 +22,14 @@ abstract public class DetoxSettings {
 	/**
 	 * Generates new value of groupGuid
 	 *
-	 * @author mohamed yehia
+	 * @author Mohamed Yehia
 	 */
 	public void generateGroupGuid () {
 
 	}
 
 	/**
-	 * Get the value of groupGuid
+	 * Gets the value of groupGuid
 	 *
 	 * @return the value of groupGuid
 	 *
@@ -40,7 +40,7 @@ abstract public class DetoxSettings {
 	}
 
 	/**
-	 * * lock the phone according to detox setting
+	 * * locks the phone according to detox setting
 	 * @author Mohamed Yehia
 	 */
 	abstract public void lock();

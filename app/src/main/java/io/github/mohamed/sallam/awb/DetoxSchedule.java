@@ -6,11 +6,11 @@ public class DetoxSchedule extends DetoxSettings {
 	private Timestamp endDate;
 	private RepeatSchedule repeatSchedule;	
 	public DetoxSchedule() {
-		// Methods
+		// implementation
 	}
 
 	/**
-	 * Set the value of title
+	 * Sets the value of title
 	 *
 	 * @param newVar the new value of title
 	 *
@@ -21,7 +21,7 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Get the value of title
+	 * Gets the value of title
 	 *
 	 * @return the value of title
 	 *
@@ -32,7 +32,7 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Set the value of startDate
+	 * Sets the value of startDate
 	 *
 	 * @param newVar the new value of startDate
 	 *
@@ -43,7 +43,7 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Get the value of startDate
+	 * Gets the value of startDate
 	 *
 	 * @return the value of startDate
 	 *
@@ -54,7 +54,7 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Set the value of endDate
+	 * Sets the value of endDate
 	 *
 	 * @param newVar the new value of endDate
 	 *
@@ -65,7 +65,7 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Get the value of endDate
+	 * Gets the value of endDate
 	 *
 	 * @return the value of endDate
 	 *
@@ -76,7 +76,7 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Set the value of repeatSchedule
+	 * Sets the value of repeatSchedule
 	 *
 	 * @param newVar the new value of repeatSchedule
 	 *
@@ -87,7 +87,7 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Get the value of repeatSchedule
+	 * Gets the value of repeatSchedule
 	 *
 	 * @return the value of repeatSchedule
 	 *
@@ -98,11 +98,11 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Lock the phone according to detox setting
+	 * Locks the phone according to detox setting
 	 *
 	 * @author Mohamed Yehia
 	 */
 	public void lock() {
-		// methods
+		// implementation
 	}
 }

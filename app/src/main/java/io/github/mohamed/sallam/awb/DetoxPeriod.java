@@ -1,13 +1,13 @@
-package io.github.mohamed.sallam.awb; //comments //parenthesis //Timestamp
+package io.github.mohamed.sallam.awb;
 import java.sql.Timestamp;
 public class DetoxPeriod extends DetoxSettings {
 	private Timestamp endDate;
 	public DetoxPeriod() {
-		// Methods
+		// implementation
 	}
 
 	/**
-	 * Set the value of endDate
+	 * Sets the value of endDate
 	 *
 	 * @param newVar the new value of endDate
 	 *
@@ -18,7 +18,7 @@ public class DetoxPeriod extends DetoxSettings {
 	}
 
 	/**
-	 * Get the value of endDate
+	 * Gets the value of endDate
 	 *
 	 * @return the value of endDate
 	 *
@@ -29,6 +29,8 @@ public class DetoxPeriod extends DetoxSettings {
 	}
 
 	/**
+	 * sets the period for which the phone is locked
+	 *
 	 * @param period the period in which the phone is locked
 	 *
 	 * @author Mohamed Yehia
@@ -40,11 +42,11 @@ public class DetoxPeriod extends DetoxSettings {
 	}
 
 	/**
-	 * lock the phone according to detox setting
+	 * locks the phone according to detox setting
 	 *
 	 * @author Mohamed Yehia
 	 */
 	public void lock() {
-		// methods
+		// implementation
 	}
 }
