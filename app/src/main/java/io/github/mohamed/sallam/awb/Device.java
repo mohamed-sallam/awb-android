@@ -1,5 +1,5 @@
+package io.github.mohamed.sallam.awb;
 import java.util.UUID;
-import java.util.*;
 
 public class Device {
 
