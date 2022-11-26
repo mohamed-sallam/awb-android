@@ -1,7 +1,7 @@
 package io.github.mohamed.sallam.awb;
 
 import androidx.annotation.NonNull;
-import static io.github.mohamed.sallam.awb.Device.Os.UNKOWN;
+import static io.github.mohamed.sallam.awb.Device.Os.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
