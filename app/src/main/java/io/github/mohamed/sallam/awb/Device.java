@@ -10,7 +10,6 @@ import java.util.UUID;
  * and generate a unique id for the device.
  *
  * @author Abdalrhman Hemida
- *
  */
 public class Device {
     // Fields
@@ -28,9 +27,8 @@ public class Device {
      * constant values more readable.
      *
      * @author Abdalrhman Hemida
-     *
      */
-    enum Os {
+    public enum Os {
         UNKOWN(0),
         UNIX(1),
         ANDROID(2),
@@ -38,7 +36,7 @@ public class Device {
 
         private final int osNum;
 
-        Os(int osNum){
+        Os(int osNum) {
             this.osNum = osNum;
         }
 
@@ -57,7 +55,6 @@ public class Device {
      * Sets the value of device name.
      *
      * @param newVar the new value of device name.
-     *
      */
     public void setName(String newVar) {
         name = newVar;
@@ -77,7 +74,6 @@ public class Device {
      * Sets the value of operating system type.
      *
      * @param newVar the new value of operatingSystemType.
-     *
      */
     public void setOperatingSystemType(Os newVar) {
         operatingSystemType = newVar;
@@ -87,7 +83,6 @@ public class Device {
      * Sets the value of device's IP Address (V4).
      *
      * @param newVar the new value of ipAddressV4.
-     *
      */
     public void setIpAddressV4(String newVar) {
         ipAddressV4 = newVar;
@@ -96,7 +91,6 @@ public class Device {
     /**
      * Generates new UUID for a device the user has added.
      * UUID is a unique id to identify devices.
-     *
      */
     public void generateUuid() {}
 
@@ -105,7 +99,6 @@ public class Device {
      * Gets the device name.
      *
      * @return the value of name.
-     *
      */
     public String getName() {
         return name;
@@ -115,7 +108,6 @@ public class Device {
      * Gets the operating system name.
      *
      * @return the value of operating system name.
-     *
      */
     public String getOperatingSystemName() {
         return operatingSystemName;
@@ -125,7 +117,6 @@ public class Device {
      * Gets the value of IP Address (V4) of the Device.
      *
      * @return the value of IP Address.
-     *
      */
     public String getIpAddressV4() {
         return ipAddressV4;
@@ -135,7 +126,6 @@ public class Device {
      * Gets the value of UUID.
      *
      * @return device UUID.
-     *
      */
     public UUID getUuid() {
         return uuid;
@@ -145,7 +135,6 @@ public class Device {
      * Gets a group of blocked apps.
      *
      * @return ArrayList of detoxing apps groups.
-     *
      */
     public ArrayList<Group> getGroups() {
         return groups;
@@ -155,7 +144,6 @@ public class Device {
      * Gets the value of operating system type.
      *
      * @return the value of operating system type.
-     *
      */
     public Os getOperatingSystemType() {
         return operatingSystemType;
@@ -169,19 +157,17 @@ public class Device {
      * @param groupUuid the group id.
      *
      * @author Abdalrhman Hemida.
-     *
      */
     public void deleteGroup(UUID groupUuid) {
         groups.removeIf(group -> group.getUuid().equals(groupUuid));
     }
 
     /**
-     * Adds a group of detoxing apps for a particular device.
+     * Adds a group of detoxing softwares/websites for a particular device.
      *
      * @param group the group of apps to be added.
      *
      * @author Abdalrhman Hemida.
-     *
      */
     public void addGroup(Group group) {
         groups.add(group);
