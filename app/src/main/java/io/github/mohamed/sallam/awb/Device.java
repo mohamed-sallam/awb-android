@@ -1,167 +1,175 @@
+package io.github.mohamed.sallam.awb;
 
-import java.util.*;
+import androidx.annotation.NonNull;
+import static io.github.mohamed.sallam.awb.Device.Os.*;
+import java.util.ArrayList;
+import java.util.UUID;
 
+/**
+ * Class Device has methods to add and delete blocked apps groups for the device
+ * and generate a unique id for the device.
+ *
+ * @author Abdalrhman Hemida
+ */
 public class Device {
+    // Fields
+    private String name;
+    private String operatingSystemName;
+    private Os operatingSystemType = UNKOWN;
+    public static final String AWB_VERSION = "0.1.0v";
+    private String ipAddressV4 = "127.0.0.1";
+    private UUID uuid;
+    private ArrayList<Group> groups = new ArrayList<>();
 
-	//
-	// Fields
-	//
+    /**
+     * Enum to optimize the interactions with operating system names by
+     * assigning constant names to a group of numeric integer values. It makes
+     * constant values more readable.
+     *
+     * @author Abdalrhman Hemida
+     */
+    public enum Os {
+        UNKOWN(0),
+        UNIX(1),
+        ANDROID(2),
+        WINDOWS(3);
 
-	private String name;
-	private String operatingSystemName;
-	private undef operatingSystemType = UNKNOWN;
-	private String AWB_VERSION = "0.1.0v";
-	private String ipAddressV4 = "127.0.0.1";
-	private GUID guid;
-	private Group groups_;	
-	public Device () { };
-	
-	//
-	// Methods
-	//
+        private final int osNum;
 
+        Os(int osNum) {
+            this.osNum = osNum;
+        }
 
-	//
-	// Accessor methods
-	//
+        @NonNull
+        @Override
+        public String toString() {
+            return Integer.toString(osNum);
+        }
+    }
 
-	/**
-	 * Set the value of name
-	 * @param newVar the new value of name
-	 */
-	public void setName (String newVar) {
-		name = newVar;
-	}
+    // Constructor
+    public Device() {}
 
-	/**
-	 * Get the value of name
-	 * @return the value of name
-	 */
-	public String getName () {
-		return name;
-	}
+    // Mutators
+    /**
+     * Sets the value of device name.
+     *
+     * @param newVar the new value of device name.
+     */
+    public void setName(String newVar) {
+        name = newVar;
+    }
 
-	/**
-	 * Set the value of operatingSystemName
-	 * @param newVar the new value of operatingSystemName
-	 */
-	public void setOperatingSystemName (String newVar) {
-		operatingSystemName = newVar;
-	}
+    /**
+     * Sets the value of operatingSystemName.
+     *
+     * @param newVar the new value of operatingSystemName.
+     *
+     */
+    public void setOperatingSystemName(String newVar) {
+        operatingSystemName = newVar;
+    }
 
-	/**
-	 * Get the value of operatingSystemName
-	 * @return the value of operatingSystemName
-	 */
-	public String getOperatingSystemName () {
-		return operatingSystemName;
-	}
+    /**
+     * Sets the value of operating system type.
+     *
+     * @param newVar the new value of operatingSystemType.
+     */
+    public void setOperatingSystemType(Os newVar) {
+        operatingSystemType = newVar;
+    }
 
-	/**
-	 * Set the value of operatingSystemType
-	 * @param newVar the new value of operatingSystemType
-	 */
-	public void setOperatingSystemType (undef newVar) {
-		operatingSystemType = newVar;
-	}
+    /**
+     * Sets the value of device's IP Address (V4).
+     *
+     * @param newVar the new value of ipAddressV4.
+     */
+    public void setIpAddressV4(String newVar) {
+        ipAddressV4 = newVar;
+    }
 
-	/**
-	 * Get the value of operatingSystemType
-	 * @return the value of operatingSystemType
-	 */
-	public undef getOperatingSystemType () {
-		return operatingSystemType;
-	}
+    /**
+     * Generates new UUID for a device the user has added.
+     * UUID is a unique id to identify devices.
+     */
+    public void generateUuid() {}
 
-	/**
-	 * Set the value of AWB_VERSION
-	 * @param newVar the new value of AWB_VERSION
-	 */
-	public void setAWB_VERSION (String newVar) {
-		AWB_VERSION = newVar;
-	}
+    // Accessors
+    /**
+     * Gets the device name.
+     *
+     * @return the value of name.
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Get the value of AWB_VERSION
-	 * @return the value of AWB_VERSION
-	 */
-	public String getAWB_VERSION () {
-		return AWB_VERSION;
-	}
+    /**
+     * Gets the operating system name.
+     *
+     * @return the value of operating system name.
+     */
+    public String getOperatingSystemName() {
+        return operatingSystemName;
+    }
 
-	/**
-	 * Set the value of ipAddressV4
-	 * @param newVar the new value of ipAddressV4
-	 */
-	public void setIpAddressV4 (String newVar) {
-		ipAddressV4 = newVar;
-	}
+    /**
+     * Gets the value of IP Address (V4) of the Device.
+     *
+     * @return the value of IP Address.
+     */
+    public String getIpAddressV4() {
+        return ipAddressV4;
+    }
 
-	/**
-	 * Get the value of ipAddressV4
-	 * @return the value of ipAddressV4
-	 */
-	public String getIpAddressV4 () {
-		return ipAddressV4;
-	}
+    /**
+     * Gets the value of UUID.
+     *
+     * @return device UUID.
+     */
+    public UUID getUuid() {
+        return uuid;
+    }
 
-	/**
-	 * Set the value of guid
-	 * @param newVar the new value of guid
-	 */
-	public void setGuid (GUID newVar) {
-		guid = newVar;
-	}
+    /**
+     * Gets a group of blocked apps.
+     *
+     * @return ArrayList of detoxing apps groups.
+     */
+    public ArrayList<Group> getGroups() {
+        return groups;
+    }
 
-	/**
-	 * Get the value of guid
-	 * @return the value of guid
-	 */
-	public GUID getGuid () {
-		return guid;
-	}
+    /**
+     * Gets the value of operating system type.
+     *
+     * @return the value of operating system type.
+     */
+    public Os getOperatingSystemType() {
+        return operatingSystemType;
+    }
 
-	/**
-	 * Set the value of groups_
-	 * @param newVar the new value of groups_
-	 */
-	public void setGroups_ (Group newVar) {
-		groups_ = newVar;
-	}
+    // Methods
+    /**
+     * Deletes a group of apps which user has defined from a particular device
+     * using the UUID of the group.
+     *
+     * @param groupUuid the group id.
+     *
+     * @author Abdalrhman Hemida.
+     */
+    public void deleteGroup(UUID groupUuid) {
+        groups.removeIf(group -> group.getUuid().equals(groupUuid));
+    }
 
-	/**
-	 * Get the value of groups_
-	 * @return the value of groups_
-	 */
-	public Group getGroups_ () {
-		return groups_;
-	}
-
-	//
-	// Other methods
-	//
-
-	/**
-	 */
-	public void generateGuid()
-	{
-	}
-
-
-	/**
-	 * @param        groupGuid
-	 */
-	public void deleteGroup(GUID groupGuid)
-	{
-	}
-
-
-	/**
-	 * @param        group
-	 */
-	public void addGroup(Group group)
-	{
-	}
-
-
+    /**
+     * Adds a group of detoxing softwares/websites for a particular device.
+     *
+     * @param group the group of apps to be added.
+     *
+     * @author Abdalrhman Hemida.
+     */
+    public void addGroup(Group group) {
+        groups.add(group);
+    }
 }
