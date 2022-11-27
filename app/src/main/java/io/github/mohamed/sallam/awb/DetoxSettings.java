@@ -1,3 +1,4 @@
+import java.util.UUID;
 
 abstract public class DetoxSettings {
 
