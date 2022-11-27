@@ -1,6 +1,7 @@
 package io.github.mohamed.sallam.awb;
 
 import java.sql.Timestamp;
+
 public class DetoxSchedule extends DetoxSettings {
 	private String title = "Custom";
 	private Timestamp startDate;

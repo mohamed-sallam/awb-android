@@ -5,44 +5,44 @@ import java.util.UUID;
 abstract public class DetoxSettings {
 
 	public static final String AWB_VERSION = "0.1.0v";
-	private UUID groupGuid;
+	private UUID groupUuid;
 	public  DetoxSettings()	{
 		// implementation
 	}
 
 	/**
-	 * Sets the value of groupGuid.
+	 * Sets the value of groupUuid.
 	 *
-	 * @param newVar the new value of groupGuid.
+	 * @param newVar the new value of groupUuid.
 	 *
 	 * @author Mohamed Yehia
 	 */
-	public void setGroupGuid(UUID newVar) {
-		groupGuid = newVar;
+	public void setGroupUuid(UUID newVar) {
+		groupUuid = newVar;
 	}
 
 	/**
-	 * Generates new value of groupGuid.
+	 * Generates new value of groupUuid.
 	 *
 	 * @author Mohamed Yehia
 	 */
-	public void generateGroupGuid() {
+	public void generateGroupUuid() {
 		//implementation
 	}
 
 	/**
-	 * Gets the value of groupGuid.
+	 * Gets the value of groupUuid.
 	 *
-	 * @return the value of groupGuid.
+	 * @return the value of groupUuid.
 	 *
 	 * @author Mohamed Yehia
 	 */
-	public UUID getGroupGuid() {
-		return groupGuid;
+	public UUID getGroupUuid() {
+		return groupUuid;
 	}
 
 	/**
-	 * * Locks the phone according to detox setting.
+	 * Locks the phone according to detox setting.
 	 *
 	 * @author Mohamed Yehia
 	 */

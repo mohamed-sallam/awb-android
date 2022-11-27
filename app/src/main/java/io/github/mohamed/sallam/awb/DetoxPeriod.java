@@ -2,6 +2,7 @@ package io.github.mohamed.sallam.awb;
 
 import java.util.Date;
 import java.sql.Timestamp;
+
 public class DetoxPeriod extends DetoxSettings {
 	private Timestamp endDate;
 	public DetoxPeriod() {
