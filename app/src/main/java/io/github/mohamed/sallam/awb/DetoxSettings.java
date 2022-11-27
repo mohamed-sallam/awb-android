@@ -1,5 +1,7 @@
 package io.github.mohamed.sallam.awb;
+
 import java.util.UUID;
+
 abstract public class DetoxSettings {
 
 	public static final String AWB_VERSION = "0.1.0v";
