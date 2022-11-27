@@ -1,3 +1,4 @@
+import java.util.UUID;
 
 public class DetoxPeriod extends DetoxSettings {
 
