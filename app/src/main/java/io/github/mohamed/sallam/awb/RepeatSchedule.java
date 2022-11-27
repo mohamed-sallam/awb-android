@@ -1,6 +1,8 @@
 package io.github.mohamed.sallam.awb;
 
 /**
+ * `RepeatSchedule` class responsible for hold repetition and duration settings.
+ *
  * @author Mohamed Sallam
  */
 public class RepeatSchedule {
@@ -12,16 +14,16 @@ public class RepeatSchedule {
 
 	// Accessor methods
 	/**
-	 * Gets the value of repetition
-	 * @return the value of repetition
+	 * Gets the value of repetition.
+	 * @return the value of repetition.
 	 */
 	public Repetition getRepetition() {
 		return repetition;
 	}
 
 	/**
-	 * Gets the value of duration
-	 * @return the value of duration
+	 * Gets the value of duration.
+	 * @return the value of duration.
 	 */
 	public Duration getDuration() {
 		return duration;
@@ -29,16 +31,16 @@ public class RepeatSchedule {
 
 	// Mutator methods
 	/**
-	 * Sets the value of repetition
-	 * @param newVar the new value of repetition
+	 * Sets the value of repetition.
+	 * @param newVar the new value of repetition.
 	 */
 	public void setRepetition(Repetition newVar) {
 		repetition = newVar;
 	}
 
 	/**
-	 * Sets the value of duration
-	 * @param newVar the new value of duration
+	 * Sets the value of duration.
+	 * @param newVar the new value of duration.
 	 */
 	public void setDuration(Duration newVar) {
 		duration = newVar;

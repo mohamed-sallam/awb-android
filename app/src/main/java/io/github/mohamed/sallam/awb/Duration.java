@@ -6,11 +6,38 @@ import java.sql.Timestamp;
 
 /**
  * Duration Rust-like enum.
+ * ```rust
+ * enum Duration {
+ *     FOREVER,
+ *     NUMBER_OF_TIMES{numberOfTimes: int},
+ *     UNTIL_DATE{date: Timestamp}
+ * }
+ * ```
+ * Each option has `toString()` method that return stringified JSON object.
+ * It's used as follow:-
+ * ```java
+ * duration.match(new Duration.DurationMatcher<Void> {
+ *   @Override
+ *   public Void when(Repetition.FOREVER duration) {
+ *      // Some code in case of `FOREVER`
+ *   }
  *
+ *   @Override
+ *   public Void when(Repetition.NUMBER_OF_TIMES duration) {
+ *      // Some code in case of NUMBER_OF_TIMES, you can use `duration.numberOfDays`
+ *   }
+ *
+ *   @Override
+ *   public Void when(Repetition.UNTIL_DATE duration) {
+ *     // Some code in case of UNTIL_DATE, you can use `duration.date`
+ *   }
+ * });
+ * ```
+ * Source: stackoverflow.com/a/27604405
  * @author Mohamed Sallam
  */
 public interface Duration {
-    <R> R accept(DurationVisitor<R> visitor);
+    <R> R match(DurationMatcher<R> matcher);
 
     class UNTIL_DATE implements Duration {
         public final Timestamp date;
@@ -20,8 +47,8 @@ public interface Duration {
         }
 
         @Override
-        public <R> R accept(DurationVisitor<R> visitor) {
-            return visitor.visit(this);
+        public <R> R match(DurationMatcher<R> matcher) {
+            return matcher.when(this);
         }
 
         @NonNull
@@ -43,8 +70,8 @@ public interface Duration {
         }
 
         @Override
-        public <R> R accept(DurationVisitor<R> visitor) {
-            return visitor.visit(this);
+        public <R> R match(DurationMatcher<R> matcher) {
+            return matcher.when(this);
         }
 
         @NonNull
@@ -60,8 +87,8 @@ public interface Duration {
 
     class FOREVER implements Duration {
         @Override
-        public <R> R accept(DurationVisitor<R> visitor) {
-            return visitor.visit(this);
+        public <R> R match(DurationMatcher<R> matcher) {
+            return matcher.when(this);
         }
 
         @NonNull
@@ -74,10 +101,10 @@ public interface Duration {
         }
     }
 
-    interface DurationVisitor<R> {
-        public R visit(FOREVER duration);
-        public R visit(NUMBER_OF_TIMES duration);
-        public R visit(UNTIL_DATE duration);
+    interface DurationMatcher<R> {
+        public R when(FOREVER duration);
+        public R when(NUMBER_OF_TIMES duration);
+        public R when(UNTIL_DATE duration);
     }
 }
 

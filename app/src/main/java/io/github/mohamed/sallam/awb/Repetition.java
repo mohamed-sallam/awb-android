@@ -6,11 +6,55 @@ import java.util.ArrayList;
 
 /**
  * Repetition Rust-like enum.
+ * ```rust
+ * enum Repetition {
+ *     NONE,
+ *     EVERY_DAY{numberOfDays: int},
+ *     EVERY_WEEK{numberOfWeeks: int, days: ArrayList<Day>}
+ * }
+ * ```
+ * Each option has `toString()` method that return stringified JSON object.
+ * It's used as follow:-
+ * ```java
+ * repetition.match(new Repetition.RepetitionMatcher<Void> {
+ *   @Override
+ *   public Void when(Repetition.NONE repetition) {
+ *      // Some code in case of `NONE`
+ *   }
  *
+ *   @Override
+ *   public Void when(Repetition.EVERY_DAY repetition) {
+ *      // Some code in case of EVERY_DAY, you can use `repetition.numberOfDays`
+ *   }
+ *
+ *   @Override
+ *   public Void when(Repetition.EVERY_WEEK repetition) {
+ *     // Some code in case of EVERY_WEEK, you can use `repetition.numberOfWeeks` or `repetition.days`
+ *   }
+ * });
+ * ```
+ * Source: stackoverflow.com/a/27604405
  * @author Mohamed Sallam
  */
 public interface Repetition {
-    <R> R accept(RepetitionVisitor<R> visitor);
+    <R> R match(RepetitionMatcher<R> matcher);
+
+    class NONE implements Repetition {
+        @Override
+        public <R> R match(RepetitionMatcher<R> matcher) {
+            return matcher.when(this);
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return "\"repetition\": {\n" +
+                    "\t\"type\":" + "\"NONE\"," +
+                    "\t\"body\": {" +
+                    "\t}\n}";
+        }
+
+    }
 
     class EVERY_DAY implements Repetition {
         public final int numberOfDays;
@@ -20,8 +64,8 @@ public interface Repetition {
         }
 
         @Override
-        public <R> R accept(RepetitionVisitor<R> visitor) {
-            return visitor.visit(this);
+        public <R> R match(RepetitionMatcher<R> matcher) {
+            return matcher.when(this);
         }
 
         @NonNull
@@ -45,8 +89,8 @@ public interface Repetition {
         }
 
         @Override
-        public <R> R accept(RepetitionVisitor<R> visitor) {
-            return visitor.visit(this);
+        public <R> R match(RepetitionMatcher<R> matcher) {
+            return matcher.when(this);
         }
 
         @NonNull
@@ -61,27 +105,10 @@ public interface Repetition {
         }
     }
 
-    class NONE implements Repetition {
-        @Override
-        public <R> R accept(RepetitionVisitor<R> visitor) {
-            return visitor.visit(this);
-        }
-
-        @NonNull
-        @Override
-        public String toString() {
-            return "\"repetition\": {\n" +
-                    "\t\"type\":" + "\"NONE\"," +
-                    "\t\"body\": {" +
-                    "\t}\n}";
-        }
-
-    }
-
-    interface RepetitionVisitor<R> {
-        public R visit(EVERY_DAY repetition);
-        public R visit(EVERY_WEEK repetition);
-        public R visit(NONE repetition);
+    interface RepetitionMatcher<R> {
+        public R when(EVERY_DAY repetition);
+        public R when(EVERY_WEEK repetition);
+        public R when(NONE repetition);
     }
 
     enum Day {
