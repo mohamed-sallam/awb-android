@@ -9,39 +9,40 @@ abstract public class DetoxSettings {
 	}
 
 	/**
-	 * Sets the value of groupGuid
+	 * Sets the value of groupGuid.
 	 *
-	 * @param newVar the new value of groupGuid
+	 * @param newVar the new value of groupGuid.
 	 *
 	 * @author Mohamed Yehia
 	 */
-	public void setGroupGuid (UUID newVar) {
+	public void setGroupGuid(UUID newVar) {
 		groupGuid = newVar;
 	}
 
 	/**
-	 * Generates new value of groupGuid
+	 * Generates new value of groupGuid.
 	 *
 	 * @author Mohamed Yehia
 	 */
-	public void generateGroupGuid () {
-
+	public void generateGroupGuid() {
+		//implementation
 	}
 
 	/**
-	 * Gets the value of groupGuid
+	 * Gets the value of groupGuid.
 	 *
-	 * @return the value of groupGuid
+	 * @return the value of groupGuid.
 	 *
 	 * @author Mohamed Yehia
 	 */
-	public UUID getGroupGuid () {
+	public UUID getGroupGuid() {
 		return groupGuid;
 	}
 
 	/**
-	 * * locks the phone according to detox setting
+	 * * Locks the phone according to detox setting.
+	 *
 	 * @author Mohamed Yehia
 	 */
-	abstract public void lock();
+	abstract public void Lock();
 }

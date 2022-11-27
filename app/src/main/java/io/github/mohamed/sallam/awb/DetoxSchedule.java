@@ -1,4 +1,5 @@
 package io.github.mohamed.sallam.awb;
+
 import java.sql.Timestamp;
 public class DetoxSchedule extends DetoxSettings {
 	private String title = "Custom";
@@ -10,7 +11,7 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Sets the value of title
+	 * Sets the value of title.
 	 *
 	 * @param newVar the new value of title
 	 *
@@ -21,9 +22,9 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Gets the value of title
+	 * Gets the value of title.
 	 *
-	 * @return the value of title
+	 * @return the value of title.
 	 *
 	 * @author Mohamed Yehia
 	 */
@@ -32,9 +33,9 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Sets the value of startDate
+	 * Sets the value of startDate.
 	 *
-	 * @param newVar the new value of startDate
+	 * @param newVar the new value of startDate.
 	 *
 	 * @author Mohamed Yehia
 	 */
@@ -43,9 +44,9 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Gets the value of startDate
+	 * Gets the value of startDate.
 	 *
-	 * @return the value of startDate
+	 * @return the value of startDate.
 	 *
 	 * @author Mohamed Yehia
 	 */
@@ -54,9 +55,9 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Sets the value of endDate
+	 * Sets the value of endDate.
 	 *
-	 * @param newVar the new value of endDate
+	 * @param newVar the new value of endDate.
 	 *
 	 * @author Mohamed Yehia
 	 */
@@ -65,9 +66,9 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Gets the value of endDate
+	 * Gets the value of endDate.
 	 *
-	 * @return the value of endDate
+	 * @return the value of endDate.
 	 *
 	 * @author Mohamed Yehia
 	 */
@@ -76,9 +77,9 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Sets the value of repeatSchedule
+	 * Sets the value of repeatSchedule.
 	 *
-	 * @param newVar the new value of repeatSchedule
+	 * @param newVar the new value of repeatSchedule.
 	 *
 	 * @author Mohamed Yehia
 	 */
@@ -87,9 +88,9 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Gets the value of repeatSchedule
+	 * Gets the value of repeatSchedule.
 	 *
-	 * @return the value of repeatSchedule
+	 * @return the value of repeatSchedule.
 	 *
 	 * @author Mohamed Yehia
 	 */
@@ -98,11 +99,11 @@ public class DetoxSchedule extends DetoxSettings {
 	}
 
 	/**
-	 * Locks the phone according to detox setting
+	 * Locks the phone according to detox setting.
 	 *
 	 * @author Mohamed Yehia
 	 */
-	public void lock() {
+	public void Lock() {
 		// implementation
 	}
 }
