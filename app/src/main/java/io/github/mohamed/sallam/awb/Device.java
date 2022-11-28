@@ -1,6 +1,11 @@
 package io.github.mohamed.sallam.awb;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import androidx.room.Relation;
+
 import static io.github.mohamed.sallam.awb.Device.Os.*;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -11,15 +16,21 @@ import java.util.UUID;
  *
  * @author Abdalrhman Hemida
  */
+@Entity(tableName = "devices_table")
 public class Device {
     // Fields
     private String name;
     private String operatingSystemName;
     private Os operatingSystemType = UNKOWN;
     public static final String AWB_VERSION = "0.1.0v";
-    private String ipAddressV4 = "127.0.0.1";
+    private String ipAddressV4 ;
+    @PrimaryKey
     private UUID uuid;
+    @Ignore
+    @Relation(parentColumn = "" )
     private ArrayList<Group> groups = new ArrayList<>();
+
+
 
     /**
      * Enum to optimize the interactions with operating system names by
@@ -50,51 +61,16 @@ public class Device {
     // Constructor
     public Device() {}
 
-    // Mutators
-    /**
-     * Sets the value of device name.
-     *
-     * @param newVar the new value of device name.
-     */
-    public void setName(String newVar) {
-        name = newVar;
+    public Device(String name, String operatingSystemName, Os operatingSystemType,
+                  String ipAddressV4, UUID uuid, ArrayList<Group> groups) {
+        this.name = name;
+        this.operatingSystemName = operatingSystemName;
+        this.operatingSystemType = operatingSystemType;
+        this.ipAddressV4 = ipAddressV4;
+        this.uuid = uuid;
+        this.groups = groups;
     }
 
-    /**
-     * Sets the value of operatingSystemName.
-     *
-     * @param newVar the new value of operatingSystemName.
-     *
-     */
-    public void setOperatingSystemName(String newVar) {
-        operatingSystemName = newVar;
-    }
-
-    /**
-     * Sets the value of operating system type.
-     *
-     * @param newVar the new value of operatingSystemType.
-     */
-    public void setOperatingSystemType(Os newVar) {
-        operatingSystemType = newVar;
-    }
-
-    /**
-     * Sets the value of device's IP Address (V4).
-     *
-     * @param newVar the new value of ipAddressV4.
-     */
-    public void setIpAddressV4(String newVar) {
-        ipAddressV4 = newVar;
-    }
-
-    /**
-     * Generates new UUID for a device the user has added.
-     * UUID is a unique id to identify devices.
-     */
-    public void generateUuid() {}
-
-    // Accessors
     /**
      * Gets the device name.
      *
@@ -149,27 +125,5 @@ public class Device {
         return operatingSystemType;
     }
 
-    // Methods
-    /**
-     * Deletes a group of apps which user has defined from a particular device
-     * using the UUID of the group.
-     *
-     * @param groupUuid the group id.
-     *
-     * @author Abdalrhman Hemida.
-     */
-    public void deleteGroup(UUID groupUuid) {
-        groups.removeIf(group -> group.getUuid().equals(groupUuid));
-    }
 
-    /**
-     * Adds a group of detoxing softwares/websites for a particular device.
-     *
-     * @param group the group of apps to be added.
-     *
-     * @author Abdalrhman Hemida.
-     */
-    public void addGroup(Group group) {
-        groups.add(group);
-    }
 }

@@ -1,5 +1,7 @@
-import java.util.UUID;
+import androidx.room.Entity;
 
+import java.util.UUID;
+@Entity(tableName = "detoxPeriod_table")
 public class DetoxPeriod extends DetoxSettings {
 
 	private long endDate;	

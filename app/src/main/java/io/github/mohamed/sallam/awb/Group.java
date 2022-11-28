@@ -1,4 +1,8 @@
 package io.github.mohamed.sallam.awb;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -6,12 +10,15 @@ import java.util.UUID;
  * This class contains the groups of apps which the user wants to block them
  * @author Mohamed Sherif
  */
+@Entity(tableName = "groups_table")
 public class Group {
 	// Fields
 	private ArrayList<String> softwares;
 	private ArrayList<String> websites;
 	private String name;
+	@PrimaryKey
 	private UUID uuid;
+	private UUID deviceUuid ;
 
 	// Constructor
 	public Group () { }
@@ -20,21 +27,7 @@ public class Group {
 	// Methods
 
 	// Mutator Methods
-	/**
-	 * Adds a software to the blocked softwares list.
-	 * @param software the new blocked software.
-	 */
-	public void addSoftware(String software) {
-		this.softwares.add(software);
-	}
 
-	/**
-	 * Adds a website to the blocked websites list.
-	 * @param website the new blocked website.
-	 */
-	public void addWebsite(String website) {
-		this.websites.add(website);
-	}
 
 	/**
 	 * Sets the value of UUID.
@@ -68,7 +61,7 @@ public class Group {
 	 */
 	public void rename(String newName) {
 		this.name = newName;
-	}
+	} //DAO_Group ??
 
 	/**
 	 * Gets group name.
@@ -101,19 +94,4 @@ public class Group {
 		return newGroup;
 	}
 
-	/**
-	 * Deletes a software from blocked softwares list.
-	 * @param index of the software desired to be deleted.
-	 */
-	public void deleteSoftware(int index) {
-		this.softwares.remove(index);
-	}
-
-	/**
-	 * Deletes website from blocked websites list.
-	 * @param index of the website desired to be deleted.
-	 */
-	public void deleteWebsite(int index) {
-		this.websites.remove(index);
-	}
 }
