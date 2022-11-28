@@ -33,7 +33,27 @@ android {
 }
 
 dependencies {
+    //written by mohamed yehia (need to be revisied with documentation)
+    def lifecycle_version = "2.5.1"
+    def room_version = "2.4.3"
+    //lifeCycle components --> viewmodel , livedata
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    // Annotation processor
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    //implementation 'com.android.support:design:1.4.1'  //need of equivalent in Androidx
+     implementation 'com.google.android.material:material:1.0.0-rc01' // androidx equivalent
+    //implementation 'androidx.appcompat:cardview:1.4.1' //need of equivalent in Androidx
+    implementation 'androidx.cardview:cardview:1.0.0' //Androidx equivalent
+
+
+    //default depenecies
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
