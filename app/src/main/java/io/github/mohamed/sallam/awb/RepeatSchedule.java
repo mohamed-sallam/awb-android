@@ -1,55 +1,48 @@
-import java.util.UUID;
-import java.util.*;
+package io.github.mohamed.sallam.awb;
 
+/**
+ * `RepeatSchedule` class responsible for hold repetition and duration settings.
+ *
+ * @author Mohamed Sallam
+ */
 public class RepeatSchedule {
-
-	//
 	// Fields
-	//
+	private Repetition repetition = new Repetition.NONE();
+	private Duration   duration   = new Duration.FOREVER();
 
-	private Repetition repetition = NONE;
-	private Duration duration = FOREVER;	
-	public RepeatSchedule () { };
-	
-	//
 	// Methods
-	//
 
-
-	//
 	// Accessor methods
-	//
-
 	/**
-	 * Set the value of repetition
-	 * @param newVar the new value of repetition
+	 * Gets the value of repetition.
+	 * @return the value of repetition.
 	 */
-	public void setRepetition (Repetition newVar) {
-		repetition = newVar;
-	}
-
-	/**
-	 * Get the value of repetition
-	 * @return the value of repetition
-	 */
-	public Repetition getRepetition () {
+	public Repetition getRepetition() {
 		return repetition;
 	}
 
 	/**
-	 * Set the value of duration
-	 * @param newVar the new value of duration
+	 * Gets the value of duration.
+	 * @return the value of duration.
 	 */
-	public void setDuration (Duration newVar) {
-		duration = newVar;
-	}
-
-	/**
-	 * Get the value of duration
-	 * @return the value of duration
-	 */
-	public Duration getDuration () {
+	public Duration getDuration() {
 		return duration;
 	}
 
+	// Mutator methods
+	/**
+	 * Sets the value of repetition.
+	 * @param newVar the new value of repetition.
+	 */
+	public void setRepetition(Repetition newVar) {
+		repetition = newVar;
+	}
+
+	/**
+	 * Sets the value of duration.
+	 * @param newVar the new value of duration.
+	 */
+	public void setDuration(Duration newVar) {
+		duration = newVar;
+	}
 }
