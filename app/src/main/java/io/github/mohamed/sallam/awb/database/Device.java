@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb;
+package io.github.mohamed.sallam.awb.database;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -6,7 +6,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.Relation;
 
-import static io.github.mohamed.sallam.awb.Device.Os.*;
+import static io.github.mohamed.sallam.awb.database.Device.Os.*;
 import java.util.ArrayList;
 import java.util.UUID;
 

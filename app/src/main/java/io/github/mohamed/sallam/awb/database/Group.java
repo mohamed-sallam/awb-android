@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb;
+package io.github.mohamed.sallam.awb.database;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;

@@ -1,21 +1,21 @@
-package io.github.mohamed.sallam.awb;
+package io.github.mohamed.sallam.awb.database;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.TypeConverters;
 
+import java.sql.Timestamp;
 import java.util.UUID;
-
-import io.github.mohamed.sallam.awb.Device;
-import io.github.mohamed.sallam.awb.Group;
 
 @Entity(tableName = "detoxPeriod_table",
 		foreignKeys = {@ForeignKey(entity = Group.class,
 		parentColumns = {"uuid"},
 		childColumns = {"groupUuid"}, onUpdate = ForeignKey.CASCADE,
 		onDelete = ForeignKey.CASCADE)})
+@TypeConverters({TimestampConverter.class})
 public class DetoxPeriod extends DetoxSettings {
 
-	private long endDate;
+	private Timestamp endDate;
 	private UUID groupUuid;
 	public DetoxPeriod () { };
 

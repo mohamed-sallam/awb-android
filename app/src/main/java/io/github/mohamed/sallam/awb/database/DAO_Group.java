@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb;
+package io.github.mohamed.sallam.awb.database;
 
 public interface DAO_Group {
 

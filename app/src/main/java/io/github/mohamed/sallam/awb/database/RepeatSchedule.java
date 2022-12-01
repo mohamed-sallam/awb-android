@@ -1,3 +1,5 @@
+package io.github.mohamed.sallam.awb.database;
+
 import java.util.UUID;
 import java.util.*;
 

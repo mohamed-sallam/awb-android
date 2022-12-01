@@ -1,10 +1,17 @@
+package io.github.mohamed.sallam.awb.database;
+
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
+
+import java.sql.Timestamp;
 import java.util.UUID;
 
+@TypeConverters({TimestampConverter.class})
 public class DetoxSchedule extends DetoxSettings {
 
 	private String title = "Custom";
-	private long startDate;
-	private long endDate;
+	private Timestamp startDate;
+	private Timestamp endDate;
 	private RepeatSchedule repeatSchedule;	
 	public DetoxSchedule () { };
 	
