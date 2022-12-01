@@ -33,6 +33,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.room:room-common:2.4.3'
+
     //written by mohamed yehia (need to be revisied with documentation)
     def lifecycle_version = "2.5.1"
     def room_version = "2.4.3"

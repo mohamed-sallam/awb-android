@@ -10,7 +10,11 @@ import java.util.UUID;
  * This class contains the groups of apps which the user wants to block them
  * @author Mohamed Sherif
  */
-@Entity(tableName = "groups_table")
+@Entity(tableName = "groups_table",
+		foreignKeys = {@ForeignKey(entity = Device.class,
+				parentColumns = {"uuid"},
+				childColumns = {"deviceUuid"}, onUpdate = ForeignKey.CASCADE,
+				onDelete = ForeignKey.CASCADE)})
 public class Group {
 	// Fields
 	private ArrayList<String> softwares;
