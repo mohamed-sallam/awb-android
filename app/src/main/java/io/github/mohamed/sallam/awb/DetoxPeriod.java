@@ -1,3 +1,5 @@
+package io.github.mohamed.sallam.awb;
+
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
