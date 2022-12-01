@@ -28,7 +28,7 @@ public class Device {
     private UUID uuid;
     @Ignore
     @Relation(parentColumn = "" )
-    private ArrayList<Group> groups = new ArrayList<Group>();
+    private List<Group> groups = new ArrayList<Group>();
 
 
 
