@@ -9,26 +9,28 @@ import androidx.room.Update;
 
 import java.util.List;
 
+import io.github.mohamed.sallam.awb.Group;
+
 /**
  * Group Data Access Object
  * @author Mohamed Sherif
  */
 @Dao
-public interface GroupDAO {
+public interface GroupDao {
 
     @Insert
-    void insertGroup(Group... group);
+    void insert(Group... group);
 
     @Update
-    void updateGroup(Group group);
+    void update(Group group);
 
     @Delete
-    void deleteGroup(Group... group);
+    void delete(Group... group);
 
     @Query("SELECT * FROM Group")
     LiveData<List<Group>> getAll();
 
     @Query("SELECT * FROM GroupWithBlockedApps")
-    LiveData<List<GroupWithBlockedApps>> getAllByBlockedApps();
+    LiveData<List<GroupWithBlockedApps>> getAllWithBlockedApps();
 
 }

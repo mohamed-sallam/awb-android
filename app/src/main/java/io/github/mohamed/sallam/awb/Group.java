@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.database;
+package io.github.mohamed.sallam.awb;
 import java.util.ArrayList;
 import java.util.UUID;
 

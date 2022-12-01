@@ -13,15 +13,15 @@ import java.util.List;
  * @author Mohamed Sherif
  */
 @Dao
-public interface BlockedAppsDAO {
+public interface BlockedAppDao {
 
     @Insert
-    void insertBlockedApps(BlockedApps... blockedApps);
+    void insert(BlockedApp... blockedApps);
 
     @Delete
-    void deleteBlockedApps(BlockedApps... blockedApps);
+    void delete(BlockedApp... blockedApp);
 
-    @Query("SELECT * FROM BlockedApps")
-    LiveData<List<BlockedApps>> getAll();
+    @Query("SELECT * FROM BlockedApp")
+    LiveData<List<BlockedApp>> getAll();
 
 }
