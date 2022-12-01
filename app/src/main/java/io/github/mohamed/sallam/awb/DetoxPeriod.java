@@ -1,12 +1,22 @@
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 
 import java.util.UUID;
-@Entity(tableName = "detoxPeriod_table")
+
+import io.github.mohamed.sallam.awb.Device;
+import io.github.mohamed.sallam.awb.Group;
+
+@Entity(tableName = "detoxPeriod_table",
+		foreignKeys = {@ForeignKey(entity = Group.class,
+		parentColumns = {"uuid"},
+		childColumns = {"groupUuid"}, onUpdate = ForeignKey.CASCADE,
+		onDelete = ForeignKey.CASCADE)})
 public class DetoxPeriod extends DetoxSettings {
 
-	private long endDate;	
+	private long endDate;
+	private UUID groupUuid;
 	public DetoxPeriod () { };
-	
+
 	//
 	// Methods
 	//
