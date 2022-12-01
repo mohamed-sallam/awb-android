@@ -3,6 +3,8 @@ package io.github.mohamed.sallam.awb;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import io.github.mohamed.sallam.awb.database.Device;
+
 /**
  * User class has methods to generate a unique secret key for a user
  * and add devices in the devices list and this class uses

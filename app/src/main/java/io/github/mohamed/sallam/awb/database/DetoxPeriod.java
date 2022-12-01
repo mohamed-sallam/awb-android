@@ -1,7 +1,9 @@
-package io.github.mohamed.sallam.awb;
+package io.github.mohamed.sallam.awb.database;
 
 import java.util.Date;
 import java.sql.Timestamp;
+
+import io.github.mohamed.sallam.awb.DetoxSettings;
 
 public class DetoxPeriod extends DetoxSettings {
 	private Timestamp endDate;

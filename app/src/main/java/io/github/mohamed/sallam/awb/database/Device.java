@@ -1,7 +1,7 @@
-package io.github.mohamed.sallam.awb;
+package io.github.mohamed.sallam.awb.database;
 
 import androidx.annotation.NonNull;
-import static io.github.mohamed.sallam.awb.Device.Os.*;
+import static io.github.mohamed.sallam.awb.database.Device.Os.*;
 import java.util.ArrayList;
 import java.util.UUID;
 

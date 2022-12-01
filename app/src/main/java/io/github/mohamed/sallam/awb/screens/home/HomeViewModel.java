@@ -1,12 +1,11 @@
 package io.github.mohamed.sallam.awb.screens.home;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import io.github.mohamed.sallam.awb.Group;
+import io.github.mohamed.sallam.awb.database.Group;
 
 public class HomeViewModel extends ViewModel {
     private MutableLiveData<List<Group>> groups;
