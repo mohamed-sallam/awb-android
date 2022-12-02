@@ -72,7 +72,12 @@ public class Repository {
     }
 
     public void update(DetoxPeriod detoxPeriod) {
-
+        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                detoxPeriodDao.update(detoxPeriod);
+            }
+        });
     }
 
     public void delete(DetoxPeriod detoxPeriod) {
@@ -99,7 +104,12 @@ public class Repository {
     }
 
     public void update(Device device) {
-
+        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                deviceDao.update(device);
+            }
+        });
     }
 
     public void delete(Device device) {
@@ -129,7 +139,12 @@ public class Repository {
     }
 
     public void update(Group group) {
-
+        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                groupDao.update(group);
+            }
+        });
     }
 
     public void delete(Group group) {
