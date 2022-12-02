@@ -50,7 +50,12 @@ public class Repository {
     }
 
     public void delete(BlockedApp blockedApp) {
-
+        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                blockedAppDao.delete(blockedApp);
+            }
+        });
     }
 
     public LiveData<List<BlockedApp>> getAll() {
@@ -81,7 +86,12 @@ public class Repository {
     }
 
     public void delete(DetoxPeriod detoxPeriod) {
-
+        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                detoxPeriodDao.delete(detoxPeriod);
+            }
+        });
     }
 
     public LiveData<DetoxPeriod> get(int id) {
@@ -113,7 +123,12 @@ public class Repository {
     }
 
     public void delete(Device device) {
-
+        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                deviceDao.delete(device);
+            }
+        });
     }
 
     public void setUuid(UUID oldUuid, UUID newUuid) {
@@ -148,7 +163,12 @@ public class Repository {
     }
 
     public void delete(Group group) {
-
+        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                groupDao.delete(group);
+            }
+        });
     }
 
     public LiveData<List<Group>> getAll() {
