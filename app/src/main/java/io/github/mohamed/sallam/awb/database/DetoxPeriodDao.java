@@ -29,4 +29,7 @@ public interface DetoxPeriodDao {
     @Query("SELECT * FROM detox_periods_table WHERE id=:id")
     LiveData<DetoxPeriod> get(int id);
 
+    @Transaction
+    @Query("SELECT * FROM detox_periods_table WHERE id=:id")
+    LiveData<DetoxPeriodAndGroup> getWithGroup(int id);
 }
