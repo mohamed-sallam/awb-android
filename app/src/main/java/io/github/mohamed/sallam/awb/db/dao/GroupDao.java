@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.database;
+package io.github.mohamed.sallam.awb.db.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -10,8 +10,8 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import io.github.mohamed.sallam.awb.Group;
-import io.github.mohamed.sallam.awb.GroupWithBlockedApps;
+import io.github.mohamed.sallam.awb.db.entity.Group;
+import io.github.mohamed.sallam.awb.db.relationship.GroupWithBlockedApps;
 
 /**
  * Group Data Access Object.

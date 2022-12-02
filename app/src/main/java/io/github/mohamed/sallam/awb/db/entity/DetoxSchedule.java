@@ -1,12 +1,14 @@
-package io.github.mohamed.sallam.awb;
+package io.github.mohamed.sallam.awb.db.entity;
 
 import java.sql.Timestamp;
+
+import io.github.mohamed.sallam.awb.RepeatSchedule;
 
 public class DetoxSchedule extends DetoxSettings {
 	private String title = "Custom";
 	private Timestamp startDate;
 	private Timestamp endDate;
-	private RepeatSchedule repeatSchedule;	
+	private RepeatSchedule repeatSchedule;
 	public DetoxSchedule() {
 		// implementation
 	}

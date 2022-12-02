@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.database;
+package io.github.mohamed.sallam.awb.db.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -8,8 +8,8 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
-import io.github.mohamed.sallam.awb.DetoxPeriod;
-import io.github.mohamed.sallam.awb.DetoxPeriodAndGroup;
+import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
+import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
 
 /**
  * Detox Period Data Access Object.

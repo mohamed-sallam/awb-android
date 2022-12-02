@@ -1,7 +1,10 @@
-package io.github.mohamed.sallam.awb;
+package io.github.mohamed.sallam.awb.db.relationship;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
+
+import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
+import io.github.mohamed.sallam.awb.db.entity.Group;
 
 public class DetoxPeriodAndGroup {
     @Embedded

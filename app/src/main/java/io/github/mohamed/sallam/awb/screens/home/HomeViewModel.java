@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import io.github.mohamed.sallam.awb.Group;
+import io.github.mohamed.sallam.awb.db.entity.Group;
 
 public class HomeViewModel extends ViewModel {
     private MutableLiveData<List<Group>> groups;

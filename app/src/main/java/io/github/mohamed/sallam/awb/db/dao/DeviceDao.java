@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.database;
+package io.github.mohamed.sallam.awb.db.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -12,9 +12,9 @@ import androidx.room.Update;
 import java.util.List;
 import java.util.UUID;
 
-import io.github.mohamed.sallam.awb.Device;
-import io.github.mohamed.sallam.awb.DeviceWithGroups;
-import io.github.mohamed.sallam.awb.UuidConverter;
+import io.github.mohamed.sallam.awb.db.entity.Device;
+import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
+import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 
 /**
  * Device Data Access Object.
