@@ -17,10 +17,10 @@ import java.util.List;
 public interface BlockedAppDao {
 
     @Insert
-    void insert(BlockedApp... blockedApps);
+    void insert(BlockedApp blockedApp);
 
     @Delete
-    void delete(BlockedApp... blockedApp);
+    void delete(BlockedApp blockedApp);
 
     @Query("SELECT * FROM blocked_apps_table")
     LiveData<List<BlockedApp>> getAll();

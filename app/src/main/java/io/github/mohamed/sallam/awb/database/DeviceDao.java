@@ -23,13 +23,13 @@ import io.github.mohamed.sallam.awb.Device;
 public interface DeviceDao {
 
     @Insert
-    void insert(Device... device);
+    void insert(Device device);
 
     @Update
     void update(Device device);
 
     @Delete
-    void delete(Device... device);
+    void delete(Device device);
 
     @Query("UPDATE devices_table SET uuid=:newUuid WHERE uuid=:oldUuid")
     void setUuid(UUID oldUuid, UUID newUuid);

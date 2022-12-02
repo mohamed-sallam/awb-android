@@ -20,13 +20,13 @@ import io.github.mohamed.sallam.awb.Group;
 public interface GroupDao {
 
     @Insert
-    void insert(Group... group);
+    void insert(Group group);
 
     @Update
     void update(Group group);
 
     @Delete
-    void delete(Group... group);
+    void delete(Group group);
 
     @Query("SELECT * FROM groups_table")
     LiveData<List<Group>> getAll();
