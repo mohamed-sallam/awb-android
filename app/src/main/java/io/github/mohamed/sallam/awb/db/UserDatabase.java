@@ -2,9 +2,11 @@ package io.github.mohamed.sallam.awb.db;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -32,22 +34,17 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract DetoxPeriodDao detoxPeriodDao();
     public abstract DeviceDao deviceDao();
     public abstract GroupDao groupDao();
-    private static volatile UserDatabase INSTANCE;
-    private static final int NUMBER_OF_THREADS = 2;
+    private static volatile UserDatabase instance;
     static final ExecutorService databaseWriteExecutor =
-            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+            Executors.newFixedThreadPool(2);
 
-    static UserDatabase getDatabase(final Context context) {
-        if (INSTANCE == null) {
-            synchronized (UserDatabase.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(
-                            context.getApplicationContext(),
-                            UserDatabase.class, "user_database")
-                            .build();
-                }
-            }
+    static synchronized UserDatabase getInstance(final Context context) {
+        if (instance == null){
+            instance = Room.databaseBuilder(context.getApplicationContext(),
+                    UserDatabase.class, "user_database")
+                    .addCallback(sRoomDatabaseCallback)
+                    .build();
         }
-        return INSTANCE;
+        return instance;
     }
 }
