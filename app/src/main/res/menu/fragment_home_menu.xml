@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/other_devices"
+        android:icon="@drawable/ic_devices"
+        android:title="@string/OtherDevices"
+        app:showAsAction="ifRoom" />
+
+
+    <item android:id="@+id/schedual_settings"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/schedual"
+        app:showAsAction="ifRoom" />
+
+
+</menu>
