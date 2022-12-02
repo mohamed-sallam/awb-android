@@ -9,7 +9,8 @@ import androidx.room.Query;
 import java.util.List;
 
 /**
- * Blocked Apps Data Access Object
+ * Blocked Apps Data Access Object.
+ *
  * @author Mohamed Sherif
  */
 @Dao

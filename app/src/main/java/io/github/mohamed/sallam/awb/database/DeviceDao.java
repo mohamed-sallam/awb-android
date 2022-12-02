@@ -14,7 +14,8 @@ import java.util.UUID;
 import io.github.mohamed.sallam.awb.Device;
 
 /**
- * Device Data Access Object
+ * Device Data Access Object.
+ *
  * @author Mohamed Sherif
  */
 @TypeConverters({UuidConverter.class})

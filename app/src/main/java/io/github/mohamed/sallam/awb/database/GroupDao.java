@@ -12,7 +12,8 @@ import java.util.List;
 import io.github.mohamed.sallam.awb.Group;
 
 /**
- * Group Data Access Object
+ * Group Data Access Object.
+ *
  * @author Mohamed Sherif
  */
 @Dao

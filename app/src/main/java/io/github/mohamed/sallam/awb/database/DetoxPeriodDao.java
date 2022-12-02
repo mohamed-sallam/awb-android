@@ -10,7 +10,8 @@ import androidx.room.Update;
 import io.github.mohamed.sallam.awb.DetoxPeriod;
 
 /**
- * Detox Period Data Access Object
+ * Detox Period Data Access Object.
+ *
  * @author Mohamed Sherif
  */
 @Dao
