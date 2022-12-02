@@ -41,7 +41,12 @@ public class Repository {
 
     // BlockedAppDao
     public void insert(BlockedApp blockedApp) {
-
+        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                blockedAppDao.insert(blockedApp);
+            }
+        });
     }
 
     public void delete(BlockedApp blockedApp) {
@@ -58,7 +63,12 @@ public class Repository {
 
     // DetoxPeriodDao
     public void insert(DetoxPeriod detoxPeriod) {
-        
+        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                detoxPeriodDao.insert(detoxPeriod);
+            }
+        });
     }
 
     public void update(DetoxPeriod detoxPeriod) {
@@ -80,7 +90,12 @@ public class Repository {
     //DeviceDao
 
     public void insert(Device device) {
-
+        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                deviceDao.insert(device);
+            }
+        });
     }
 
     public void update(Device device) {
@@ -105,7 +120,12 @@ public class Repository {
 
     //GroupDao
     public void insert(Group group) {
-
+        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            @Override
+            public void run(){
+                groupDao.insert(group);
+            }
+        });
     }
 
     public void update(Group group) {
