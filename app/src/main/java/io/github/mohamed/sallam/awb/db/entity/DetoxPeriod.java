@@ -1,12 +1,13 @@
-package io.github.mohamed.sallam.awb;
+package io.github.mohamed.sallam.awb.db.entity;
 
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import java.util.Date;
 import java.sql.Timestamp;
-import java.util.UUID;
+
+import io.github.mohamed.sallam.awb.db.converter.TimestampConverter;
+import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 
 @TypeConverters({UuidConverter.class, TimestampConverter.class})
 @Entity(tableName = "detox_periods_table")

@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb;
+package io.github.mohamed.sallam.awb.db.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -6,9 +6,11 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import static io.github.mohamed.sallam.awb.Device.Os.*;
-import java.util.ArrayList;
+import static io.github.mohamed.sallam.awb.db.entity.Device.Os.*;
+
 import java.util.UUID;
+
+import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 
 /**
  * Class Device has methods to add and delete blocked apps groups for the device

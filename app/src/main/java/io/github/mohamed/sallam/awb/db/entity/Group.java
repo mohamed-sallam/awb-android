@@ -1,11 +1,12 @@
-package io.github.mohamed.sallam.awb;
+package io.github.mohamed.sallam.awb.db.entity;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import java.util.ArrayList;
 import java.util.UUID;
+
+import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 
 /**
  * This class contains the groups of apps which the user wants to block them
