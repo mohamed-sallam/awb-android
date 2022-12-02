@@ -8,4 +8,8 @@
     <string name="m">M</string>
     <string name="h">H</string>
     <string name="yousef_ahmed">Yousef Ahmed</string>
+    <string name="save">Save</string>
+    <string name="Cancel">Cancel</string>
+    <string name="SearchApps" />
+    <string name="SelectAll" />
 </resources>
