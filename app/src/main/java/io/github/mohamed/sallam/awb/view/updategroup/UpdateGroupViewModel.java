@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.screens.updategroup;
+package io.github.mohamed.sallam.awb.view.updategroup;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
