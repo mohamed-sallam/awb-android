@@ -14,8 +14,13 @@ public class Repository {
     DetoxPeriodDao detoxPeriodDao;
     DeviceDao deviceDao;
     GroupDao groupDao;
-    
-    public Repository(Application application){
 
+    public Repository(Application application){
+        UserDatabase db = UserDatabase.getDatabase(application);
+        blockedAppDao = db.blockedAppDao();
+        detoxPeriodDao = db.detoxPeriodDao();
+        deviceDao = db.deviceDao();
+        groupDao = db.groupDao();
     }
+
 }
