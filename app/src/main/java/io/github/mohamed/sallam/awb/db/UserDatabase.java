@@ -1,6 +1,7 @@
 package io.github.mohamed.sallam.awb.db;
 
 import android.content.Context;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -8,6 +9,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -47,4 +50,29 @@ public abstract class UserDatabase extends RoomDatabase {
         }
         return instance;
     }
+
+    private static RoomDatabase.Callback sRoomDatabaseCallback =
+            new RoomDatabase.Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+
+            databaseWriteExecutor.execute(() -> {
+                Device device = new Device();
+                device.name = android.os.Build.MANUFACTURER
+                        + android.os.Build.PRODUCT;
+                device.thisDevice = true;
+                device.operatingSystemName = Build.VERSION_CODES.class
+                        .getFields()[android.os.Build.VERSION.SDK_INT]
+                        .getName();
+                device.operatingSystemType = Device.Os.ANDROID;
+                try {
+                    device.ipAddressV4 = Inet4Address.getLocalHost().getHostAddress();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
+                device.secretKey = "1234"; // To be implemented.
+            });
+        }
+    };
 }
