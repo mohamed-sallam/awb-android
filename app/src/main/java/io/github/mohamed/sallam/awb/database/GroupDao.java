@@ -27,10 +27,10 @@ public interface GroupDao {
     @Delete
     void delete(Group... group);
 
-    @Query("SELECT * FROM Group")
+    @Query("SELECT * FROM groups_table")
     LiveData<List<Group>> getAll();
 
-    @Query("SELECT * FROM GroupWithBlockedApps")
+    @Transaction
+    @Query("SELECT * FROM groups_table")
     LiveData<List<GroupWithBlockedApps>> getAllWithBlockedApps();
-
 }

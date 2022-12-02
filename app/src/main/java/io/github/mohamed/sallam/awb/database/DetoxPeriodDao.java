@@ -25,7 +25,7 @@ public interface DetoxPeriodDao {
     @Delete
     void delete(DetoxPeriod detoxPeriod);
 
-    @Query("SELECT id FROM DetoxPeriod WHERE id=:id")
+    @Query("SELECT * FROM detox_periods_table WHERE id=:id")
     LiveData<DetoxPeriod> get(int id);
 
 }

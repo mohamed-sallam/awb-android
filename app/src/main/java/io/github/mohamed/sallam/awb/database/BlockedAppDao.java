@@ -21,7 +21,7 @@ public interface BlockedAppDao {
     @Delete
     void delete(BlockedApp... blockedApp);
 
-    @Query("SELECT * FROM BlockedApp")
+    @Query("SELECT * FROM blocked_apps_table")
     LiveData<List<BlockedApp>> getAll();
 
     @Query("INSERT INTO blocked_apps_table (path, groupUuid) " +

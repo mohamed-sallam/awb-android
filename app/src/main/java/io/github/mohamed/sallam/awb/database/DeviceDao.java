@@ -30,13 +30,13 @@ public interface DeviceDao {
     @Delete
     void delete(Device... device);
 
-    @Query("UPDATE Device SET uuid=:newUuid WHERE uuid=:oldUuid")
+    @Query("UPDATE devices_table SET uuid=:newUuid WHERE uuid=:oldUuid")
     void setUuid(UUID oldUuid, UUID newUuid);
 
-    @Query("SELECT * FROM Device")
+    @Query("SELECT * FROM devices_table")
     LiveData<List<Device>> getAll();
 
-    @Query("SELECT * FROM DeviceWithGroups")
+    @Transaction
+    @Query("SELECT * FROM devices_table")
     LiveData<List<DeviceWithGroups>> getAllWithGroups();
-
 }
