@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.screens.home;
+package io.github.mohamed.sallam.awb.view.home;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
