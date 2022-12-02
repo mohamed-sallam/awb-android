@@ -5,11 +5,13 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
 
 import io.github.mohamed.sallam.awb.Group;
+import io.github.mohamed.sallam.awb.GroupWithBlockedApps;
 
 /**
  * Group Data Access Object.
@@ -18,7 +20,6 @@ import io.github.mohamed.sallam.awb.Group;
  */
 @Dao
 public interface GroupDao {
-
     @Insert
     void insert(Group group);
 

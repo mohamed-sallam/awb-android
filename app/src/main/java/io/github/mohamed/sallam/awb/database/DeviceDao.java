@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.TypeConverters;
 import androidx.room.Update;
 
@@ -12,6 +13,8 @@ import java.util.List;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.Device;
+import io.github.mohamed.sallam.awb.DeviceWithGroups;
+import io.github.mohamed.sallam.awb.UuidConverter;
 
 /**
  * Device Data Access Object.
@@ -21,7 +24,6 @@ import io.github.mohamed.sallam.awb.Device;
 @TypeConverters({UuidConverter.class})
 @Dao
 public interface DeviceDao {
-
     @Insert
     void insert(Device device);
 

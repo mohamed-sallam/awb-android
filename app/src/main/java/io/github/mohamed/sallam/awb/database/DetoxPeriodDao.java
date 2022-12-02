@@ -5,9 +5,11 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import io.github.mohamed.sallam.awb.DetoxPeriod;
+import io.github.mohamed.sallam.awb.DetoxPeriodAndGroup;
 
 /**
  * Detox Period Data Access Object.
@@ -16,7 +18,6 @@ import io.github.mohamed.sallam.awb.DetoxPeriod;
  */
 @Dao
 public interface DetoxPeriodDao {
-
     @Insert
     void insert(DetoxPeriod detoxPeriod);
 
