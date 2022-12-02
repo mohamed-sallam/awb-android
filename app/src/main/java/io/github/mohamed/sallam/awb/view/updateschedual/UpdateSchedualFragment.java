@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.screens.updateschedual;
+package io.github.mohamed.sallam.awb.view.updateschedual;
 
 import android.os.Bundle;
 
