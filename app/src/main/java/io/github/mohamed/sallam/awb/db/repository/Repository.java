@@ -59,7 +59,7 @@ public class Repository {
     }
 
     public LiveData<List<BlockedApp>> getAll() {
-
+        blockedAppDao.getAll();
     }
 
     public void clone(UUID sourceGroupUuid, UUID destinationGroupUuid) {
@@ -95,11 +95,11 @@ public class Repository {
     }
 
     public LiveData<DetoxPeriod> get(int id) {
-
+        detoxPeriodDao.get(id);
     }
 
     public LiveData<DetoxPeriodAndGroup> getWithGroup(int id) {
-
+        detoxPeriodDao.getWithGroup(id);
     }
 
     //DeviceDao
@@ -136,11 +136,11 @@ public class Repository {
     }
 
     public LiveData<List<Device>> getAll() {
-
+        deviceDao.getAll();
     }
 
     public LiveData<List<DeviceWithGroups>> getAllWithGroups() {
-
+        deviceDao.getAllWithGroups();
     }
 
     //GroupDao
@@ -172,11 +172,11 @@ public class Repository {
     }
 
     public LiveData<List<Group>> getAll() {
-
+        groupDao.getAll();
     }
 
     public LiveData<List<GroupWithBlockedApps>> getAllWithBlockedApps() {
-
+        groupDao.getAllWithBlockedApps();
     }
 
 }
