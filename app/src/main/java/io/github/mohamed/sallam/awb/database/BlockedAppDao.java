@@ -24,4 +24,9 @@ public interface BlockedAppDao {
     @Query("SELECT * FROM BlockedApp")
     LiveData<List<BlockedApp>> getAll();
 
+    @Query("INSERT INTO blocked_apps_table (path, groupUuid) " +
+           "SELECT path, :destinationGroupUuid " +
+           "FROM blocked_apps_table " +
+           "WHERE groupUuid = :sourceGroupUuid")
+    void clone(UUID sourceGroupUuid, UUID destinationGroupUuid);
 }
