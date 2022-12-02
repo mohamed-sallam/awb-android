@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="io.github.mohamed.sallam.awb.screens.home.HomeFragment"
+        android:name="io.github.mohamed.sallam.awb.view.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/schedualsFragment"
-        android:name="io.github.mohamed.sallam.awb.screens.scheduals.SchedualsFragment"
+        android:name="io.github.mohamed.sallam.awb.view.scheduals.SchedualsFragment"
         android:label="fragment_scheduals"
         tools:layout="@layout/fragment_scheduals" >
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateSchedualFragment"
-        android:name="io.github.mohamed.sallam.awb.screens.updateschedual.UpdateSchedualFragment"
+        android:name="io.github.mohamed.sallam.awb.view.updateschedual.UpdateSchedualFragment"
         android:label="fragment_update_schedual"
         tools:layout="@layout/fragment_update_schedual" >
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/repeatSchedualFragment"
-        android:name="io.github.mohamed.sallam.awb.screens.repeatschedual.RepeatSchedualFragment"
+        android:name="io.github.mohamed.sallam.awb.view.repeatschedual.RepeatSchedualFragment"
         android:label="fragment_repeat_schedual"
         tools:layout="@layout/fragment_repeat_schedual" >
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/devicesFragment"
-        android:name="io.github.mohamed.sallam.awb.screens.devices.DevicesFragment"
+        android:name="io.github.mohamed.sallam.awb.view.devices.DevicesFragment"
         android:label="fragment_devices"
         tools:layout="@layout/fragment_devices" >
         <action
@@ -68,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateGroupFragment"
-        android:name="io.github.mohamed.sallam.awb.screens.updategroup.UpdateGroupFragment"
+        android:name="io.github.mohamed.sallam.awb.view.updategroup.UpdateGroupFragment"
         android:label="fragment_update_group"
         tools:layout="@layout/fragment_update_group" >
         <action
