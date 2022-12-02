@@ -1,36 +1,20 @@
 package io.github.mohamed.sallam.awb;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.UUID;
 
+@TypeConverters({UuidConverter.class, TimestampConverter.class})
+@Entity(tableName = "detox_periods_table")
 public class DetoxPeriod extends DetoxSettings {
-	private Timestamp endDate;
-	public DetoxPeriod() {
-		// implementation
-	}
+	// Fields
+	public Timestamp endDate;
 
-	/**
-	 * Sets the value of endDate.
-	 *
-	 * @param newVar the new value of endDate.
-	 *
-	 * @author Mohamed Yehia
-	 */
-	public void setEndDate(Timestamp newVar) {
-		endDate = newVar;
-	}
-
-	/**
-	 * Gets the value of endDate.
-	 *
-	 * @return the value of endDate.
-	 *
-	 * @author Mohamed Yehia
-	 */
-	public Timestamp getEndDate() {
-		return endDate;
-	}
-
+	// Methods
 	/**
 	 * Sets the period for which the phone is locked.
 	 *
