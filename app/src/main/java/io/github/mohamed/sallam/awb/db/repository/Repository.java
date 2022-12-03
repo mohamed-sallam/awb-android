@@ -40,7 +40,7 @@ public class Repository {
     }
 
     // BlockedAppDao
-    public void insert(BlockedApp blockedApp) {
+    public void insertBlockedApp(BlockedApp blockedApp) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -49,7 +49,7 @@ public class Repository {
         });
     }
 
-    public void delete(BlockedApp blockedApp) {
+    public void deleteBlockedApp(BlockedApp blockedApp) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -58,11 +58,12 @@ public class Repository {
         });
     }
 
-    public LiveData<List<BlockedApp>> getAll() {
+    public LiveData<List<BlockedApp>> getAllBlockedApp() {
         return blockedAppDao.getAll();
     }
 
-    public void clone(UUID sourceGroupUuid, UUID destinationGroupUuid) {
+    public void cloneBlockedAppToGroup
+            (UUID sourceGroupUuid, UUID destinationGroupUuid) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -72,7 +73,7 @@ public class Repository {
     }
 
     // DetoxPeriodDao
-    public void insert(DetoxPeriod detoxPeriod) {
+    public void insertDetoxPeriod(DetoxPeriod detoxPeriod) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -81,7 +82,7 @@ public class Repository {
         });
     }
 
-    public void update(DetoxPeriod detoxPeriod) {
+    public void updateDetoxPeriod(DetoxPeriod detoxPeriod) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -90,7 +91,7 @@ public class Repository {
         });
     }
 
-    public void delete(DetoxPeriod detoxPeriod) {
+    public void deleteDetoxPeriod(DetoxPeriod detoxPeriod) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -99,17 +100,16 @@ public class Repository {
         });
     }
 
-    public LiveData<DetoxPeriod> get(int id) {
+    public LiveData<DetoxPeriod> getDetoxPeriod(int id) {
         return detoxPeriodDao.get(id);
     }
 
-    public LiveData<DetoxPeriodAndGroup> getWithGroup(int id) {
+    public LiveData<DetoxPeriodAndGroup> getDetoxPeriodWithGroup(int id) {
         return detoxPeriodDao.getWithGroup(id);
     }
 
     //DeviceDao
-
-    public void insert(Device device) {
+    public void insertDevice(Device device) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -118,7 +118,7 @@ public class Repository {
         });
     }
 
-    public void update(Device device) {
+    public void updateDevice(Device device) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -127,7 +127,7 @@ public class Repository {
         });
     }
 
-    public void delete(Device device) {
+    public void deleteDevice(Device device) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -136,7 +136,7 @@ public class Repository {
         });
     }
 
-    public void setUuid(UUID oldUuid, UUID newUuid) {
+    public void setUuidToDevice(UUID oldUuid, UUID newUuid) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -145,16 +145,16 @@ public class Repository {
         });
     }
 
-    public LiveData<List<Device>> getAll() {
+    public LiveData<List<Device>> getAllDevices() {
         return deviceDao.getAll();
     }
 
-    public LiveData<List<DeviceWithGroups>> getAllWithGroups() {
+    public LiveData<List<DeviceWithGroups>> getAllDevicesWithGroups() {
         return deviceDao.getAllWithGroups();
     }
 
     //GroupDao
-    public void insert(Group group) {
+    public void insertGroup(Group group) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -163,7 +163,7 @@ public class Repository {
         });
     }
 
-    public void update(Group group) {
+    public void updateGroup(Group group) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -172,7 +172,7 @@ public class Repository {
         });
     }
 
-    public void delete(Group group) {
+    public void deleteGroup(Group group) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -181,11 +181,11 @@ public class Repository {
         });
     }
 
-    public LiveData<List<Group>> getAll() {
+    public LiveData<List<Group>> getAllGroup() {
         return groupDao.getAll();
     }
 
-    public LiveData<List<GroupWithBlockedApps>> getAllWithBlockedApps() {
+    public LiveData<List<GroupWithBlockedApps>> getAllGroupWithBlockedApps() {
         return groupDao.getAllWithBlockedApps();
     }
 }
