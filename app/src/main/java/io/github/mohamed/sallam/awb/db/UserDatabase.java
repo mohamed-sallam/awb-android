@@ -30,29 +30,32 @@ import io.github.mohamed.sallam.awb.db.entity.Group;
  *
  * @author Mohamed Sherif
  */
-@Database(entities = {BlockedApp.class, DetoxPeriod.class,
-        Device.class, Group.class}, version = 1, exportSchema = false)
+@Database(entities = {BlockedApp.class, DetoxPeriod.class, Device.class,
+                      Group.class},
+          version = 1,
+          exportSchema = false)
 public abstract class UserDatabase extends RoomDatabase {
-    public abstract BlockedAppDao blockedAppDao();
-    public abstract DetoxPeriodDao detoxPeriodDao();
-    public abstract DeviceDao deviceDao();
-    public abstract GroupDao groupDao();
     private static volatile UserDatabase instance;
-    static final ExecutorService databaseWriteExecutor =
+    public abstract BlockedAppDao  blockedAppDao();
+    public abstract DetoxPeriodDao detoxPeriodDao();
+    public abstract DeviceDao      deviceDao();
+    public abstract GroupDao       groupDao();
+    public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(2);
 
     static synchronized UserDatabase getInstance(final Context context) {
         if (instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),
-                    UserDatabase.class, "user_database")
-                    .addCallback(sRoomDatabaseCallback)
-                    .build();
+                                            UserDatabase.class,
+                                      "user_database")
+                           .addCallback(roomCallback)
+                           .build();
         }
         return instance;
     }
 
-    private static RoomDatabase.Callback sRoomDatabaseCallback =
-            new RoomDatabase.Callback() {
+    private static final
+    RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
@@ -60,18 +63,24 @@ public abstract class UserDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 Device device = new Device();
                 device.name = android.os.Build.MANUFACTURER
-                        + android.os.Build.PRODUCT;
+                            + android.os.Build.PRODUCT;
                 device.thisDevice = true;
-                device.operatingSystemName = Build.VERSION_CODES.class
-                        .getFields()[android.os.Build.VERSION.SDK_INT]
-                        .getName();
+                device.operatingSystemName = Build.VERSION_CODES
+                                                  .class
+                                                  .getFields()[android.os
+                                                                      .Build
+                                                                      .VERSION
+                                                                      .SDK_INT]
+                                                  .getName();
                 device.operatingSystemType = Device.Os.ANDROID;
                 try {
-                    device.ipAddressV4 = Inet4Address.getLocalHost().getHostAddress();
+                    device.ipAddressV4 = Inet4Address.getLocalHost()
+                                                     .getHostAddress();
                 } catch (UnknownHostException e) {
                     e.printStackTrace();
                 }
-                device.secretKey = "1234"; // To be implemented.
+                device.secretKey = "1234"; // TODO: use generation function from
+                                           // our utils
             });
         }
     };
