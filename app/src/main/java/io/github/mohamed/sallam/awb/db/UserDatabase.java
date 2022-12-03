@@ -81,6 +81,8 @@ public abstract class UserDatabase extends RoomDatabase {
                 }
                 device.secretKey = "1234"; // TODO: use generation function from
                                            // our utils
+
+                instance.deviceDao().insert(device);
             });
         }
     };
