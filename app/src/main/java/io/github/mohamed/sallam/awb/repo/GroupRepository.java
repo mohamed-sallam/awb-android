@@ -15,7 +15,7 @@ import io.github.mohamed.sallam.awb.db.entity.Group;
 
 import io.github.mohamed.sallam.awb.db.relationship.GroupWithBlockedApps;
 
-public class GroupRepository {
+public class GroupRepository implements IGroupRepository {
     private GroupDao groupDao;
     private BlockedAppDao blockedAppDao;
 
@@ -26,7 +26,7 @@ public class GroupRepository {
     }
 
     //GroupDao
-    public void insertGroup(Group group) {
+    public void insert(Group group) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -35,30 +35,32 @@ public class GroupRepository {
         });
     }
 
-    public void updateGroup(Group group) {
+    public void rename(String name, UUID uuid) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
-                groupDao.update(group);
+                groupDao.rename(name, uuid);
             }
         });
     }
 
-    public void deleteGroup(Group group) {
+    public void delete(UUID groupUuid) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
-                groupDao.delete(group);
+                groupDao.delete(groupUuid);
+                blockedAppDao.deleteByGroupUuid(groupUuid);
             }
         });
     }
 
-    public LiveData<List<Group>> getAllGroup() {
-        return groupDao.getAll();
+    public LiveData<List<Group>> getAll(UUID deviceUuid) {
+        return groupDao.getAll(deviceUuid);
     }
 
-    public LiveData<List<GroupWithBlockedApps>> getAllGroupWithBlockedApps() {
-        return groupDao.getAllWithBlockedApps();
+    public LiveData<List<GroupWithBlockedApps>>
+    getAllWithBlockedApps(UUID deviceUuid) {
+        return groupDao.getAllWithBlockedApps(deviceUuid);
     }
 
     // BlockedAppDao
@@ -80,16 +82,18 @@ public class GroupRepository {
         });
     }
 
-    public LiveData<List<BlockedApp>> getAllBlockedApp() {
-        return blockedAppDao.getAll();
+    public LiveData<List<BlockedApp>>
+    getAllBlockedApps(UUID deviceUuid, UUID groupUuid) {
+        return blockedAppDao.getAll(deviceUuid, groupUuid);
     }
 
-    public void cloneBlockedAppToGroup
-            (UUID sourceGroupUuid, UUID destinationGroupUuid) {
+    public void clone
+            (UUID sourceGroupUuid, String groupName) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
-                blockedAppDao.clone(sourceGroupUuid, destinationGroupUuid);
+                Group destinationGroup = new Group(groupName);
+                blockedAppDao.clone(sourceGroupUuid, destinationGroup.uuid);
             }
         });
     }

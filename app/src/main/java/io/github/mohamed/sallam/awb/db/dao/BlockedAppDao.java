@@ -27,12 +27,18 @@ public interface BlockedAppDao {
     @Delete
     void delete(BlockedApp blockedApp);
 
-    @Query("SELECT * FROM blocked_apps_table")
-    LiveData<List<BlockedApp>> getAll();
+    @Query("DELETE FROM blocked_apps_table WHERE groupUuid = :groupUuid")
+    void deleteByGroupUuid(UUID groupUuid);
+
+    @Query("SELECT * FROM blocked_apps_table WHERE deviceUuid = :deviceUuid + " +
+            "groupUuid = :groupUuid")
+    LiveData<List<BlockedApp>> getAll(UUID deviceUuid, UUID groupUuid);
 
     @Query("INSERT INTO blocked_apps_table (path, groupUuid) " +
            "SELECT path, :destinationGroupUuid " +
            "FROM blocked_apps_table " +
            "WHERE groupUuid = :sourceGroupUuid")
     void clone(UUID sourceGroupUuid, UUID destinationGroupUuid);
+
+
 }

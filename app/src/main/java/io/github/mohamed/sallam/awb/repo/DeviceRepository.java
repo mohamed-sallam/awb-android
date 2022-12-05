@@ -11,7 +11,7 @@ import io.github.mohamed.sallam.awb.db.dao.DeviceDao;
 import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 
-public class DeviceRepository {
+public class DeviceRepository implements IDeviceRepository {
     private DeviceDao deviceDao;
 
     public DeviceRepository(Application application) {
@@ -20,7 +20,7 @@ public class DeviceRepository {
     }
 
     //DeviceDao
-    public void insertDevice(Device device) {
+    public void insert(Device device) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -29,7 +29,7 @@ public class DeviceRepository {
         });
     }
 
-    public void updateDevice(Device device) {
+    public void update(Device device) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -38,17 +38,19 @@ public class DeviceRepository {
         });
     }
 
-    public void deleteDevice(Device device) {
+
+    public void delete(UUID deviceUuid) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
-                deviceDao.delete(device);
+                deviceDao.delete(deviceUuid);
             }
         });
     }
 
-    public void setUuidToDevice(UUID oldUuid, UUID newUuid) {
+    public void generateUuid(UUID oldUuid) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
+            UUID newUuid;
             @Override
             public void run(){
                 deviceDao.setUuid(oldUuid,newUuid);
@@ -56,7 +58,7 @@ public class DeviceRepository {
         });
     }
 
-    public LiveData<List<Device>> getAllDevices() {
+    public LiveData<List<Device>> getAll() {
         return deviceDao.getAll();
     }
 

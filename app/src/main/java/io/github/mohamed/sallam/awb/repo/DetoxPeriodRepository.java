@@ -3,18 +3,13 @@ package io.github.mohamed.sallam.awb.repo;
 import android.app.Application;
 import androidx.lifecycle.LiveData;
 
-import java.util.List;
-import java.util.UUID;
-
 import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.DetoxPeriodDao;
 
-import io.github.mohamed.sallam.awb.db.entity.BlockedApp;
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
+import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithBlockedApps;
 
-import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
-
-public class DetoxPeriodRepository { //generic irepo.. // 3 x irep.... extend irepo
+public class DetoxPeriodRepository implements IDetoxPeriodRepository { 
     private DetoxPeriodDao detoxPeriodDao;
 
     public DetoxPeriodRepository(Application application) {
@@ -41,11 +36,11 @@ public class DetoxPeriodRepository { //generic irepo.. // 3 x irep.... extend ir
         });
     }
 
-    public void delete(DetoxPeriod detoxPeriod) {
+    public void delete(int id) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
-                detoxPeriodDao.delete(detoxPeriod);
+                detoxPeriodDao.delete(id);
             }
         });
     }
@@ -54,7 +49,10 @@ public class DetoxPeriodRepository { //generic irepo.. // 3 x irep.... extend ir
         return detoxPeriodDao.get(id);
     }
 
-    public LiveData<DetoxPeriodAndGroup> getDetoxPeriodWithGroup(int id) {
+    public LiveData<DetoxPeriodAndGroupWithBlockedApps>
+    getDetoxPeriodAndGroupWithBlockedApps(int id) {
         return detoxPeriodDao.getWithGroup(id);
     }
+
+
 }

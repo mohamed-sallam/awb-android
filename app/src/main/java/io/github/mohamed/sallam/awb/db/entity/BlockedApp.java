@@ -16,5 +16,6 @@ public class BlockedApp {
     public int id;
     public String path;
     public UUID groupUuid;
+    public UUID deviceUuid;
 }
 
