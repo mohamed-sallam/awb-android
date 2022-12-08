@@ -1,20 +1,55 @@
 package io.github.mohamed.sallam.awb.view.home;
 
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 
 import java.util.List;
 
-import io.github.mohamed.sallam.awb.db.entity.Group;
+//extend AndroidViewModel as video to pass context "application"
+public class HomeViewModel extends AndroidViewModel {
 
-public class HomeViewModel extends ViewModel {
-    private MutableLiveData<List<Group>> groups;
-
-    public MutableLiveData<List<Group>> getGroups() {
-        return groups;
+    //DeviceRepository Constructor
+    DeviceRepository devicerepository;
+    public HomeViewModel(@NonNull Application application) {
+        super(application);
+        devicerepository = new DeviceRepository(application);
     }
 
-    public void setGroups(MutableLiveData<List<Group>> groups) {
-        this.groups = groups;
+    // DeviceRepository methods
+    public LiveData<List<DeviceWithGroups>> getAllDevicesWithGroups() {
+        return devicerepository.getAllDevicesWithGroups();
     }
+
+    //DetoxRepository Constructor
+    DetoxPeriodRepository detoxperiodrepository;
+    public HomeViewModel(@NonNull Application application) {
+        super(application);
+        detoxperiodrepository = new DetoxPeriodRepository(application);
+    }
+
+    //DetoxRepository method
+    public void insert(DetoxPeriod detoxPeriod) {
+        detoxperiodrepository.insert(detoxPeriod);
+    }
+
+    public void update(DetoxPeriod detoxPeriod) {
+        detoxperiodrepository.update(detoxPeriod);
+    }
+
+    public void delete(int id) {
+        detoxperiodrepository.delete(id);
+    }
+
+    public LiveData<DetoxPeriod> get(int id) {
+        return detoxperiodrepository.get(id);
+    }
+
+    public LiveData<DetoxPeriodAndGroupWithBlockedApps>
+    getDetoxPeriodAndGroupWithBlockedApps(int id) {
+        return detoxperiodrepository.getDetoxPeriodAndGroupWithBlockedApps(id);
+    }
+
+
 }
