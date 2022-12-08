@@ -5,13 +5,13 @@
     <data>
         <variable
             name="UpdateGroupViewModel"
-            type="io.github.mohamed.sallam.awb.view.updategroup.UpdateGroupViewModel" />
+            type="io.github.mohamed.sallam.awb.screen.updategroup.UpdateGroupViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.updategroup.UpdateGroupFragment">
+        tools:context=".screen.updategroup.UpdateGroupFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <TextView

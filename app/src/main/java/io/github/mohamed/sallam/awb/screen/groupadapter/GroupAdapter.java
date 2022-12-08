@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.view.groupadapter;
+package io.github.mohamed.sallam.awb.screen.groupadapter;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;

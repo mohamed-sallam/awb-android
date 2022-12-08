@@ -6,13 +6,13 @@
     <data>
         <variable
             name="HomeViewModel"
-            type="io.github.mohamed.sallam.awb.view.home.HomeViewModel" />
+            type="io.github.mohamed.sallam.awb.screen.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.home.HomeFragment">
+        tools:context=".screen.home.HomeFragment">
 
         <NumberPicker
             android:id="@+id/minPicker"
