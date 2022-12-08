@@ -11,6 +11,7 @@ import static io.github.mohamed.sallam.awb.db.entity.Device.Os.*;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
+import io.github.mohamed.sallam.awb.repo.IAggregateRoot;
 
 /**
  * Class Device has methods to add and delete blocked apps groups for the device
@@ -21,7 +22,7 @@ import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
  */
 @TypeConverters({UuidConverter.class})
 @Entity(tableName = "devices_table")
-public class Device {
+public class Device implements IAggregateRoot {
     // Fields
     @NonNull
     @PrimaryKey

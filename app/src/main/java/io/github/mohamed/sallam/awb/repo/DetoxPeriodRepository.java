@@ -9,7 +9,7 @@ import io.github.mohamed.sallam.awb.db.dao.DetoxPeriodDao;
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithBlockedApps;
 
-public class DetoxPeriodRepository implements IDetoxPeriodRepository { 
+public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     private DetoxPeriodDao detoxPeriodDao;
 
     public DetoxPeriodRepository(Application application) {
