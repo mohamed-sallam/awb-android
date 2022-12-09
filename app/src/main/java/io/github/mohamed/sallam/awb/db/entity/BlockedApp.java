@@ -13,9 +13,8 @@ import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 public class BlockedApp {
     // Fields
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public Integer id;
     public String path;
     public UUID groupUuid;
-    public UUID deviceUuid;
 }
 

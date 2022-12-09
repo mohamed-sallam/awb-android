@@ -9,15 +9,13 @@ import io.github.mohamed.sallam.awb.db.entity.BlockedApp;
 import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.relationship.GroupWithBlockedApps;
 
-public interface IGroupRepository extends IRepository<Group> {
-    void delete(UUID entity);
-    void rename(String name, UUID uuid);
+public interface IGroupRepository extends IRepository<Group, UUID> {
+    void rename(UUID uuid, String name);
     LiveData<List<Group>> getAll(UUID deviceUuid);
     LiveData<List<GroupWithBlockedApps>> getAllWithBlockedApps(UUID deviceUuid);
     void insertBlockedApp(BlockedApp blockedApp);
-    void deleteBlockedApp(BlockedApp blockedApp);  // TODO: declared while working on RecyclerView
-    LiveData<List<BlockedApp>> getAllBlockedApps
-            (UUID deviceUuid, UUID groupUuid);
+    void deleteBlockedApp(int idBlockedApp);  // TODO: declared while working on RecyclerView
+    LiveData<List<BlockedApp>> getAllBlockedApps(UUID groupUuid);
     void clone
             (UUID sourceGroupUuid, String newGroupName);
 }

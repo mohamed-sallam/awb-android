@@ -8,11 +8,14 @@ import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.DeviceDao;
+import io.github.mohamed.sallam.awb.db.dao.GroupDao;
 import io.github.mohamed.sallam.awb.db.entity.Device;
+import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 
 public class DeviceRepository implements IDeviceRepository {
     private DeviceDao deviceDao;
+    private GroupDao groupDao;
 
     public DeviceRepository(Application application) {
         UserDatabase db = UserDatabase.getInstance(application);
@@ -48,12 +51,17 @@ public class DeviceRepository implements IDeviceRepository {
         });
     }
 
-    public void generateUuid(UUID oldUuid) {
+    public void generateUuid(UUID oldDeviceUuid) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            UUID newUuid;
             @Override
             public void run(){
-                deviceDao.setUuid(oldUuid,newUuid);
+                UUID newDeviceUuid = UUID.randomUUID();
+                List<Group>deviceGroups =
+                        (List<Group>) groupDao.getAllByDevice(oldDeviceUuid);
+
+                for(Group group : deviceGroups)
+                    group.deviceUuid = newDeviceUuid;
+                deviceDao.setUuid(oldDeviceUuid, newDeviceUuid);
             }
         });
     }

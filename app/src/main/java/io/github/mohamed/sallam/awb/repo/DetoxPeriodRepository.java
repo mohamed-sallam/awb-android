@@ -7,7 +7,7 @@ import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.DetoxPeriodDao;
 
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
-import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithBlockedApps;
+import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
 
 public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     private DetoxPeriodDao detoxPeriodDao;
@@ -36,7 +36,7 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
         });
     }
 
-    public void delete(int id) {
+    public void delete(Integer id) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -49,10 +49,14 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
         return detoxPeriodDao.get(id);
     }
 
-    public LiveData<DetoxPeriodAndGroupWithBlockedApps>
-    getDetoxPeriodAndGroupWithBlockedApps(int id) {
+    public LiveData<DetoxPeriodAndGroup>
+    getDetoxPeriodAndGroup(int id) {
         return detoxPeriodDao.getWithGroup(id);
     }
 
+//    public LiveData<DetoxPeriodAndGroupWithBlockedApps>  //TODO relationship
+//    getWithGroupWithBlockedApps(int id) {
+//        return detoxPeriodDao.getWithGroupWithBlockedApps(id);
+//    }
 
 }

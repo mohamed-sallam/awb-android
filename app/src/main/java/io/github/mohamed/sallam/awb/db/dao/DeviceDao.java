@@ -30,7 +30,8 @@ public interface DeviceDao {
     @Update
     void update(Device device);
 
-    @Delete
+
+    @Query("DELETE FROM devices_table WHERE uuid=:deviceUuid")
     void delete(UUID deviceUuid);
 
     @Query("UPDATE devices_table SET uuid=:newUuid WHERE uuid=:oldUuid")

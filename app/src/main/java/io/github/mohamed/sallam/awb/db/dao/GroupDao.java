@@ -7,7 +7,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.TypeConverters;
-import androidx.room.Update;
 
 import java.util.List;
 import java.util.UUID;
@@ -15,6 +14,7 @@ import java.util.UUID;
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.relationship.GroupWithBlockedApps;
+import retrofit2.http.GET;
 
 /**
  * Group Data Access Object.
@@ -28,15 +28,19 @@ public interface GroupDao {
     void insert(Group group);
 
     @Query("UPDATE groups_table SET name = :name WHERE uuid = :uuid")
-    void rename(String name, UUID uuid);
+    void rename(UUID uuid, String name);
 
-    @Delete
+    @Query("DELETE FROM devices_table WHERE uuid=:groupUuid")
     void delete(UUID groupUuid);
 
+    @Query("SELECT * FROM groups_table WHERE uuid = :groupUuid LIMIT 1")
+    Group get(UUID groupUuid);
+
     @Query("SELECT * FROM groups_table WHERE uuid = :deviceUuid")
-    LiveData<List<Group>> getAll(UUID deviceUuid);
+    LiveData<List<Group>> getAllByDevice(UUID deviceUuid);
 
     @Transaction
     @Query("SELECT * FROM groups_table WHERE uuid = :deviceUuid")
-    LiveData<List<GroupWithBlockedApps>> getAllWithBlockedApps(UUID deviceUuid);
+    LiveData<List<GroupWithBlockedApps>>
+    getAllWithBlockedAppsByDevice(UUID deviceUuid);
 }

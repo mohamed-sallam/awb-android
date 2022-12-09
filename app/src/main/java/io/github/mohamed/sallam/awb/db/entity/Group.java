@@ -25,7 +25,4 @@ public class Group implements IAggregateRoot {
 	public String name;
 	public UUID deviceUuid;
 
-	public Group(String name) {
-		this.name = name;
-	}
 }
