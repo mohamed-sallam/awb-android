@@ -2,7 +2,6 @@ package io.github.mohamed.sallam.awb.db.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
@@ -12,9 +11,9 @@ import androidx.room.Update;
 import java.util.List;
 import java.util.UUID;
 
+import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
-import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 
 /**
  * Device Data Access Object.

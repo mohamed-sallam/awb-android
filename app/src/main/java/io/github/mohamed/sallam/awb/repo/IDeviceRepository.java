@@ -1,8 +1,10 @@
 package io.github.mohamed.sallam.awb.repo;
 
 import androidx.lifecycle.LiveData;
+
 import java.util.List;
 import java.util.UUID;
+
 import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 

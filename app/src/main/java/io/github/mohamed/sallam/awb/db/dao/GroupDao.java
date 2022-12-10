@@ -2,7 +2,6 @@ package io.github.mohamed.sallam.awb.db.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
@@ -14,7 +13,6 @@ import java.util.UUID;
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.relationship.GroupWithBlockedApps;
-import retrofit2.http.GET;
 
 /**
  * Group Data Access Object.

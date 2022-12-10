@@ -1,12 +1,12 @@
 package io.github.mohamed.sallam.awb.db.entity;
 
+import static io.github.mohamed.sallam.awb.db.entity.Device.Os.UNKNOWN;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
-
-import static io.github.mohamed.sallam.awb.db.entity.Device.Os.*;
 
 import java.util.UUID;
 

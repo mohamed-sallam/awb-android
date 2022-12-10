@@ -1,6 +1,7 @@
 package io.github.mohamed.sallam.awb.repo;
 
 import android.app.Application;
+
 import androidx.lifecycle.LiveData;
 
 import java.util.List;

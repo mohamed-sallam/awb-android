@@ -1,6 +1,7 @@
 package io.github.mohamed.sallam.awb.repo;
 
 import android.app.Application;
+
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
@@ -9,10 +10,8 @@ import java.util.UUID;
 import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.BlockedAppDao;
 import io.github.mohamed.sallam.awb.db.dao.GroupDao;
-
 import io.github.mohamed.sallam.awb.db.entity.BlockedApp;
 import io.github.mohamed.sallam.awb.db.entity.Group;
-
 import io.github.mohamed.sallam.awb.db.relationship.GroupWithBlockedApps;
 
 public class GroupRepository implements IGroupRepository {
