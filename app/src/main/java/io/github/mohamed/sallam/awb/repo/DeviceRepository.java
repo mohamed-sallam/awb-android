@@ -67,7 +67,7 @@ public class DeviceRepository implements IDeviceRepository {
         return deviceDao.getAll();
     }
 
-    public LiveData<List<DeviceWithGroups>> getAllDevicesWithGroups() {
+    public LiveData<List<DeviceWithGroups>> getAllWithGroups() {
         return deviceDao.getAllWithGroups();
     }
 }

@@ -12,5 +12,5 @@ public interface IDeviceRepository extends IRepository<Device, UUID> {
     void update(Device device);
     void generateUuid(UUID oldUuid);
     LiveData<List<Device>> getAll();
-    LiveData<List<DeviceWithGroups>> getAllDevicesWithGroups();  // TODO maybe deleted
+    LiveData<List<DeviceWithGroups>> getAllWithGroups();  // TODO maybe deleted
 }
