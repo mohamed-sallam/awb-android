@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.UserDatabase;
@@ -53,12 +54,12 @@ public class GroupRepository implements IGroupRepository {
         });
     }
 
-    public LiveData<List<Group>> getAll(UUID deviceUuid) {
+    public LiveData<List<Group>> getAllByDevice(UUID deviceUuid) {
         return groupDao.getAllByDevice(deviceUuid);
     }
 
     public LiveData<List<GroupWithBlockedApps>>
-    getAllWithBlockedApps(UUID deviceUuid) {
+    getAllWithBlockedAppsByDevice(UUID deviceUuid) {
         return groupDao.getAllWithBlockedAppsByDevice(deviceUuid);
     }
 
@@ -72,7 +73,7 @@ public class GroupRepository implements IGroupRepository {
         });
     }
 
-    public void deleteBlockedApp(int idBlockedApp) {
+    public void deleteBlockedApp(Integer idBlockedApp) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
@@ -82,19 +83,19 @@ public class GroupRepository implements IGroupRepository {
     }
 
     public LiveData<List<BlockedApp>>
-    getAllBlockedApps(UUID groupUuid) {
+    getAllBlockedAppsByGroupUuid(UUID groupUuid) {
         return blockedAppDao.getAllByGroupUuid(groupUuid);
     }
 
-    public void clone(UUID srcGroupUuid, String groupName) {
+    public void clone(UUID sourceGroupUuid, String groupName) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run() {
-                Group desGroup = new Group();
-                desGroup.name = groupName;
-                desGroup.deviceUuid = groupDao.get(srcGroupUuid).deviceUuid;
-                blockedAppDao.clone(srcGroupUuid, desGroup.uuid);
-                groupDao.insert(desGroup);
+                Group destinationGroup = new Group();
+                destinationGroup.name = groupName;
+                destinationGroup.deviceUuid = Objects.requireNonNull(groupDao.get(sourceGroupUuid).getValue()).deviceUuid;
+                blockedAppDao.clone(sourceGroupUuid, destinationGroup.uuid);
+                groupDao.insert(destinationGroup);
             }
         });
     }
