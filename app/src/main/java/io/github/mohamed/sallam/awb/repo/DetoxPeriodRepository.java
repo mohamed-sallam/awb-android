@@ -45,12 +45,12 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
         });
     }
 
-    public LiveData<DetoxPeriod> get(int id) {
+    public LiveData<DetoxPeriod> get(Integer id) {
         return detoxPeriodDao.get(id);
     }
 
     public LiveData<DetoxPeriodAndGroup>
-    getDetoxPeriodAndGroup(int id) {
+    getDetoxPeriodAndGroup(Integer id) {
         return detoxPeriodDao.getWithGroup(id);
     }
 

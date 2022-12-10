@@ -7,8 +7,8 @@ import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithBlock
 
 public interface IDetoxPeriodRepository extends IRepository<DetoxPeriod, Integer> {
     void update(DetoxPeriod detoxPeriod);
-    LiveData<DetoxPeriod> get(int id);
-    LiveData<DetoxPeriodAndGroup> getDetoxPeriodAndGroup(int id);
 //    LiveData<DetoxPeriodAndGroupWithBlockedApps>
 //    getWithGroupWithBlockedApps(int id);  //TODO implement on DAO
+    LiveData<DetoxPeriod> get(Integer id);
+    LiveData<DetoxPeriodAndGroup> getDetoxPeriodAndGroup(Integer id);
 }
