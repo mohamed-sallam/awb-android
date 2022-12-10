@@ -9,11 +9,13 @@ import androidx.room.Update;
 
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
+import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithBlockedApps;
 
 /**
  * Detox Period Data Access Object.
  *
  * @author Mohamed Sherif
+ * @author Mohamed Sallam
  */
 @Dao
 public interface DetoxPeriodDao {
@@ -33,4 +35,8 @@ public interface DetoxPeriodDao {
     @Query("SELECT * FROM detox_periods_table WHERE id=:id")
     LiveData<DetoxPeriodAndGroup> getWithGroup(Integer id);
 
+    @Transaction
+    @Query("SELECT * FROM detox_periods_table WHERE id=:id")
+    LiveData<DetoxPeriodAndGroupWithBlockedApps>
+    getAndGroupWithBlockedApps(Integer id);
 }
