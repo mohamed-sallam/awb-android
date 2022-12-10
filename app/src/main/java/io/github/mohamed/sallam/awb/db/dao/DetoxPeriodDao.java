@@ -2,7 +2,6 @@ package io.github.mohamed.sallam.awb.db.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
@@ -10,11 +9,13 @@ import androidx.room.Update;
 
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
+import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithBlockedApps;
 
 /**
  * Detox Period Data Access Object.
  *
  * @author Mohamed Sherif
+ * @author Mohamed Sallam
  */
 @Dao
 public interface DetoxPeriodDao {
@@ -24,13 +25,18 @@ public interface DetoxPeriodDao {
     @Update
     void update(DetoxPeriod detoxPeriod);
 
-    @Delete
-    void delete(DetoxPeriod detoxPeriod);
+    @Query("DELETE FROM detox_periods_table WHERE id=:id")
+    void delete(Integer id);
 
     @Query("SELECT * FROM detox_periods_table WHERE id=:id")
-    LiveData<DetoxPeriod> get(int id);
+    LiveData<DetoxPeriod> get(Integer id);
 
     @Transaction
     @Query("SELECT * FROM detox_periods_table WHERE id=:id")
-    LiveData<DetoxPeriodAndGroup> getWithGroup(int id);
+    LiveData<DetoxPeriodAndGroup> getWithGroup(Integer id);
+
+    @Transaction
+    @Query("SELECT * FROM detox_periods_table WHERE id=:id")
+    LiveData<DetoxPeriodAndGroupWithBlockedApps>
+    getAndGroupWithBlockedApps(Integer id);
 }

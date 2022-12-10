@@ -1,12 +1,14 @@
 package io.github.mohamed.sallam.awb.view.updategroup;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
 
 import io.github.mohamed.sallam.awb.R;
 
@@ -50,11 +52,28 @@ public class UpdateGroupFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        // To call the method onCreateOptionsMenu()
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
+
+    /**
+     * Initialize the contents of the Activity's standard options menu.
+     *
+     * @param menu The option menu in which place items.
+     * @param inflater MenuInflater.
+     *
+     * @author Yousef Ahmed
+     */
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu,
+                                    @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.fragment_update_group_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
