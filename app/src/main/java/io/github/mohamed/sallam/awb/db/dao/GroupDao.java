@@ -32,7 +32,7 @@ public interface GroupDao {
     void delete(UUID groupUuid);
 
     @Query("SELECT * FROM groups_table WHERE uuid = :groupUuid LIMIT 1")
-    Group get(UUID groupUuid);
+    LiveData<Group> get(UUID groupUuid);
 
     @Query("SELECT * FROM groups_table WHERE uuid = :deviceUuid")
     LiveData<List<Group>> getAllByDevice(UUID deviceUuid);
