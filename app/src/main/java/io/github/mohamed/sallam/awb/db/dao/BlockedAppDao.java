@@ -31,7 +31,7 @@ public interface BlockedAppDao {
     void deleteByGroupUuid(UUID groupUuid);
 
     @Query("SELECT * FROM blocked_apps_table WHERE groupUuid = :groupUuid")
-    LiveData<List<BlockedApp>> getAllByGroup(UUID groupUuid);
+    LiveData<List<BlockedApp>> getAllByGroupUuid(UUID groupUuid);
 
     @Query("INSERT INTO blocked_apps_table (path, groupUuid) " +
            "SELECT path, :destinationGroupUuid " +
