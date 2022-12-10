@@ -43,7 +43,7 @@ public abstract class UserDatabase extends RoomDatabase {
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(2);
 
-    static synchronized UserDatabase getInstance(final Context context) {
+    public static synchronized UserDatabase getInstance(final Context context) {
         if (instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),
                                             UserDatabase.class,

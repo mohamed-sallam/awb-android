@@ -2,7 +2,6 @@ package io.github.mohamed.sallam.awb.db.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
@@ -12,9 +11,9 @@ import androidx.room.Update;
 import java.util.List;
 import java.util.UUID;
 
+import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
-import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 
 /**
  * Device Data Access Object.
@@ -30,8 +29,9 @@ public interface DeviceDao {
     @Update
     void update(Device device);
 
-    @Delete
-    void delete(Device device);
+
+    @Query("DELETE FROM devices_table WHERE uuid=:deviceUuid")
+    void delete(UUID deviceUuid);
 
     @Query("UPDATE devices_table SET uuid=:newUuid WHERE uuid=:oldUuid")
     void setUuid(UUID oldUuid, UUID newUuid);

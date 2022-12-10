@@ -13,7 +13,7 @@ import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 @Entity
 abstract public class DetoxSettings {
 	@PrimaryKey(autoGenerate = true)
-	public int id;
+	public Integer id;
 	public static final String AWB_VERSION = "0.1.0v";
 	public UUID groupUuid;
 
