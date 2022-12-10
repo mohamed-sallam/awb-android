@@ -37,6 +37,11 @@ public interface GroupDao {
     @Query("SELECT * FROM groups_table WHERE uuid = :deviceUuid")
     LiveData<List<Group>> getAllByDevice(UUID deviceUuid);
 
+    @Query("UPDATE groups_table "             +
+           "SET   deviceUuid=:newDeviceUuid " +
+           "WHERE deviceUuid=:oldDeviceUuid"  )
+    void replaceDeviceUuid(UUID oldDeviceUuid, UUID newDeviceUuid);
+
     @Transaction
     @Query("SELECT * FROM groups_table WHERE uuid = :deviceUuid")
     LiveData<List<GroupWithBlockedApps>>

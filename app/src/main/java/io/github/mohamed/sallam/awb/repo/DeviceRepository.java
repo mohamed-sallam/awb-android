@@ -57,11 +57,7 @@ public class DeviceRepository implements IDeviceRepository {
             @Override
             public void run(){
                 UUID newDeviceUuid = UUID.randomUUID();
-                List<Group>deviceGroups =
-                        (List<Group>) groupDao.getAllByDevice(oldDeviceUuid);
-
-                for(Group group : deviceGroups)
-                    group.deviceUuid = newDeviceUuid;
+                groupDao.replaceDeviceUuid(oldDeviceUuid, newDeviceUuid);
                 deviceDao.setUuid(oldDeviceUuid, newDeviceUuid);
             }
         });
