@@ -14,17 +14,6 @@
         android:layout_height="match_parent"
         tools:context=".view.home.HomeFragment">
 
-        <NumberPicker
-            android:id="@+id/minPicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.324" />
 
         <TextView
             android:id="@+id/min_textView"
@@ -32,88 +21,95 @@
             android:layout_height="wrap_content"
             android:text="@string/m"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/minPicker"
-            app:layout_constraintEnd_toEndOf="@+id/minPicker"
-            app:layout_constraintStart_toStartOf="@+id/minPicker"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.904" />
+            app:layout_constraintEnd_toEndOf="@+id/hrPicker"
+            app:layout_constraintStart_toStartOf="@+id/hrPicker"
+            app:layout_constraintTop_toBottomOf="@+id/hrPicker" />
 
         <NumberPicker
             android:id="@+id/hrPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
             android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="@+id/minPicker"
-            app:layout_constraintEnd_toStartOf="@+id/minPicker"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/minPicker"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="@+id/button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/minPicker"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <NumberPicker
+            android:id="@+id/minPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/min_textView"
+            app:layout_constraintEnd_toStartOf="@+id/hrPicker"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@+id/recyclerView"
+            app:layout_constraintTop_toTopOf="@+id/hrPicker"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/hr_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
             android:text="@string/h"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/hrPicker"
-            app:layout_constraintEnd_toStartOf="@+id/min_textView"
-            app:layout_constraintHorizontal_bias="0.301"
-            app:layout_constraintStart_toStartOf="@+id/hrPicker"
-            app:layout_constraintTop_toTopOf="@+id/min_textView"
-            app:layout_constraintVertical_bias="0.0" />
-
+            app:layout_constraintEnd_toEndOf="@+id/minPicker"
+            app:layout_constraintStart_toStartOf="@+id/minPicker"
+            app:layout_constraintTop_toBottomOf="@+id/minPicker" />
 
         <Button
             android:id="@+id/lock"
             style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="146dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:background="#013220"
             android:drawableStart="@drawable/ic_lock"
             android:text="@string/lock"
             android:textStyle="bold|italic"
             app:icon="@drawable/ic_lock"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/minPicker"
-            app:layout_constraintVertical_bias="0.155"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="@+id/hrPicker"
+            app:layout_constraintStart_toStartOf="@+id/minPicker"
+            app:layout_constraintTop_toBottomOf="@+id/min_textView"
+            app:layout_constraintVertical_bias="0.0"
             tools:ignore="MissingConstraints" />
 
         <Button
+            android:id="@+id/button"
             style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
-            android:layout_width="wrap_content"
 
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:background="#420E0E"
             app:backgroundTint="#03A9F4"
             app:iconTintMode="add"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
-            app:layout_constraintStart_toEndOf="@+id/recyclerView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.874"
+            app:layout_constraintTop_toTopOf="@+id/recyclerView"
             app:strokeColor="#FFFFFF"
             tools:ignore="MissingConstraints"
             tools:text="Add" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="275dp"
-            android:layout_height="162dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lock"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:orientation="horizontal"
-            app:layout_constraintVertical_bias="0.58" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:itemCount="4" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
