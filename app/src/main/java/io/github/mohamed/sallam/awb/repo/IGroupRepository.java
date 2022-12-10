@@ -16,6 +16,5 @@ public interface IGroupRepository extends IRepository<Group, UUID> {
     void insertBlockedApp(BlockedApp blockedApp);
     void deleteBlockedApp(int idBlockedApp);  // TODO: declared while working on RecyclerView
     LiveData<List<BlockedApp>> getAllBlockedApps(UUID groupUuid);
-    void clone
-            (UUID sourceGroupUuid, String newGroupName);
+    void clone(UUID sourceGroupUuid, String newGroupName);
 }

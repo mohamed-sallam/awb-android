@@ -83,10 +83,10 @@ public class GroupRepository implements IGroupRepository {
 
     public LiveData<List<BlockedApp>>
     getAllBlockedApps(UUID groupUuid) {
-        return blockedAppDao.getAllByGroup(groupUuid);
+        return blockedAppDao.getAllByGroupUuid(groupUuid);
     }
 
-    public void clone (UUID srcGroupUuid, String groupName) {
+    public void clone(UUID srcGroupUuid, String groupName) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run() {
