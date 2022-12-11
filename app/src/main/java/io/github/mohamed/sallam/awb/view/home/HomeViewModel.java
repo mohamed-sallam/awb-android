@@ -59,4 +59,8 @@ public class HomeViewModel extends AndroidViewModel {
         detoxPeriod.groupUuid = groupUuid;
         detoxPeriodRepository.insert(detoxPeriod);
     }
+
+    public void duplicateGroup(UUID groupUuid, String newGroupName) {
+        groupRepository.clone(groupUuid, newGroupName);
+    }
 }
