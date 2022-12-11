@@ -23,8 +23,9 @@ public interface BlockedAppDao {
     @Insert
     void insert(BlockedApp blockedApp);
 
-    @Query("DELETE FROM blocked_apps_table WHERE id = :id")
-    void delete(Integer id);
+    @Query("DELETE FROM blocked_apps_table " +
+           "WHERE groupUuid=:groupUuid AND packageName=:packageName")
+    void delete(UUID groupUuid, String packageName);
 
     @Query("DELETE FROM blocked_apps_table WHERE groupUuid = :groupUuid")
     void deleteByGroupUuid(UUID groupUuid);
