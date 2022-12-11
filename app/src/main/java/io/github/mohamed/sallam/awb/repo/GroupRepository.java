@@ -58,9 +58,8 @@ public class GroupRepository implements IGroupRepository {
         return groupDao.getAllByDevice(deviceUuid);
     }
 
-    public LiveData<List<GroupWithBlockedApps>>
-    getAllWithBlockedAppsByDevice(UUID deviceUuid) {
-        return groupDao.getAllWithBlockedAppsByDevice(deviceUuid);
+    public LiveData<GroupWithBlockedApps> getWithBlockedApps(UUID uuid) {
+        return groupDao.getWithBlockedApps(uuid);
     }
 
     // BlockedAppDao
@@ -73,11 +72,11 @@ public class GroupRepository implements IGroupRepository {
         });
     }
 
-    public void deleteBlockedApp(Integer idBlockedApp) {
+    public void deleteBlockedApp(UUID groupUuid, String packageName) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
-                blockedAppDao.delete(idBlockedApp);
+                blockedAppDao.delete(groupUuid, packageName);
             }
         });
     }

@@ -1,5 +1,6 @@
 package io.github.mohamed.sallam.awb.db.relationship;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
@@ -15,5 +16,5 @@ public class GroupWithBlockedApps {
             parentColumn = "uuid",
             entityColumn = "groupUuid"
     )
-    public List<BlockedApp> blockedApps;
+    public LiveData<List<BlockedApp>> blockedApps;
 }
