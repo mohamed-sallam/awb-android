@@ -10,8 +10,8 @@ public class DetoxPeriodAndGroup {
     @Embedded
     public DetoxPeriod detoxPeriod;
     @Relation(
-            parentColumn = "uuid",
-            entityColumn = "groupUuid"
+            parentColumn = "groupUuid",
+            entityColumn = "uuid"
     )
     public Group group;
 }

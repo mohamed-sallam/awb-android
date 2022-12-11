@@ -11,7 +11,7 @@ public class DetoxPeriodAndGroupWithBlockedApps {
     @Embedded
     public DetoxPeriodAndGroup detoxPeriodAndGroup;
     @Relation(
-            parentColumn = "uuid",
+            parentColumn = "groupUuid",
             entityColumn = "groupUuid"
     )
     public List<WhitelistedApp> whitelistedApps;
