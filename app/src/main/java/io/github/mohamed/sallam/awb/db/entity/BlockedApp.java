@@ -14,7 +14,7 @@ public class BlockedApp {
     // Fields
     @PrimaryKey(autoGenerate = true)
     public Integer id;
-    public String path;
+    public String packageName;
     public UUID groupUuid;
 }
 
