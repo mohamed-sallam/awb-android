@@ -12,7 +12,7 @@ import io.github.mohamed.sallam.awb.db.relationship.GroupWithBlockedApps;
 public interface IGroupRepository extends IRepository<Group> {
     void rename(UUID uuid, String name);
     LiveData<List<Group>> getAllByDevice(UUID deviceUuid);
-    LiveData<List<GroupWithBlockedApps>> getAllWithBlockedAppsByDevice(UUID deviceUuid);
+    LiveData<GroupWithBlockedApps> getWithBlockedApps(UUID uuid);
     void insertBlockedApp(BlockedApp blockedApp);
     void deleteBlockedApp(UUID groupUuid, String packageName);  // TODO: declared while working on RecyclerView
     LiveData<List<BlockedApp>> getAllBlockedAppsByGroupUuid(UUID groupUuid);

@@ -43,7 +43,6 @@ public interface GroupDao {
     void replaceDeviceUuid(UUID oldDeviceUuid, UUID newDeviceUuid);
 
     @Transaction
-    @Query("SELECT * FROM groups_table WHERE uuid = :deviceUuid")
-    LiveData<List<GroupWithBlockedApps>>
-    getAllWithBlockedAppsByDevice(UUID deviceUuid);
+    @Query("SELECT * FROM groups_table WHERE uuid=:uuid")
+    LiveData<GroupWithBlockedApps> getWithBlockedApps(UUID uuid);
 }

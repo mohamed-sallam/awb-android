@@ -58,9 +58,8 @@ public class GroupRepository implements IGroupRepository {
         return groupDao.getAllByDevice(deviceUuid);
     }
 
-    public LiveData<List<GroupWithBlockedApps>>
-    getAllWithBlockedAppsByDevice(UUID deviceUuid) {
-        return groupDao.getAllWithBlockedAppsByDevice(deviceUuid);
+    public LiveData<GroupWithBlockedApps> getWithBlockedApps(UUID uuid) {
+        return groupDao.getWithBlockedApps(uuid);
     }
 
     // BlockedAppDao
