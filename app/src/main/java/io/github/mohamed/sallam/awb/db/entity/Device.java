@@ -14,7 +14,7 @@ import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 import io.github.mohamed.sallam.awb.repo.IAggregateRoot;
 
 /**
- * Class Device has methods to add and delete blocked apps groups for the device
+ * Class Device has methods to add and delete whitelisted apps groups for the device
  * and generate a unique id for the device.
  *
  * @author Abdalrhman Hemida

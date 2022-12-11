@@ -11,7 +11,7 @@ import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 
 @TypeConverters({UuidConverter.class})
 @Entity(
-        tableName = "blocked_apps_table",
+        tableName = "whitelisted_apps_table",
         indices = {
                 @Index(
                         value = {"packageName", "groupUuid"},
@@ -19,7 +19,7 @@ import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
                 )
         }
 )
-public class BlockedApp {
+public class WhitelistedApp {
     // Fields
     @PrimaryKey(autoGenerate = true)
     public Integer id;

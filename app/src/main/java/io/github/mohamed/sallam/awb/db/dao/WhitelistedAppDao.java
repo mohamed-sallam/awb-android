@@ -10,32 +10,32 @@ import java.util.List;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
-import io.github.mohamed.sallam.awb.db.entity.BlockedApp;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 
 /**
- * Blocked Apps Data Access Object.
+ * Whitelisted Apps Data Access Object.
  *
  * @author Mohamed Sherif
  */
 @TypeConverters({UuidConverter.class})
 @Dao
-public interface BlockedAppDao {
+public interface WhitelistedAppDao {
     @Insert
-    void insert(BlockedApp blockedApp);
+    void insert(WhitelistedApp whitelistedApp);
 
-    @Query("DELETE FROM blocked_apps_table " +
+    @Query("DELETE FROM whitelisted_apps_table " +
            "WHERE groupUuid=:groupUuid AND packageName=:packageName")
     void delete(UUID groupUuid, String packageName);
 
-    @Query("DELETE FROM blocked_apps_table WHERE groupUuid = :groupUuid")
+    @Query("DELETE FROM whitelisted_apps_table WHERE groupUuid = :groupUuid")
     void deleteByGroupUuid(UUID groupUuid);
 
-    @Query("SELECT * FROM blocked_apps_table WHERE groupUuid = :groupUuid")
-    LiveData<List<BlockedApp>> getAllByGroupUuid(UUID groupUuid);
+    @Query("SELECT * FROM whitelisted_apps_table WHERE groupUuid = :groupUuid")
+    LiveData<List<WhitelistedApp>> getAllByGroupUuid(UUID groupUuid);
 
-    @Query("INSERT INTO blocked_apps_table (packageName, groupUuid) " +
+    @Query("INSERT INTO whitelisted_apps_table (packageName, groupUuid) " +
            "SELECT packageName, :destinationGroupUuid " +
-           "FROM blocked_apps_table " +
+           "FROM whitelisted_apps_table " +
            "WHERE groupUuid = :sourceGroupUuid")
     void clone(UUID sourceGroupUuid, UUID destinationGroupUuid);
 

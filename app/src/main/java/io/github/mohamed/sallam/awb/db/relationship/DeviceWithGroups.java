@@ -1,6 +1,5 @@
 package io.github.mohamed.sallam.awb.db.relationship;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
@@ -16,5 +15,5 @@ public class DeviceWithGroups {
             parentColumn = "uuid",
             entityColumn = "deviceUuid"
     )
-    public LiveData<List<Group>> groups;
+    public List<Group> groups;
 }
