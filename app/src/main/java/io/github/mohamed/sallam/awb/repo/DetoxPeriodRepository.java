@@ -31,24 +31,24 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
         );
     }
 
-    public void delete(Integer id) {
+    public void delete() {
         UserDatabase.databaseWriteExecutor.execute(
-                () -> detoxPeriodDao.delete(id)
+                () -> detoxPeriodDao.delete()
         );
     }
 
-    public LiveData<DetoxPeriod> get(Integer id) {
-        return detoxPeriodDao.get(id);
+    public LiveData<DetoxPeriod> get() {
+        return detoxPeriodDao.get();
     }
 
     public LiveData<DetoxPeriodAndGroup>
-    getDetoxPeriodAndGroup(Integer id) {
-        return detoxPeriodDao.getWithGroup(id);
+    getDetoxPeriodAndGroup() {
+        return detoxPeriodDao.getWithGroup();
     }
 
     public LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-    getAndGroupWithWhitelistedApps(Integer id) {
-        return detoxPeriodDao.getAndGroupWithWhitelistedApps(id);
+    getAndGroupWithWhitelistedApps() {
+        return detoxPeriodDao.getAndGroupWithWhitelistedApps();
     }
 
 }

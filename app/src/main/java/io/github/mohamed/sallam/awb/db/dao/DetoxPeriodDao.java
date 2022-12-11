@@ -25,18 +25,18 @@ public interface DetoxPeriodDao {
     @Update
     void update(DetoxPeriod detoxPeriod);
 
-    @Query("DELETE FROM detox_periods_table WHERE id=:id")
-    void delete(Integer id);
+    @Query("DELETE FROM detox_periods_table")
+    void delete();
 
-    @Query("SELECT * FROM detox_periods_table WHERE id=:id")
-    LiveData<DetoxPeriod> get(Integer id);
-
-    @Transaction
-    @Query("SELECT * FROM detox_periods_table WHERE id=:id")
-    LiveData<DetoxPeriodAndGroup> getWithGroup(Integer id);
+    @Query("SELECT * FROM detox_periods_table LIMIT 1")
+    LiveData<DetoxPeriod> get();
 
     @Transaction
-    @Query("SELECT * FROM detox_periods_table WHERE id=:id")
+    @Query("SELECT * FROM detox_periods_table LIMIT 1")
+    LiveData<DetoxPeriodAndGroup> getWithGroup();
+
+    @Transaction
+    @Query("SELECT * FROM detox_periods_table LIMIT 1")
     LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-    getAndGroupWithWhitelistedApps(Integer id);
+    getAndGroupWithWhitelistedApps();
 }
