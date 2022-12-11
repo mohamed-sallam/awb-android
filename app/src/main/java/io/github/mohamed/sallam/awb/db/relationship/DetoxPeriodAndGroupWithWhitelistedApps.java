@@ -5,9 +5,9 @@ import androidx.room.Relation;
 
 import java.util.List;
 
-import io.github.mohamed.sallam.awb.db.entity.BlockedApp;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 
-public class DetoxPeriodAndGroupWithBlockedApps {
+public class DetoxPeriodAndGroupWithWhitelistedApps {
     @Embedded
     public DetoxPeriodAndGroup detoxPeriodAndGroup;
     @Relation(

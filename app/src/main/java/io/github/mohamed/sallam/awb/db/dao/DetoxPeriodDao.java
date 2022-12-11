@@ -9,7 +9,7 @@ import androidx.room.Update;
 
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
-import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithBlockedApps;
+import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
 
 /**
  * Detox Period Data Access Object.
@@ -37,6 +37,6 @@ public interface DetoxPeriodDao {
 
     @Transaction
     @Query("SELECT * FROM detox_periods_table WHERE id=:id")
-    LiveData<DetoxPeriodAndGroupWithBlockedApps>
-    getAndGroupWithBlockedApps(Integer id);
+    LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
+    getAndGroupWithWhitelistedApps(Integer id);
 }

@@ -9,20 +9,20 @@ import java.util.Objects;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.UserDatabase;
-import io.github.mohamed.sallam.awb.db.dao.BlockedAppDao;
+import io.github.mohamed.sallam.awb.db.dao.WhitelistedAppDao;
 import io.github.mohamed.sallam.awb.db.dao.GroupDao;
-import io.github.mohamed.sallam.awb.db.entity.BlockedApp;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.entity.Group;
-import io.github.mohamed.sallam.awb.db.relationship.GroupWithBlockedApps;
+import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 
 public class GroupRepository implements IGroupRepository {
     private GroupDao groupDao;
-    private BlockedAppDao blockedAppDao;
+    private WhitelistedAppDao whitelistedAppDao;
 
     public GroupRepository(Application application) {
         UserDatabase db = UserDatabase.getInstance(application);
         groupDao = db.groupDao();
-        blockedAppDao = db.blockedAppDao();
+        whitelistedAppDao = db.whitelistedAppDao();
     }
 
     //GroupDao
@@ -49,7 +49,7 @@ public class GroupRepository implements IGroupRepository {
             @Override
             public void run(){
                 groupDao.delete(groupUuid);
-                blockedAppDao.deleteByGroupUuid(groupUuid);
+                whitelistedAppDao.deleteByGroupUuid(groupUuid);
             }
         });
     }
@@ -58,32 +58,32 @@ public class GroupRepository implements IGroupRepository {
         return groupDao.getAllByDevice(deviceUuid);
     }
 
-    public LiveData<GroupWithBlockedApps> getWithBlockedApps(UUID uuid) {
-        return groupDao.getWithBlockedApps(uuid);
+    public LiveData<GroupWithWhitelistedApps> getWithWhitelistedApps(UUID uuid) {
+        return groupDao.getWithWhitelistedApps(uuid);
     }
 
-    // BlockedAppDao
-    public void insertBlockedApp(BlockedApp blockedApp) {
+    // WhitelistedAppDao
+    public void insertWhitelistedApp(WhitelistedApp whitelistedApp) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
-                blockedAppDao.insert(blockedApp);
+                whitelistedAppDao.insert(whitelistedApp);
             }
         });
     }
 
-    public void deleteBlockedApp(UUID groupUuid, String packageName) {
+    public void deleteWhitelistedApp(UUID groupUuid, String packageName) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
             public void run(){
-                blockedAppDao.delete(groupUuid, packageName);
+                whitelistedAppDao.delete(groupUuid, packageName);
             }
         });
     }
 
-    public LiveData<List<BlockedApp>>
-    getAllBlockedAppsByGroupUuid(UUID groupUuid) {
-        return blockedAppDao.getAllByGroupUuid(groupUuid);
+    public LiveData<List<WhitelistedApp>>
+    getAllWhitelistedAppsByGroupUuid(UUID groupUuid) {
+        return whitelistedAppDao.getAllByGroupUuid(groupUuid);
     }
 
     public void clone(UUID sourceGroupUuid, String groupName) {
@@ -93,7 +93,7 @@ public class GroupRepository implements IGroupRepository {
                 Group destinationGroup = new Group();
                 destinationGroup.name = groupName;
                 destinationGroup.deviceUuid = Objects.requireNonNull(groupDao.get(sourceGroupUuid).getValue()).deviceUuid;
-                blockedAppDao.clone(sourceGroupUuid, destinationGroup.uuid);
+                whitelistedAppDao.clone(sourceGroupUuid, destinationGroup.uuid);
                 groupDao.insert(destinationGroup);
             }
         });

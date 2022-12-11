@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-import io.github.mohamed.sallam.awb.db.entity.BlockedApp;
-import io.github.mohamed.sallam.awb.db.relationship.GroupWithBlockedApps;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
+import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 import io.github.mohamed.sallam.awb.repo.GroupRepository;
 
 /**
@@ -35,8 +35,8 @@ public class UpdateGroupViewModel extends AndroidViewModel {
         this.groupUuid = groupUuid;
     }
 
-    public LiveData<GroupWithBlockedApps> getGroupWithBlockedApps() {
-        return groupRepository.getWithBlockedApps(groupUuid);
+    public LiveData<GroupWithWhitelistedApps> getGroupWithWhitelistedApps() {
+        return groupRepository.getWithWhitelistedApps(groupUuid);
     }
 
     public void allowApp(String packageName) {
@@ -45,10 +45,10 @@ public class UpdateGroupViewModel extends AndroidViewModel {
             appCommands.put(packageName, new AppCommand(packageName, true) {
                 @Override
                 public void execute() {
-                    BlockedApp blockedApp = new BlockedApp();
-                    blockedApp.groupUuid = groupUuid;
-                    blockedApp.packageName = packageName;
-                    groupRepository.insertBlockedApp(blockedApp);
+                    WhitelistedApp whitelistedApp = new WhitelistedApp();
+                    whitelistedApp.groupUuid = groupUuid;
+                    whitelistedApp.packageName = packageName;
+                    groupRepository.insertWhitelistedApp(whitelistedApp);
                 }
             });
             return;
@@ -63,7 +63,7 @@ public class UpdateGroupViewModel extends AndroidViewModel {
             appCommands.put(packageName, new AppCommand(packageName, false) {
                 @Override
                 void execute() {
-                    groupRepository.deleteBlockedApp(groupUuid, packageName);
+                    groupRepository.deleteWhitelistedApp(groupUuid, packageName);
                 }
             });
             return;

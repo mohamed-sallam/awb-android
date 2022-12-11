@@ -12,7 +12,7 @@ import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 import io.github.mohamed.sallam.awb.db.entity.Group;
-import io.github.mohamed.sallam.awb.db.relationship.GroupWithBlockedApps;
+import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 
 /**
  * Group Data Access Object.
@@ -44,5 +44,5 @@ public interface GroupDao {
 
     @Transaction
     @Query("SELECT * FROM groups_table WHERE uuid=:uuid")
-    LiveData<GroupWithBlockedApps> getWithBlockedApps(UUID uuid);
+    LiveData<GroupWithWhitelistedApps> getWithWhitelistedApps(UUID uuid);
 }
