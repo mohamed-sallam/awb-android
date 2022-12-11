@@ -25,8 +25,7 @@ import io.github.mohamed.sallam.awb.db.entity.Group;
 
 /**
  * Our Internal Database
- *
- * @Source https://www.techotopia.com/index.php/An_Android_Room_Database_and_Repository_Tutorial
+ * Source: techotopia.com/index.php/An_Android_Room_Database_and_Repository_Tutorial
  *
  * @author Mohamed Sherif
  */

@@ -11,7 +11,7 @@ import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
 
 public class DetoxPeriodRepository implements IDetoxPeriodRepository {
-    private DetoxPeriodDao detoxPeriodDao;
+    private final DetoxPeriodDao detoxPeriodDao;
 
     public DetoxPeriodRepository(Application application) {
         UserDatabase db = UserDatabase.getInstance(application);
@@ -20,30 +20,21 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
 
     // DetoxPeriodDao
     public void insert(DetoxPeriod detoxPeriod) {
-        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            @Override
-            public void run(){
-                detoxPeriodDao.insert(detoxPeriod);
-            }
-        });
+        UserDatabase.databaseWriteExecutor.execute(
+                () -> detoxPeriodDao.insert(detoxPeriod)
+        );
     }
 
     public void update(DetoxPeriod detoxPeriod) {
-        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            @Override
-            public void run(){
-                detoxPeriodDao.update(detoxPeriod);
-            }
-        });
+        UserDatabase.databaseWriteExecutor.execute(
+                () -> detoxPeriodDao.update(detoxPeriod)
+        );
     }
 
     public void delete(Integer id) {
-        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            @Override
-            public void run(){
-                detoxPeriodDao.delete(id);
-            }
-        });
+        UserDatabase.databaseWriteExecutor.execute(
+                () -> detoxPeriodDao.delete(id)
+        );
     }
 
     public LiveData<DetoxPeriod> get(Integer id) {
