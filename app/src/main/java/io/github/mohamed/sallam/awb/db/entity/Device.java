@@ -1,19 +1,20 @@
 package io.github.mohamed.sallam.awb.db.entity;
 
+import static io.github.mohamed.sallam.awb.db.entity.Device.Os.UNKNOWN;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import static io.github.mohamed.sallam.awb.db.entity.Device.Os.*;
-
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
+import io.github.mohamed.sallam.awb.repo.IAggregateRoot;
 
 /**
- * Class Device has methods to add and delete blocked apps groups for the device
+ * Class Device has methods to add and delete whitelisted apps groups for the device
  * and generate a unique id for the device.
  *
  * @author Abdalrhman Hemida
@@ -21,7 +22,7 @@ import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
  */
 @TypeConverters({UuidConverter.class})
 @Entity(tableName = "devices_table")
-public class Device {
+public class Device implements IAggregateRoot {
     // Fields
     @NonNull
     @PrimaryKey

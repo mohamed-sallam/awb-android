@@ -7,6 +7,7 @@ import androidx.room.TypeConverters;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
+import io.github.mohamed.sallam.awb.repo.IAggregateRoot;
 
 /**
  * This class contains the groups of apps which the user wants to block them
@@ -16,11 +17,12 @@ import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
  */
 @TypeConverters({UuidConverter.class})
 @Entity(tableName = "groups_table")
-public class Group {
+public class Group implements IAggregateRoot {
 	// Fields
 	@NonNull
 	@PrimaryKey
 	public UUID uuid = UUID.randomUUID();
 	public String name;
 	public UUID deviceUuid;
+
 }
