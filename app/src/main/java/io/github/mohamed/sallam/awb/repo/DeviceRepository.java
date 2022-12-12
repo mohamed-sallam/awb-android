@@ -70,4 +70,8 @@ public class DeviceRepository implements IDeviceRepository {
     public LiveData<List<DeviceWithGroups>> getAllWithGroups() {
         return deviceDao.getAllWithGroups();
     }
+
+    public LiveData<Device> getThisDevice() {
+        return deviceDao.getThisDevice();
+    }
 }
