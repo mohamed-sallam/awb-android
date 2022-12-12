@@ -1,5 +1,6 @@
 package io.github.mohamed.sallam.awb.screen.updategroup;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -8,6 +9,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -34,6 +36,8 @@ public class UpdateGroupViewModel extends AndroidViewModel {
     private final Map<String, AppCommand> appCommands;
     private final UUID groupUuid;
     private final Application application;
+    private final List<App> apps;
+    MutableLiveData<Boolean> navigateBack = new MutableLiveData<Boolean>(false);
 
     public UpdateGroupViewModel(@NonNull Application application, UUID groupUuid) {
         super(application);
@@ -41,6 +45,11 @@ public class UpdateGroupViewModel extends AndroidViewModel {
         this.groupUuid = groupUuid;
         groupRepository = new GroupRepository(application);
         appCommands = new LinkedHashMap<>();
+        apps = getAllApps();
+    }
+
+    public void resetNavigation() {
+        navigateBack = null;
     }
 
     public LiveData<GroupWithWhitelistedApps> getGroupWithWhitelistedApps() {
@@ -48,6 +57,7 @@ public class UpdateGroupViewModel extends AndroidViewModel {
     }
 
     public List<App> getAllApps() {
+        @SuppressLint("QueryPermissionsNeeded")
         List<ApplicationInfo> appsData = application.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
         List<App> apps = new ArrayList<>();
         for (ApplicationInfo appInfo : appsData) {
