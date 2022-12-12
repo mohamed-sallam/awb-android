@@ -16,7 +16,7 @@
 
 
         <TextView
-            android:id="@+id/minTextView"
+            android:id="@+id/min_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/m"
@@ -32,7 +32,7 @@
             android:layout_marginStart="8dp"
             android:gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-            app:layout_constraintEnd_toEndOf="@+id/addButton"
+            app:layout_constraintEnd_toEndOf="@+id/button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/minPicker"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/minTextView"
+            app:layout_constraintBottom_toTopOf="@+id/min_textView"
             app:layout_constraintEnd_toStartOf="@+id/hrPicker"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -52,7 +52,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/hrTextView"
+            android:id="@+id/hr_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/h"
@@ -75,12 +75,12 @@
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="@+id/hrPicker"
             app:layout_constraintStart_toStartOf="@+id/minPicker"
-            app:layout_constraintTop_toBottomOf="@+id/minTextView"
+            app:layout_constraintTop_toBottomOf="@+id/min_textView"
             app:layout_constraintVertical_bias="0.0"
             tools:ignore="MissingConstraints" />
 
         <Button
-            android:id="@+id/addButton"
+            android:id="@+id/button"
             style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
 
             android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/addButton"
+            app:layout_constraintEnd_toStartOf="@+id/button"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             tools:itemCount="4" />
