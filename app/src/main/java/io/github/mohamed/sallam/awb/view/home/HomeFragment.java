@@ -1,7 +1,10 @@
 package io.github.mohamed.sallam.awb.view.home;
 
+import static io.github.mohamed.sallam.awb.util.StatusUtil.isUsageStatGranted;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -85,14 +88,24 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentHomeBinding.inflate(
+                inflater, container, false
+        );
         binding.lockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), LockService.class);
-                getActivity().startService(i);
+                if (isUsageStatGranted(requireContext().getApplicationContext())) {
+                    Intent i = new Intent(getActivity(), LockService.class);
+                    getActivity().startService(i);
+                } else {
+                    startActivity(
+                        new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+                    );
+                }
             }
         });
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(
+                R.layout.fragment_home, container, false
+        );
     }
 }
