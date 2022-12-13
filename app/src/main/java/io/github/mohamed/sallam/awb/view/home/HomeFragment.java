@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import java.util.Objects;
 
@@ -36,10 +37,11 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentHomeBinding.inflate(Objects.requireNonNull(inflater), container, false);
+        viewModel = new HomeViewModel(requireActivity().getApplication());
         binding.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,9 +53,9 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
 
     public void openDialog() {
         AddGroupDialog addGroupDialog = new AddGroupDialog();
-        addGroupDialog.show(requireActivity().getSupportFragmentManager(), "Dialog");
+        addGroupDialog.setListener(this);
+        addGroupDialog.show(getChildFragmentManager(), "Dialog");
     }
-
 
     @Override
     public void onSaveGroupName(String groupName) {
