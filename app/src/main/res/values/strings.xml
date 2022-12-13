@@ -12,4 +12,5 @@
     <string name="Cancel">Cancel</string>
     <string name="SearchApps" />
     <string name="SelectAll" />
+    <string name="group_name">Group Name</string>
 </resources>
