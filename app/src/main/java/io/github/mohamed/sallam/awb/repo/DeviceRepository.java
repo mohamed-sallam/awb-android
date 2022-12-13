@@ -2,7 +2,7 @@ package io.github.mohamed.sallam.awb.repo;
 
 import android.app.Application;
 import android.os.Build;
-import android.util.Log;
+
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
