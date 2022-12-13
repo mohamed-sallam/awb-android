@@ -21,9 +21,9 @@ import io.github.mohamed.sallam.awb.repo.GroupRepository;
  * @author Mohamed Yehia
  */
 public class MainLauncherViewModel extends AndroidViewModel {
-    private final DetoxPeriodRepository detoxPeriodRepository;
+    private DetoxPeriodRepository detoxPeriodRepository;
     private final GroupRepository groupRepository;
-    private final LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
+    private LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
             detoxPeriodAndGroupWithWhitelistedApps;
 
     public MainLauncherViewModel(@NonNull Application application, UUID groupUuid) {
@@ -37,16 +37,17 @@ public class MainLauncherViewModel extends AndroidViewModel {
     /**
      * Updates `DetoxPeriod` by increasing/decreasing the period.
      *
-     * @param time Time to be added/subtracted from the detox period.
+     * @param additionalTime Time to be added from the detox period.
      *
      * @author Mohamed Sherif
      */
-    public void updateDetoxPeriod(long time) {
+    public void increaseDetoxPeriod(long additionalTime) {
+        additionalTime = Math.abs(additionalTime);
         final DetoxPeriod detoxPeriod = Objects.requireNonNull(
                                             detoxPeriodAndGroupWithWhitelistedApps
                                             .getValue()
                                         ).detoxPeriodAndGroup.detoxPeriod;
-        detoxPeriod.endDate.setTime(detoxPeriod.endDate.getTime() + time);
+        detoxPeriod.endDate.setTime(detoxPeriod.endDate.getTime() + additionalTime);
         detoxPeriodRepository.update(detoxPeriod);
     }
 

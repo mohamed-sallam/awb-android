@@ -13,11 +13,15 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.LiveData;
 
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
+import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
+import io.github.mohamed.sallam.awb.repo.DetoxPeriodRepository;
 import io.github.mohamed.sallam.awb.view.mainlauncher.MainLauncherActivity;
 
 /**
@@ -26,6 +30,9 @@ import io.github.mohamed.sallam.awb.view.mainlauncher.MainLauncherActivity;
  * @author Mohamed Sherif
  */
 public class LockService extends Service {
+    private DetoxPeriodRepository detoxPeriodRepository;
+    private LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
+            detoxPeriodAndGroupWithWhitelistedApps;
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -62,6 +69,16 @@ public class LockService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    public void decreaseDetoxPeriod(long subtractedTime) {
+        subtractedTime = -Math.abs(subtractedTime);
+        final DetoxPeriod detoxPeriod = Objects.requireNonNull(
+                detoxPeriodAndGroupWithWhitelistedApps
+                        .getValue()
+        ).detoxPeriodAndGroup.detoxPeriod;
+        detoxPeriod.endDate.setTime(detoxPeriod.endDate.getTime() + subtractedTime);
+        detoxPeriodRepository.update(detoxPeriod);
     }
 
     private String getForegroundAppPackageName() {
