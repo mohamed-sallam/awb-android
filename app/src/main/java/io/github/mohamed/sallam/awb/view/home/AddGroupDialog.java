@@ -14,6 +14,8 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import java.util.Objects;
+
 import io.github.mohamed.sallam.awb.R;
 
 public class AddGroupDialog extends AppCompatDialogFragment {
@@ -22,13 +24,17 @@ public class AddGroupDialog extends AppCompatDialogFragment {
     private HomeViewModel homeViewModel;
     private GroupNameDialogListener listener;
 
+    public void setListener(GroupNameDialogListener listener) {
+        this.listener = listener;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = requireActivity().getLayoutInflater();
-        @SuppressLint({"ResourceType", "InflateParams"}) View view = inflater.inflate(R.id.dialog_add_group, null);
+        @SuppressLint({"ResourceType", "InflateParams"}) View view = inflater.inflate(R.layout.dialog_add_group, null);
         editTextGroupName = view.findViewById(R.id.groupNameEditText);
 
         builder.setView(view)
@@ -36,7 +42,7 @@ public class AddGroupDialog extends AppCompatDialogFragment {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Objects.requireNonNull(AddGroupDialog.this.getDialog()).cancel();
                     }
                 })
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
@@ -47,17 +53,6 @@ public class AddGroupDialog extends AppCompatDialogFragment {
                 });
 
         return builder.create();
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        try {
-            listener = (GroupNameDialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + "must implement GroupNameDialogListener");
-        }
     }
 
     public interface GroupNameDialogListener {
