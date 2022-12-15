@@ -48,6 +48,13 @@ import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhite
 public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     private final DetoxPeriodDao detoxPeriodDao;
 
+    /**
+     * Constructor to instantiate an object from `detoxPeriodDao`.
+     *
+     * @param application is the context where The Application class in Android
+     * is the base class within an Android app that contains all other
+     * components such as activities and services.
+     */
     public DetoxPeriodRepository(Application application) {
         UserDatabase db = UserDatabase.getInstance(application);
         detoxPeriodDao = db.detoxPeriodDao();
