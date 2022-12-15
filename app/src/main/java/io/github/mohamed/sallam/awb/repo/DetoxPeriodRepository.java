@@ -1,14 +1,13 @@
 package io.github.mohamed.sallam.awb.repo;
 
 import android.app.Application;
-
 import androidx.lifecycle.LiveData;
-
 import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.DetoxPeriodDao;
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
-import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
+import io.github.mohamed.sallam.awb.db.relationship.
+        DetoxPeriodAndGroupWithWhitelistedApps;
 
 /**
  * `DetoxPeriodRepository` class is responsible for handling and implementing
@@ -128,5 +127,4 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     getAndGroupWithWhitelistedApps(Integer id) {
         return detoxPeriodDao.getAndGroupWithWhitelistedApps(id);
     }
-
 }
