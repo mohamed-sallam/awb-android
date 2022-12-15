@@ -60,19 +60,31 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
         detoxPeriodDao = db.detoxPeriodDao();
     }
 
-    // DetoxPeriodDao
+    /**
+     * Method to insert detox, blocking, period in the database.
+     * @param detoxPeriod object of the blocking period.
+     */
     public void insert(DetoxPeriod detoxPeriod) {
         UserDatabase.databaseWriteExecutor.execute(
                 () -> detoxPeriodDao.insert(detoxPeriod)
         );
     }
 
+    /**
+     * Method to update detox, blocking, period.
+     * @param detoxPeriod object of the blocking period
+     */
     public void update(DetoxPeriod detoxPeriod) {
         UserDatabase.databaseWriteExecutor.execute(
                 () -> detoxPeriodDao.update(detoxPeriod)
         );
     }
 
+    /**
+     * Method to delete detox, blocking, period.
+     *
+     * @param id the blocking period id, is the unique identifier for the period.
+     */
     public void delete(Integer id) {
         UserDatabase.databaseWriteExecutor.execute(
                 () -> detoxPeriodDao.delete(id)
