@@ -91,15 +91,39 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
         );
     }
 
+    /**
+     * Method to get detox, blocking, period by id as a live data.
+     * LiveData is an observable data holder class. Unlike a regular observable
+     * so any change on database will be affecting UI.
+     *
+     * @param id the blocking period id, is the unique identifier for the period.
+     *
+     * @return Detox period from database by using `detoxPeriodDao`.
+     */
     public LiveData<DetoxPeriod> get(Integer id) {
         return detoxPeriodDao.get(id);
     }
 
+    /**
+     * Method to get detox-period with group using a relationship `DetoxPeriodAndGroup`
+     *
+     * @param id the blocking period id, is the unique identifier for the period.
+     *
+     * @return Detox period with a group specified to it.
+     */
     public LiveData<DetoxPeriodAndGroup>
     getDetoxPeriodAndGroup(Integer id) {
         return detoxPeriodDao.getWithGroup(id);
     }
 
+    /**
+     * Method to get detox-period with group including its applications using
+     * relationship `DetoxPeriodAndGroupWithWhitelistedApps`
+     *
+     * @param id the blocking period id, is the unique identifier for the period.
+     *
+     * @return Detox period for a group with its Whitelisted applications.
+     */
     public LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
     getAndGroupWithWhitelistedApps(Integer id) {
         return detoxPeriodDao.getAndGroupWithWhitelistedApps(id);
