@@ -8,10 +8,8 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 
@@ -19,10 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.LiveData;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -54,6 +50,8 @@ public class LockService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        detoxPeriodAndGroupWithWhitelistedApps =
+                detoxPeriodRepository.getAndGroupWithWhitelistedApps();
     }
 
     @Override
@@ -131,21 +129,19 @@ public class LockService extends Service {
     public void openOverlayActivity(Long durationInMillis) {
         // create an instance of Window class
         // and display the content on screen
-        //preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //sharedPreferencesAppsList = preferences.getStringSet("whitelistedApps", new HashSet<String>());
-        List<App> apps;
         mainLauncherActivity = new MainLauncherActivity(this);
-        mainLauncherActivity.setDurationInMillis(durationInMillis);
         mainLauncherActivity.open();
 
         cTimer = new CountDownTimer(durationInMillis, 1000) {
             public void onTick(long millisUntilFinished) {
-                if(apps.contains(getForegroundAppPackageName())) {
-                    mainLauncherActivity.countDownVisibility(View.GONE);
+                if(
+                        detoxPeriodAndGroupWithWhitelistedApps.getValue()
+                        .whitelistedApps.contains(getForegroundAppPackageName())
+                ) {
+                    mainLauncherActivity.visibility(View.GONE);
                 } else {
-                    mainLauncherActivity.countDownVisibility(View.VISIBLE);
+                    mainLauncherActivity.visibility(View.VISIBLE);
                 }
-
             }
 
             public void onFinish() {

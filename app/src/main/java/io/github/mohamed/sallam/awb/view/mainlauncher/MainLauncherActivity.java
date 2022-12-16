@@ -7,17 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.role.RoleManager;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.CountDownTimer;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;
@@ -85,7 +82,7 @@ public class MainLauncherActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    public void countDownVisibility(int visible) {
+    public void visibility(int visible) {
         mView.setVisibility(visible);
     }
 
