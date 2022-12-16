@@ -18,8 +18,8 @@ import io.github.mohamed.sallam.awb.db.relationship.
  * @author Abdalrhman Hemida
  * @author Mohamed Yehia
  */
-public interface
-IDetoxPeriodRepository extends IRepository<DetoxPeriod, Integer> {
+public interface IDetoxPeriodRepository extends IRepository<DetoxPeriod> {
+
     /**
      * Updates detox, blocking, period in database.
      *

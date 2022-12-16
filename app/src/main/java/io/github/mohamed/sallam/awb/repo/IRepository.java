@@ -39,7 +39,7 @@ package io.github.mohamed.sallam.awb.repo;
  *
  * @author Abdalrhman Hemida
  */
-public interface IRepository<T extends IAggregateRoot, k> {
+public interface IRepository<T extends IAggregateRoot> {
 
     /**
      * Inserts an object into the database.
@@ -48,12 +48,4 @@ public interface IRepository<T extends IAggregateRoot, k> {
      * implementation to another of the abstract method.
      */
     void insert(T entity);
-
-    /**
-     * Deletes an object from database.
-     *
-     * @param id is the unique identifier for the object which can be UUID or
-     * Integer depending on the implementation of the abstract method.
-     */
-    void delete(k id);
 }

@@ -17,7 +17,7 @@ import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
  * @author Abdalrhman Hemida
  * @author Mohamed Yehia
  */
-public interface IDeviceRepository extends IRepository<Device, UUID> {
+public interface IDeviceRepository extends IRepository<Device> {
     /**
      * Updates device in database.
      *
