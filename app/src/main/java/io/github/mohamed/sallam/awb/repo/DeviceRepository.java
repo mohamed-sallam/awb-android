@@ -23,14 +23,10 @@ public class DeviceRepository implements IDeviceRepository {
         deviceDao = db.deviceDao();
     }
 
-    //DeviceDao
     public void insert(Device device) {
-        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            @Override
-            public void run(){
-                deviceDao.insert(device);
-            }
-        });
+        UserDatabase.databaseWriteExecutor.execute(
+                () -> deviceDao.insert(device)
+        );
     }
 
     public void update(Device device) {
