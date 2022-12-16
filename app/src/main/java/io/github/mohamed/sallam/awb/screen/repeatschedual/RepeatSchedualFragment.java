@@ -1,23 +1,20 @@
-package io.github.mohamed.sallam.awb.view.home;
+package io.github.mohamed.sallam.awb.screen.repeatschedual;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import io.github.mohamed.sallam.awb.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link RepeatSchedualFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class RepeatSchedualFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +25,7 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public HomeFragment() {
+    public RepeatSchedualFragment() {
         // Required empty public constructor
     }
 
@@ -38,11 +35,11 @@ public class HomeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
+     * @return A new instance of fragment RepeatSchedualFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+    public static RepeatSchedualFragment newInstance(String param1, String param2) {
+        RepeatSchedualFragment fragment = new RepeatSchedualFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -52,8 +49,6 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // To call the method onCreateOptionsMenu()
-        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -61,25 +56,10 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    /**
-     * Initialize the contents of the Activity's standard options menu.
-     *
-     * @param menu The option menu in which place items.
-     * @param inflater MenuInflater.
-     *
-     * @author Yousef Ahmed
-     */
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu,
-                                    @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.fragment_home_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_repeat_schedual, container, false);
     }
 }

@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.view.updategroup;
+package io.github.mohamed.sallam.awb.screen.updategroup;
 
 import android.app.Application;
 

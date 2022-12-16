@@ -6,16 +6,16 @@
     <data>
         <variable
             name="UpdateGroupViewModel"
-            type="io.github.mohamed.sallam.awb.view.updategroup.UpdateGroupViewModel" />
+            type="io.github.mohamed.sallam.awb.screen.updategroup.UpdateGroupViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.updategroup.UpdateGroupFragment">
+        tools:context=".screen.updategroup.UpdateGroupFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView2"
+            android:id="@+id/appsRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
