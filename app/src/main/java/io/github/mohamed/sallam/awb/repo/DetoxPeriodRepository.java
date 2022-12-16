@@ -10,7 +10,9 @@ import io.github.mohamed.sallam.awb.db.relationship.
         DetoxPeriodAndGroupWithWhitelistedApps;
 
 /**
+ * {@inheritDoc}
  *
+ * {@link IDetoxPeriodRepository}
  *
  * @author Abdalrhman Hemida
  * @author Mohamed Yehia
@@ -19,7 +21,7 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     private final DetoxPeriodDao detoxPeriodDao;
 
     /**
-     * Constructor to instantiate an object from `detoxPeriodDao`.
+     * Instantiates an object from `detoxPeriodDao`.
      *
      * @param application is the context where The Application class in Android
      * is the base class within an Android app that contains all other
@@ -31,6 +33,8 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @param detoxPeriod object of the blocking period.
      */
     public void insert(DetoxPeriod detoxPeriod) {
@@ -46,6 +50,7 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     }
 
     /**
+     * {@inheritDoc}
      *
      * @param id the blocking period id, is the unique identifier for the period.
      */
@@ -59,8 +64,7 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
         return detoxPeriodDao.get(id);
     }
 
-    public LiveData<DetoxPeriodAndGroup>
-    getDetoxPeriodAndGroup(Integer id) {
+    public LiveData<DetoxPeriodAndGroup> getDetoxPeriodAndGroup(Integer id) {
         return detoxPeriodDao.getWithGroup(id);
     }
 
