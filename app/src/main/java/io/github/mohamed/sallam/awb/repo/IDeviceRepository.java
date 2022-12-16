@@ -32,6 +32,19 @@ public interface IDeviceRepository extends IRepository<Device, UUID> {
      * new UUID for it.
      */
     void generateUuid(UUID oldUuid);
+
+    /**
+     * Gets all the devices stored in the database
+     *
+     * @return list of devices as live data.
+     */
     LiveData<List<Device>> getAll();
+
+    /**
+     * Gets all devices with its groups from database using relationship
+     * `DeviceWithGroups`.
+     *
+     * @return list of devices with its groups as live data.
+     */
     LiveData<List<DeviceWithGroups>> getAllWithGroups();  // TODO maybe deleted
 }
