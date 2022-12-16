@@ -3,16 +3,17 @@ package io.github.mohamed.sallam.awb;
 import android.graphics.drawable.Drawable;
 
 public class App {
-    private final String name;
+    private String appName;
+    private final String packageName;
     private final Drawable icon;
     private boolean isSelected;
 
-    public App(String name, Drawable icon) {
-        this(name, icon, false);
+    public App(String packageName, Drawable icon) {
+        this(packageName, icon, false);
     }
 
-    public App(String name, Drawable icon, boolean isSelected) {
-        this.name = name;
+    public App(String packageName, Drawable icon, boolean isSelected) {
+        this.packageName = packageName;
         this.icon = icon;
         this.isSelected = isSelected;
     }
@@ -25,19 +26,25 @@ public class App {
         isSelected = selected;
     }
 
-    public String getName() {
-        return name;
+    public String getAppName() {
+        return appName;
     }
 
     public Drawable getIcon() {
         return icon;
     }
 
+    public String getPackageName() {
+        return packageName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o instanceof App) {
             App anotherApp = (App) o;
-            return this.name.equals(anotherApp.getName()) && this.icon.equals(anotherApp.icon);
+            return this.appName.equals(anotherApp.getAppName()) &&
+                   this.icon.equals(anotherApp.icon) &&
+                   packageName.equals(anotherApp.getAppName()) ;
         }
         return false;
     }

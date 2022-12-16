@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -58,19 +57,23 @@ public class UpdateGroupViewModel extends AndroidViewModel {
 
     public List<App> getAllApps() {
         @SuppressLint("QueryPermissionsNeeded")
-        List<ApplicationInfo> appsData = application.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
+        List<ApplicationInfo> appsData = application.getPackageManager()
+                                                    .getInstalledApplications(
+                                                            PackageManager
+                                                            .GET_META_DATA
+                                                    );
         List<App> apps = new ArrayList<>();
         for (ApplicationInfo appInfo : appsData) {
             if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 1) {
                 App app = new App(appInfo.packageName,
                         application.getPackageManager().getApplicationIcon(appInfo));
-                for (WhitelistedApp whitelistedApp: Objects.requireNonNull(getGroupWithWhitelistedApps().getValue()).whitelistedApps) {
-                    if (whitelistedApp.packageName.equals(app.getName())) {
+                for (WhitelistedApp whitelistedApp: Objects.requireNonNull(
+                        getGroupWithWhitelistedApps().getValue()).whitelistedApps) {
+                    if (whitelistedApp.packageName.equals(app.getPackageName())) {
                         app.setSelected(true);
                         break;
                     }
                 }
-                Log.i("list ", app.getName());
                 apps.add(app);
             }
         }

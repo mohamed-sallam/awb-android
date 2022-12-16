@@ -53,15 +53,19 @@ public class UpdateGroupFragment extends Fragment {
         // Inflate the layout for this fragment
         Intent intent = getActivity().getIntent();
         binding = FragmentUpdateGroupBinding.inflate(inflater, container,false);
-        updateGroupViewModel = new UpdateGroupViewModel(getActivity().getApplication(), (UUID) intent.getExtras().get("UUID"));
+        updateGroupViewModel = new UpdateGroupViewModel(getActivity()
+                                                        .getApplication(),
+                                                        (UUID) intent.getExtras()
+                                                        .get("UUID")
+        );
         AppsAdapter appsAdapter = new AppsAdapter(new AppsAdapter.OnAppListener() {
             @Override
             public void onClick(App app) {
                 if (app.isSelected()){
-                     updateGroupViewModel.blockApp(app.getName());
+                     updateGroupViewModel.blockApp(app.getPackageName());
                      app.setSelected(false);
                 } else {
-                    updateGroupViewModel.allowApp(app.getName());
+                    updateGroupViewModel.allowApp(app.getPackageName());
                     app.setSelected(true);
                 }
             }
@@ -74,11 +78,13 @@ public class UpdateGroupFragment extends Fragment {
                 updateGroupViewModel.navigateBack.setValue(true);
             }
         });
-        updateGroupViewModel.navigateBack.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+        updateGroupViewModel.navigateBack.observe(getViewLifecycleOwner(),
+                new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean navigate) {
                 if (navigate) {
-                    Navigation.findNavController(binding.getRoot()).navigate(R.id.action_updateGroupFragment_to_homeFragment);
+                    Navigation.findNavController(binding.getRoot()).
+                            navigate(R.id.action_updateGroupFragment_to_homeFragment);
                     updateGroupViewModel.resetNavigation();
                 }
             }
