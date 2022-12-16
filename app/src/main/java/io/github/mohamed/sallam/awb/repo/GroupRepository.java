@@ -15,10 +15,26 @@ import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 
+/**
+ * {@inheritDoc}
+ *
+ * {@link IGroupRepository}
+ *
+ * @author Abdalrhman Hemida
+ * @author Mohamed Yehia
+ */
 public class GroupRepository implements IGroupRepository {
     private final GroupDao groupDao;
     private final WhitelistedAppDao whitelistedAppDao;
 
+    /**
+     * Instantiate an object from `GroupDao` and `WhitelistedAppDao` to access
+     * DAOs methods.
+     *
+     * @param application is the context where The Application class in Android
+     * is the base class within an Android app that contains all other
+     * components such as activities and services.
+     */
     public GroupRepository(Application application) {
         UserDatabase db = UserDatabase.getInstance(application);
         groupDao = db.groupDao();
