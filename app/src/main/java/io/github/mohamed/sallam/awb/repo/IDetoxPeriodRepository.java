@@ -7,7 +7,6 @@ import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
 import io.github.mohamed.sallam.awb.db.relationship.
         DetoxPeriodAndGroupWithWhitelistedApps;
 
-public interface IDetoxPeriodRepository extends IRepository<DetoxPeriod> {
 /**
  * {@link IRepository}
  *
@@ -19,6 +18,8 @@ public interface IDetoxPeriodRepository extends IRepository<DetoxPeriod> {
  * @author Abdalrhman Hemida
  * @author Mohamed Yehia
  */
+public interface
+IDetoxPeriodRepository extends IRepository<DetoxPeriod, Integer> {
     /**
      * Updates detox, blocking, period in database.
      *
