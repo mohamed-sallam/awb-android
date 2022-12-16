@@ -41,7 +41,11 @@ public class GroupRepository implements IGroupRepository {
         whitelistedAppDao = db.whitelistedAppDao();
     }
 
-    //GroupDao
+    /**
+     * {@inheritDoc}
+     *
+     * @param group object to be inserted.
+     */
     public void insert(Group group) {
         UserDatabase.databaseWriteExecutor.execute(
                 () -> groupDao.insert(group)
@@ -54,6 +58,14 @@ public class GroupRepository implements IGroupRepository {
         );
     }
 
+
+    /**
+     * Deletes a specific group from database. We use it to remove
+     * a group of whitelisted apps.
+     *
+     * @param groupUuid is the unique identifier for a group to
+     * access it in database.
+     */
     public void delete(UUID groupUuid) {
         UserDatabase.databaseWriteExecutor.execute(() -> {
             groupDao.delete(groupUuid);
