@@ -19,14 +19,17 @@ import io.github.mohamed.sallam.awb.databinding.GroupItemBinding;
  * @author Abdurrahman Salah
  */
 public class GroupAdapter extends ListAdapter<Group, GroupAdapter.GroupViewHolder> {
-    protected GroupAdapter(@NonNull DiffUtil.ItemCallback<Group> diffCallback) {
-        super(diffCallback);
+
+    protected GroupAdapter() {
+        // TODO create new object from Differ class and pass it in the super method [super(new Differ()]
+        super();
     }
 
     @NonNull
     @Override
     public GroupAdapter.GroupViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
                                                            int viewType) {
+        // TODO add parent to root View argument and false to attachToRoot argument
         return new GroupViewHolder(GroupItemBinding
                                    .inflate(LayoutInflater
                                             .from(parent.getContext())));
@@ -48,9 +51,10 @@ public class GroupAdapter extends ListAdapter<Group, GroupAdapter.GroupViewHolde
         }
 
         void bind(Group group) {
-            binding.textView.setText(group.name);
-            binding.imageView.setBackgroundColor(Color.GRAY);
+            // TODO bind the group with the group in the data binding
         }
     }
+
+    // TODO create Differ class that inherit from DiffUtil.ItemCallback<Group>
 }
 

@@ -22,7 +22,11 @@ public class Group implements IAggregateRoot {
 	@NonNull
 	@PrimaryKey
 	public UUID uuid = UUID.randomUUID();
+	// TODO make name final
 	public String name;
 	public UUID deviceUuid;
 
+	// TODO add constructor pass name
+	// TODO add getter for the name
+	// TODO write equal method to compare with items in group adapter [in diff call]
 }
