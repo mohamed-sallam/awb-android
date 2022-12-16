@@ -84,7 +84,7 @@ public class AppsAdapter extends ListAdapter<App, AppsAdapter.ViewHolder> {
 
         @Override
         public boolean areContentsTheSame(@NonNull App oldItem, @NonNull App newItem) {
-            return oldItem.equals(newItem);
+            return true;
         }
     }
 }

@@ -66,6 +66,8 @@ public class UpdateGroupViewModel extends AndroidViewModel {
         for (ApplicationInfo appInfo : appsData) {
             if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 1) {
                 App app = new App(appInfo.packageName,
+                        application.getPackageManager().getApplicationLabel(appInfo)
+                        .toString(),
                         application.getPackageManager().getApplicationIcon(appInfo));
                 for (WhitelistedApp whitelistedApp: Objects.requireNonNull(
                         getGroupWithWhitelistedApps().getValue()).whitelistedApps) {

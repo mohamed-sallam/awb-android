@@ -8,12 +8,13 @@ public class App {
     private final Drawable icon;
     private boolean isSelected;
 
-    public App(String packageName, Drawable icon) {
-        this(packageName, icon, false);
+    public App(String packageName, String appName, Drawable icon) {
+        this(packageName, appName, icon, false);
     }
 
-    public App(String packageName, Drawable icon, boolean isSelected) {
+    public App(String packageName, String appName, Drawable icon, boolean isSelected) {
         this.packageName = packageName;
+        this.appName = appName;
         this.icon = icon;
         this.isSelected = isSelected;
     }
@@ -36,16 +37,5 @@ public class App {
 
     public String getPackageName() {
         return packageName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o instanceof App) {
-            App anotherApp = (App) o;
-            return this.appName.equals(anotherApp.getAppName()) &&
-                   this.icon.equals(anotherApp.icon) &&
-                   packageName.equals(anotherApp.getAppName()) ;
-        }
-        return false;
     }
 }
