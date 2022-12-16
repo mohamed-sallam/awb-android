@@ -41,5 +41,11 @@ package io.github.mohamed.sallam.awb.repo;
  */
 
 public interface IRepository<T extends IAggregateRoot> {
+    /**
+     * Inserts an object into the database.
+     *
+     * @param entity object to be inserted into database its type variant from
+     * implementation to another of the abstract method.
+     */
     void insert(T entity);
 }
