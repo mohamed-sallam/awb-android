@@ -42,13 +42,10 @@ public class DeviceRepository implements IDeviceRepository {
     }
 
     public void generateUuid(UUID oldDeviceUuid) {
-        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            @Override
-            public void run(){
-                UUID newDeviceUuid = UUID.randomUUID();
-                groupDao.replaceDeviceUuid(oldDeviceUuid, newDeviceUuid);
-                deviceDao.setUuid(oldDeviceUuid, newDeviceUuid);
-            }
+        UserDatabase.databaseWriteExecutor.execute(() -> {
+            UUID newDeviceUuid = UUID.randomUUID();
+            groupDao.replaceDeviceUuid(oldDeviceUuid, newDeviceUuid);
+            deviceDao.setUuid(oldDeviceUuid, newDeviceUuid);
         });
     }
 
