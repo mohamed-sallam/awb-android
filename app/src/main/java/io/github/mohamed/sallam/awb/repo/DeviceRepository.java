@@ -38,7 +38,11 @@ public class DeviceRepository implements IDeviceRepository {
         deviceDao = db.deviceDao();
     }
 
-    //DeviceDao
+    /**
+     * {@inheritDoc}
+     *
+     * @param device object of a device.
+     */
     public void insert(Device device) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
@@ -57,7 +61,11 @@ public class DeviceRepository implements IDeviceRepository {
         });
     }
 
-
+    /**
+     * {@inheritDoc}
+     *
+     * @param deviceUuid the device unique identifier.
+     */
     public void delete(UUID deviceUuid) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
             @Override
