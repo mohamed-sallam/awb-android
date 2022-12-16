@@ -26,7 +26,9 @@ public interface IDeviceRepository extends IRepository<Device> {
     void update(Device device);
 
     /**
-     * Generates a new UUID, unique identifier for a device.
+     * Generates a new UUID, unique identifier for a device. It's used while
+     * extracting a Device from my devices cluster, so I can change the secret
+     * key for this device.
      *
      * @param oldUuid the old uuid for a specific device, in order to create a
      * new UUID for it.
