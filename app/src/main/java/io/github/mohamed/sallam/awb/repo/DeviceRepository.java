@@ -35,14 +35,10 @@ public class DeviceRepository implements IDeviceRepository {
         );
     }
 
-
     public void delete(UUID deviceUuid) {
-        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            @Override
-            public void run(){
-                deviceDao.delete(deviceUuid);
-            }
-        });
+        UserDatabase.databaseWriteExecutor.execute(
+                () -> deviceDao.delete(deviceUuid)
+        );
     }
 
     public void generateUuid(UUID oldDeviceUuid) {
