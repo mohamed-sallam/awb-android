@@ -14,10 +14,25 @@ import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 
+/**
+ * {@inheritDoc}
+ *
+ * {@link IDeviceRepository}
+ *
+ * @author Abdalrhman Hemida
+ * @author Mohamed Yehia
+ */
 public class DeviceRepository implements IDeviceRepository {
     private DeviceDao deviceDao;
     private GroupDao groupDao;
 
+    /**
+     * Instantiate an object from `deviceDao` and `groupDao`.
+     *
+     * @param application is the context where The Application class in Android
+     * is the base class within an Android app that contains all other
+     * components such as activities and services.
+     */
     public DeviceRepository(Application application) {
         UserDatabase db = UserDatabase.getInstance(application);
         deviceDao = db.deviceDao();
