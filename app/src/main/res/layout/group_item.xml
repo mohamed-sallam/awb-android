@@ -6,7 +6,7 @@
     <data>
         <variable
             name="group"
-            type="io.github.mohamed.sallam.awb.Group" />
+            type="io.github.mohamed.sallam.awb.db.entity.Group" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
