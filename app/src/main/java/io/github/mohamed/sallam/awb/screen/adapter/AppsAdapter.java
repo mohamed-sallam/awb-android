@@ -1,7 +1,6 @@
 package io.github.mohamed.sallam.awb.screen.adapter;
 
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,12 @@ public class AppsAdapter extends ListAdapter<App, AppsAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(AppItemBinding.inflate(LayoutInflater.from(parent.getContext())), onAppListener);
+        return new ViewHolder(
+                AppItemBinding.inflate(LayoutInflater.from(parent.getContext()),
+                        parent,
+                        false),
+                onAppListener
+        );
     }
 
     @Override
@@ -45,22 +49,21 @@ public class AppsAdapter extends ListAdapter<App, AppsAdapter.ViewHolder> {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
             this.onAppListener = onAppListener;
-            if (itemBinding.item.isSelected()){
-                itemBinding.item.setBackgroundColor(Color.GREEN);
-            } else {
-                itemBinding.item.setBackgroundColor(Color.RED);
-            }
+            validateBackgroundColor(itemBinding.getAppItem());
             itemBinding.item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onAppListener.onClick(itemBinding.getAppItem());
-                    if (itemBinding.item.isSelected()){
-                        itemBinding.item.setBackgroundColor(Color.GREEN);
-                    } else {
-                        itemBinding.item.setBackgroundColor(Color.RED);
-                    }
                 }
             });
+        }
+
+        void validateBackgroundColor(App app) {
+            if (app.isSelected()) {
+                itemBinding.item.setBackgroundColor(Color.GREEN);
+            } else {
+                itemBinding.item.setBackgroundColor(Color.RED);
+            }
         }
 
         void bind(App app) {
@@ -76,8 +79,7 @@ public class AppsAdapter extends ListAdapter<App, AppsAdapter.ViewHolder> {
 
         @Override
         public boolean areItemsTheSame(@NonNull App oldItem, @NonNull App newItem) {
-            Log.i("areItemsTheSame: ", "called");
-            return oldItem.getName().equals(newItem.getName());
+            return oldItem.getPackageName().equals(newItem.getPackageName());
         }
 
         @Override
