@@ -50,9 +50,11 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     }
 
     /**
-     * {@inheritDoc}
+     * Deletes a specific detox period from database. We use it to remove detox
+     * period for a specific group.
      *
-     * @param id the blocking period id, is the unique identifier for the period.
+     * @param id is the unique identifier for a detox period object to access it
+     * in database.
      */
     public void delete(Integer id) {
         UserDatabase.databaseWriteExecutor.execute(

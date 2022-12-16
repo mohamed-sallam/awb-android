@@ -27,7 +27,7 @@ public class DeviceRepository implements IDeviceRepository {
     private GroupDao groupDao;
 
     /**
-     * Instantiate an object from `deviceDao` and `groupDao`.
+     * Instantiate an object from `DeviceDao` and `GroupDao`.
      *
      * @param application is the context where The Application class in Android
      * is the base class within an Android app that contains all other
@@ -41,7 +41,7 @@ public class DeviceRepository implements IDeviceRepository {
     /**
      * {@inheritDoc}
      *
-     * @param device object of a device.
+     * @param device object to be inserted.
      */
     public void insert(Device device) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
@@ -62,9 +62,11 @@ public class DeviceRepository implements IDeviceRepository {
     }
 
     /**
-     * {@inheritDoc}
+     * Deletes a specific device from database. We use it to remove
+     * a device with its groups including whitelisted applications.
      *
-     * @param deviceUuid the device unique identifier.
+     * @param deviceUuid is the unique identifier for a device to
+     * access it in database.
      */
     public void delete(UUID deviceUuid) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
