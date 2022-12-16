@@ -30,12 +30,9 @@ public class DeviceRepository implements IDeviceRepository {
     }
 
     public void update(Device device) {
-        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            @Override
-            public void run(){
-                deviceDao.update(device);
-            }
-        });
+        UserDatabase.databaseWriteExecutor.execute(
+                () -> deviceDao.update(device)
+        );
     }
 
 
