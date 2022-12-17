@@ -10,11 +10,9 @@ public class RepeatSchedule {
 	private Repetition repetition = new Repetition.NONE();
 	private Duration   duration   = new Duration.FOREVER();
 
-	// Methods
-
-	// Accessor methods
 	/**
 	 * Gets the value of repetition.
+	 *
 	 * @return the value of repetition.
 	 */
 	public Repetition getRepetition() {
@@ -23,15 +21,17 @@ public class RepeatSchedule {
 
 	/**
 	 * Gets the value of duration.
+	 *
 	 * @return the value of duration.
 	 */
 	public Duration getDuration() {
 		return duration;
 	}
 
-	// Mutator methods
 	/**
-	 * Sets the value of repetition.
+	 * Sets the value of repetition. Used when you want to set a repetition
+	 * for a schedule.
+	 *
 	 * @param newVar the new value of repetition.
 	 */
 	public void setRepetition(Repetition newVar) {
@@ -39,7 +39,8 @@ public class RepeatSchedule {
 	}
 
 	/**
-	 * Sets the value of duration.
+	 * Sets the value of locking duration.
+	 *
 	 * @param newVar the new value of duration.
 	 */
 	public void setDuration(Duration newVar) {
