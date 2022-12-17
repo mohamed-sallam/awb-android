@@ -9,6 +9,12 @@ import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 
+/**
+ * Class `WhitelistedApp` to define the structure of an application object.
+ *
+ * @author Abdalrhman Hemida
+ * @author Mohamed Sallam
+ */
 @TypeConverters({UuidConverter.class})
 @Entity(
         tableName = "whitelisted_apps_table",
