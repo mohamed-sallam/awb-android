@@ -13,9 +13,11 @@ import androidx.fragment.app.Fragment;
 import io.github.mohamed.sallam.awb.R;
 
 /**
+ * Class `HomeFragment` displays for us our devices and their groups of .
+ * applications We can choose whether the device we want to lock or a specific
+ * group in the device to lock for a specific period of time. Users can determine
+ * the period of the locking in the home fragment, finally click on the lock button
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
 
@@ -33,11 +35,12 @@ public class HomeFragment extends Fragment {
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Use this factory method to create a new instance of this fragment using
+     * the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
+     *
      * @return A new instance of fragment HomeFragment.
      */
     // TODO: Rename and change types and number of parameters
