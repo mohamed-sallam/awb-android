@@ -10,7 +10,8 @@ import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 import io.github.mohamed.sallam.awb.repo.IAggregateRoot;
 
 /**
- * This class contains the groups of apps which the user wants to block them
+ * Class `Group` to define the structure of a Group object. It represents a table
+ * on our database contains all Groups created on the application by the user.
  *
  * @author Mohamed Sherif
  * @author Mohamed Sallam
