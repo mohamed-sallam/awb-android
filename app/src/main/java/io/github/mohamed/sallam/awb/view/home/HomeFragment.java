@@ -22,7 +22,6 @@ import io.github.mohamed.sallam.awb.R;
 public class HomeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -30,8 +29,13 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    /**
+     * Empty public constructor is a must.
+     * @see <a href="https://developer.android.com/reference/android/app/Fragment#public-constructors_1">
+     *     Android Dcoumentation</a>
+     */
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
     /**
