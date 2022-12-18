@@ -100,13 +100,4 @@ public class DetoxSchedule extends DetoxSettings {
 	public RepeatSchedule getRepeatSchedule() {
 		return repeatSchedule;
 	}
-
-	/**
-	 * Locks the phone according to detox setting.
-	 *
-	 * @author Mohamed Yehia
-	 */
-	public void Lock() {
-		// implementation
-	}
 }
