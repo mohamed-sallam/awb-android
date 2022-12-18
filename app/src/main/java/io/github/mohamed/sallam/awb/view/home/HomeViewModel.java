@@ -42,10 +42,22 @@ public class HomeViewModel extends AndroidViewModel {
         detoxPeriodRepository = new DetoxPeriodRepository(application);
     }
 
+    /**
+     * Gets all devices with its groups from database using relationship
+     * `DeviceWithGroups`.
+     *
+     * @return list of devices with its groups as live data.
+     */
     public LiveData<List<DeviceWithGroups>> getAllDevicesWithGroups() {
         return deviceRepository.getAllWithGroups();
     }
 
+    /**
+     * Inserts a group of whitelisted applications in the database.
+     *
+     * @param groupName name of the group
+     * @param deviceUuid device unique identifier for the group we want insert.
+     */
     public void insertGroup(String groupName, UUID deviceUuid) {
         Group group = new Group();
         group.name = groupName;
@@ -53,14 +65,32 @@ public class HomeViewModel extends AndroidViewModel {
         groupRepository.insert(group);
     }
 
+    /**
+     * Renames a specific group of whitelisted applications.
+     *
+     * @param groupUuid is the unique identifier for the group,same as id.
+     * @param groupName new name of the group.
+     */
     public void renameGroup(UUID groupUuid, String groupName) {
         groupRepository.rename(groupUuid, groupName);
     }
 
+    /**
+     * Deletes a specific group from group table.
+     *
+     * @param groupUuid the unique identifier for the group to access it on.
+     * group table
+     */
     public void deleteGroup(UUID groupUuid) {
         groupRepository.delete(groupUuid);
     }
 
+    /**
+     * Inserts a blocking period for a specific group of white listed applications.
+     *
+     * @param period the time of blocking
+     * @param groupUuid the unique identifier for the group to access on database.
+     */
     public void insertDetoxPeriod(long period, UUID groupUuid) {
         DetoxPeriod detoxPeriod = new DetoxPeriod();
         detoxPeriod.setPeriod(period);
@@ -68,6 +98,15 @@ public class HomeViewModel extends AndroidViewModel {
         detoxPeriodRepository.insert(detoxPeriod);
     }
 
+    /**
+     * Copy a group with its whitelisted applications to a new group. Use it
+     * when you need to make a copy of a group so we can edit it without
+     * touching the original group.
+     *
+     * @param groupUuid the unique identifier for the group to access the
+     * group we want to copy from
+     * @param newGroupName the new group name, the copied one.
+     */
     public void duplicateGroup(UUID groupUuid, String newGroupName) {
         groupRepository.clone(groupUuid, newGroupName);
     }
