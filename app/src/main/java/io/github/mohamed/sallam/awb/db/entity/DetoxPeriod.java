@@ -28,13 +28,4 @@ public class DetoxPeriod extends DetoxSettings implements IAggregateRoot {
 	public void setPeriod(long period) {
 		endDate.setTime(new Date().getTime() + period * 60_000);
 	}
-
-	/**
-	 * Locks the phone according to detox setting.
-	 *
-	 * @author Mohamed Yehia
-	 */
-	public void Lock() {
-		// implementation
-	}
 }

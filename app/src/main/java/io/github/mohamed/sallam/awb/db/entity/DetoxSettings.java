@@ -16,11 +16,4 @@ abstract public class DetoxSettings {
 	public Integer id;
 	public static final String AWB_VERSION = "0.1.0v";
 	public UUID groupUuid;
-
-	/**
-	 * Locks the phone according to detox setting.
-	 *
-	 * @author Mohamed Yehia
-	 */
-	abstract public void Lock();
 }
