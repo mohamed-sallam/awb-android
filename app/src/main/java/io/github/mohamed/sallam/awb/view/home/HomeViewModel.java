@@ -17,7 +17,8 @@ import io.github.mohamed.sallam.awb.repo.DeviceRepository;
 import io.github.mohamed.sallam.awb.repo.GroupRepository;
 
 /**
- * HomeFragment ViewModel
+ * HomeFragment ViewModel is responsible for preparing, holding and managing
+ * the data used in Home fragment
  *
  * @author Mohamed Sallam
  * @author Yousef Ahmed
@@ -27,6 +28,13 @@ public class HomeViewModel extends AndroidViewModel {
     private GroupRepository       groupRepository;
     private DetoxPeriodRepository detoxPeriodRepository;
 
+    /**
+     * Instantiation of required repositories in order to access the
+     * required methods to hande the data used in `HomeFragment`.
+     *
+     * @param application is the context where The Application class in Android
+     * is the base class within an Android app that contains all other
+     */
     public HomeViewModel(@NonNull Application application) {
         super(application);
         deviceRepository = new DeviceRepository(application);
