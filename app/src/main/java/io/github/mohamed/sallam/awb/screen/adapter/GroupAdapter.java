@@ -19,8 +19,16 @@ import io.github.mohamed.sallam.awb.databinding.GroupItemBinding;
  * @author Abdurrahman Salah
  */
 public class GroupAdapter extends ListAdapter<Group, GroupAdapter.GroupViewHolder> {
-    protected GroupAdapter(@NonNull DiffUtil.ItemCallback<Group> diffCallback) {
-        super(diffCallback);
+
+    private final OnLongPressListener onLongPressListener;
+    private final OnClickListener onClickListener;
+    //private int selectedPosition = 0;
+
+    public GroupAdapter(OnLongPressListener onLongPressListener,
+                           OnClickListener onClickListener) {
+        super(new Differ());
+        this.onClickListener = onClickListener;
+        this.onLongPressListener = onLongPressListener;
     }
 
     @NonNull
@@ -29,7 +37,10 @@ public class GroupAdapter extends ListAdapter<Group, GroupAdapter.GroupViewHolde
                                                            int viewType) {
         return new GroupViewHolder(GroupItemBinding
                                    .inflate(LayoutInflater
-                                            .from(parent.getContext())));
+                                            .from(parent.getContext()), parent
+                                            , false)
+                                            , onLongPressListener
+                                            , onClickListener);
     }
 
     @Override
@@ -37,20 +48,68 @@ public class GroupAdapter extends ListAdapter<Group, GroupAdapter.GroupViewHolde
                                  int position) {
         Group item = getItem(position);
         holder.bind(item);
+        holder.validateBackgroundColor(item);
     }
 
     static class GroupViewHolder extends RecyclerView.ViewHolder {
         GroupItemBinding binding;
 
-        public GroupViewHolder(GroupItemBinding views) {
+        public GroupViewHolder(GroupItemBinding views,
+                               OnLongPressListener onLongPressListener,
+                               OnClickListener onClickListener) {
             super(views.getRoot());
             this.binding = views;
+            this.binding.groupItem.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onLongPressListener.onLongPress(binding.getGroup());
+                    return false;
+                }
+            });
+            this.binding.groupItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickListener.onClick(binding.getGroup());
+                    validateBackgroundColor(binding.getGroup());
+                }
+            });
         }
 
         void bind(Group group) {
-            binding.textView.setText(group.name);
-            binding.imageView.setBackgroundColor(Color.GRAY);
+            binding.setGroup(group);
+        }
+
+        public void validateBackgroundColor(Group item) {
+            if (item.isSelected()) {
+                binding.groupItem.setBackgroundColor(Color.GREEN);
+                binding.getGroup().setSelected(false);
+            } else {
+                binding.groupItem.setBackgroundColor(Color.DKGRAY);
+                binding.getGroup().setSelected(true);
+            }
         }
     }
+
+    static class Differ extends DiffUtil.ItemCallback<Group> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull Group oldItem, @NonNull Group newItem) {
+            return oldItem.uuid == newItem.uuid;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Group oldItem, @NonNull Group newItem) {
+            return oldItem.equals(newItem);
+        }
+    }
+
+    public interface OnLongPressListener {
+        void onLongPress(Group group);
+    }
+
+    public interface OnClickListener {
+        void onClick(Group group);
+    }
+
 }
 
