@@ -38,7 +38,7 @@ public interface DetoxPeriodDao {
      *
      * @param id represent the id of a given detox period.
      *
-     * @return live data of the detox periods from detox periods table.
+     * @return live data of detox period from detox periods table.
      */
     @Query("SELECT * FROM detox_periods_table WHERE id=:id")
     LiveData<DetoxPeriod> get(Integer id);
@@ -59,7 +59,7 @@ public interface DetoxPeriodDao {
      *
      * @param id represent the id of a given detox period.
      *
-     * @return live data of the detox period and group with whitelisted
+     * @return live data of the detox period and its group with whitelisted
      * apps from detox periods table.
      */
     @Transaction
