@@ -58,7 +58,8 @@ public class UpdateGroupFragment extends Fragment {
                                                         (UUID) intent.getExtras()
                                                         .get("UUID")
         );
-        AppsAdapter appsAdapter = new AppsAdapter(new AppsAdapter.OnAppListener() {
+        AppsAdapter appsAdapter = new AppsAdapter(getActivity().getApplicationContext()
+                , new AppsAdapter.OnAppListener() {
             @Override
             public void onClick(App app) {
                 if (app.isSelected()){
