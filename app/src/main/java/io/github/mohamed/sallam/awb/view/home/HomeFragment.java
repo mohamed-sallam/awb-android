@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
     private FragmentHomeBinding binding;
     private Device thisDevice;
     private HomeViewModel viewModel;
+    private long duration;
     /**
      * Initialize the contents of the Activity's standard options menu.
      *
@@ -43,8 +45,30 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(Objects.requireNonNull(inflater), container, false);
+        binding = FragmentHomeBinding.inflate(Objects.requireNonNull(inflater),
+                container, false);
         viewModel = new HomeViewModel(requireActivity().getApplication());
+
+        binding.minutePicker.setMinValue(0);
+        binding.minutePicker.setMaxValue(59);
+        binding.minutePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int oldValue, int newValue) {
+                duration -= (long) oldValue * 60_000;
+                duration += (long) newValue * 60_000;
+            }
+        });
+
+        binding.hourPicker.setMinValue(0);
+        binding.hourPicker.setMaxValue(24);
+        binding.hourPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int oldValue, int newValue) {
+                duration -= (long) oldValue * 3_600_000;
+                duration += (long) newValue * 3_600_000;
+            }
+        });
+
         binding.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
