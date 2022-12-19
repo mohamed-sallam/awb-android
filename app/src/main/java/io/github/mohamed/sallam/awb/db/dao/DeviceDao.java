@@ -30,7 +30,7 @@ public interface DeviceDao {
     void update(Device device);
 
     /**
-     * a function that gets the uuid of a device to remove it from the devices table.
+     * gets the uuid of a device to remove it from the devices table.
      *
      * @param deviceUuid represent the uuid of a device to be removed.
      */
@@ -38,7 +38,7 @@ public interface DeviceDao {
     void delete(UUID deviceUuid);
 
     /**
-     * a function that set a new uuid for a device and update the devices table.
+     * set a new uuid for a device and update the devices table.
      *
      * @param oldUuid represent the device uuid before update.
      *
@@ -48,7 +48,7 @@ public interface DeviceDao {
     void setUuid(UUID oldUuid, UUID newUuid);
 
     /**
-     * a function that gets all devices from the devices table.
+     * gets all devices from the devices table.
      *
      * @return a live data of the list of devices from devices table.
      */
@@ -56,9 +56,9 @@ public interface DeviceDao {
     LiveData<List<Device>> getAll();
 
     /**
-     * a function that gets all devices with its groups from the devices table.
+     * gets all devices with its groups from the devices table.
      *
-     * @return a live data of the list of devices with groups from devices table.
+     * @return a live data of the list of devices with its groups from devices table.
      */
     @Transaction
     @Query("SELECT * FROM devices_table")
