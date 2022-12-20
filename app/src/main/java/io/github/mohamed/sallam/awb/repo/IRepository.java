@@ -13,7 +13,7 @@ package io.github.mohamed.sallam.awb.repo;
  * Why using lamda expression?
  * Makes our code more readable and shorter. Instead of instantiation an
  * anonymous inner class that implements the abstract method run() on the
- * interface 'Runnable', we use lamdad expression to do that.
+ * interface 'Runnable', we use lamda expression to do that.
  *
  * For example: instead of writing
  * ```
@@ -30,11 +30,14 @@ package io.github.mohamed.sallam.awb.repo;
  *                 () -> detoxPeriodDao.insert(detoxPeriod)
  *         );
  * ```
- * Source: https://code.tutsplus.com/tutorials/
- * java-8-for-android-cleaner-code-with-lambda-expressions--cms-29661
+ *
+ * @see <a href =”
+ * https://code.tutsplus.com/tutorials/java-8-for-android-cleaner-code-with-lambda-expressions--cms-29661
+ * ”>Java 8 for Android: Cleaner Code With Lambda Expressions</a>
  *
  * Generics used to provide compile-time type checking and removing risk of
  * `ClassCastException` that was common while working with collection classes.
+ *
  * {@link IAggregateRoot} to define the aggregate roots to extend.
  *
  * @author Abdalrhman Hemida

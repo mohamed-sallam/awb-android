@@ -19,7 +19,8 @@ import io.github.mohamed.sallam.awb.repo.GroupRepository;
  * UpdateGroupFragment ViewModel. It uses Command Pattern to queue applications
  * blocking and whitelisting til user save these command by clicking <save> or
  * discard them by clicking <cancel>.
- * Source: refactoring.guru/design-patterns/command
+ *
+ * @see <a href =”https://refactoring.guru/design-patterns/command”>Command</a>
  *
  * @author Mohamed Sallam
  */

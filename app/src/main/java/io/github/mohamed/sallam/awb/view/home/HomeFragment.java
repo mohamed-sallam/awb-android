@@ -16,7 +16,8 @@ import io.github.mohamed.sallam.awb.R;
  * Class `HomeFragment` displays for us our devices and their groups of .
  * applications We can choose whether the device we want to lock or a specific
  * group in the device to lock for a specific period of time. Users can determine
- * the period of the locking in the home fragment, finally click on the lock button
+ * the period of the locking in the home fragment, finally click on the lock button.
+ *
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {

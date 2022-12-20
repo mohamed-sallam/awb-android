@@ -41,6 +41,8 @@ public class Device implements IAggregateRoot {
      * assigning constant names to a group of numeric integer values. It makes
      * constant values more readable.
      *
+     * @see
+     *
      * @author Abdalrhman Hemida
      */
     public enum Os {

@@ -11,8 +11,10 @@ package io.github.mohamed.sallam.awb.repo;
  * `DetoxPeriod`, `DetoxSchedule`, `DetoxSettings` form an aggregate and
  * `DetoxPeriod` is the aggregate root.
  *
- * source: https://www.taithienbo.com/repository-pattern/
- * source: https://stackoverflow.com/questions/1958621/whats-an-aggregate-root
+ * @see <a href =” https://www.taithienbo.com/repository-pattern/”>Repository pattern</a>
+ * @see <a href =”
+ * https://stackoverflow.com/questions/1958621/whats-an-aggregate-root”>
+ * What's an Aggregate Root?</a>
  *
  * @author Abdalrhman Hemida
  */

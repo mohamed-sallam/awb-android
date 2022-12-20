@@ -21,14 +21,14 @@ import io.github.mohamed.sallam.awb.db.relationship.
 public interface IDetoxPeriodRepository extends IRepository<DetoxPeriod> {
 
     /**
-     * Updates detox, blocking, period in database.
+     * Updates detox periods in database.
      *
      * @param detoxPeriod object of the blocking period.
      */
     void update(DetoxPeriod detoxPeriod);
 
     /**
-     * Gets detox, blocking, period by id as a live data.
+     * Gets detox periods by id as a live data.
      *
      * @param id the blocking period id, is the unique identifier for the period.
      *

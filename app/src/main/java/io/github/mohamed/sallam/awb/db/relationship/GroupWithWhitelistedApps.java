@@ -13,7 +13,8 @@ import io.github.mohamed.sallam.awb.db.entity.Group;
  * and `WhitelistedApp` in order to query a group with its applications
  * from database by using DAO method.
  *
- * Source: https://developer.android.com/training/data-storage/room/relationships
+ * @see <a href =”https://developer.android.com/training/data-storage/room/relationships”>
+ * Define relationships between objects</a>
  */
 public class GroupWithWhitelistedApps {
     @Embedded
