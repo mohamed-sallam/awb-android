@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.view.home;
+package io.github.mohamed.sallam.awb.screen.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

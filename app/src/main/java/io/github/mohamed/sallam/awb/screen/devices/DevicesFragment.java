@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.view.devices;
+package io.github.mohamed.sallam.awb.screen.devices;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
