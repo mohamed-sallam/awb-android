@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="removeGroupOption" type="id" />
+    <item name="editGroupOption" type="id" />
+    <item name="duplicateGroupOption" type="id" />
+    <item name="renameGroupOption" type="id" />
+</resources>
