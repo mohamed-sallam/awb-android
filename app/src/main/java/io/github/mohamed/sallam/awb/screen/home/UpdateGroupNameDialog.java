@@ -1,9 +1,8 @@
-package io.github.mohamed.sallam.awb.view.home;
+package io.github.mohamed.sallam.awb.screen.home;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +17,7 @@ import java.util.Objects;
 
 import io.github.mohamed.sallam.awb.R;
 
-public class AddGroupDialog extends AppCompatDialogFragment {
+public class UpdateGroupNameDialog extends AppCompatDialogFragment {
 
     private EditText editTextGroupName;
     private HomeViewModel homeViewModel;
@@ -42,7 +41,7 @@ public class AddGroupDialog extends AppCompatDialogFragment {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Objects.requireNonNull(AddGroupDialog.this.getDialog()).cancel();
+                        Objects.requireNonNull(UpdateGroupNameDialog.this.getDialog()).cancel();
                     }
                 })
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {

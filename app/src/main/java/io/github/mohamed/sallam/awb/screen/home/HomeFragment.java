@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
 import java.util.Objects;
@@ -20,12 +19,13 @@ import io.github.mohamed.sallam.awb.R;
 import io.github.mohamed.sallam.awb.databinding.FragmentHomeBinding;
 import io.github.mohamed.sallam.awb.db.entity.Device;
 
-public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDialogListener {
+public class HomeFragment extends Fragment implements UpdateGroupNameDialog.GroupNameDialogListener {
 
     private FragmentHomeBinding binding;
     private Device thisDevice;
     private HomeViewModel viewModel;
     private long duration;
+
     /**
      * Initialize the contents of the Activity's standard options menu.
      *
@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
                 openDialog();
             }
         });
-        viewModel.getThisDevice().observe((LifecycleOwner) this, new Observer<Device>() {
+        viewModel.getThisDevice().observe(getViewLifecycleOwner(), new Observer<Device>() {
             @Override
             public void onChanged(Device device) {
                 if (device == null) {
@@ -89,9 +89,9 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
     }
 
     public void openDialog() {
-        AddGroupDialog addGroupDialog = new AddGroupDialog();
-        addGroupDialog.setListener(this);
-        addGroupDialog.show(getChildFragmentManager(), "Dialog");
+        UpdateGroupNameDialog updateGroupNameDialog = new UpdateGroupNameDialog();
+        updateGroupNameDialog.setListener(this);
+        updateGroupNameDialog.show(getChildFragmentManager(), "Dialog");
     }
 
     @Override
