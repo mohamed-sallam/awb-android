@@ -6,61 +6,26 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+
+import java.util.Objects;
 
 import io.github.mohamed.sallam.awb.R;
+import io.github.mohamed.sallam.awb.databinding.FragmentHomeBinding;
+import io.github.mohamed.sallam.awb.db.entity.Device;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDialogListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        // To call the method onCreateOptionsMenu()
-        setHasOptionsMenu(true);
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+    private FragmentHomeBinding binding;
+    private Device thisDevice;
+    private HomeViewModel viewModel;
+    private long duration;
     /**
      * Initialize the contents of the Activity's standard options menu.
      *
@@ -77,9 +42,60 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        binding = FragmentHomeBinding.inflate(Objects.requireNonNull(inflater),
+                container, false);
+        viewModel = new HomeViewModel(requireActivity().getApplication());
+
+        binding.minutePicker.setMinValue(0);
+        binding.minutePicker.setMaxValue(59);
+        binding.minutePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int oldValue, int newValue) {
+                duration -= (long) oldValue * 60_000;
+                duration += (long) newValue * 60_000;
+            }
+        });
+
+        binding.hourPicker.setMinValue(0);
+        binding.hourPicker.setMaxValue(24);
+        binding.hourPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int oldValue, int newValue) {
+                duration -= (long) oldValue * 3_600_000;
+                duration += (long) newValue * 3_600_000;
+            }
+        });
+
+        binding.addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
+        viewModel.getThisDevice().observe((LifecycleOwner) this, new Observer<Device>() {
+            @Override
+            public void onChanged(Device device) {
+                if (device == null) {
+                    Toast.makeText(getActivity(), "yooooooo, no device no life :(", Toast.LENGTH_SHORT).show();
+                } else {
+                    thisDevice = device;
+                }
+            }
+        });
+        return binding.getRoot();
+    }
+
+    public void openDialog() {
+        AddGroupDialog addGroupDialog = new AddGroupDialog();
+        addGroupDialog.setListener(this);
+        addGroupDialog.show(getChildFragmentManager(), "Dialog");
+    }
+
+    @Override
+    public void onSaveGroupName(String groupName) {
+        viewModel.insertGroup(groupName, thisDevice.uuid);
     }
 }

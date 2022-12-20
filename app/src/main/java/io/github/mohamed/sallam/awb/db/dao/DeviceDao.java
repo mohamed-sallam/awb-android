@@ -39,6 +39,9 @@ public interface DeviceDao {
     @Query("SELECT * FROM devices_table")
     LiveData<List<Device>> getAll();
 
+    @Query("SELECT * FROM devices_table WHERE thisDevice LIMIT 1")
+    LiveData<Device> getThisDevice();
+
     @Transaction
     @Query("SELECT * FROM devices_table")
     LiveData<List<DeviceWithGroups>> getAllWithGroups();
