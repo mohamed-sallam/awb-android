@@ -1,10 +1,10 @@
 package io.github.mohamed.sallam.awb.db.entity;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import java.util.Objects;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
@@ -25,35 +25,15 @@ public class Group implements IAggregateRoot {
 	public UUID uuid = UUID.randomUUID();
 	public String name;
 	public UUID deviceUuid;
-	private boolean isSelected;
-
-	public boolean isSelected() {
-		return isSelected;
-	}
-
-	public void setSelected(boolean selected) {
-		isSelected = selected;
-	}
-
-
-	public Group(String name) {
-		this.name = name;
-		this.isSelected = false;
-	}
-
-	public String getName() {
-		return name;
-	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Group) {
 			Group group = (Group) o;
-			return Objects.equals(name, group.name)
-					&& Objects.equals(uuid, group.uuid)
-					&& Objects.equals(deviceUuid, group.deviceUuid);
+			return uuid.equals(group.uuid) &&
+				   name.equals(group.name) &&
+				   deviceUuid.equals(group.deviceUuid);
 		}
 		return false;
 	}
-
 }
