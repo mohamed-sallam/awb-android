@@ -13,15 +13,16 @@ import androidx.annotation.NonNull;
 import io.github.mohamed.sallam.awb.R;
 
 /**
- * A simple {@link Fragment} subclass.
- *
- * Use the {@link UpdateGroupFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * class `UpdateGroupFragment` displays the whitelisted applications of a
+ * specific group. User can select and unselect applications on the group through
+ * this fragment. User can search for a specific application, then finally save
+ * the changes.
+ * Use the {@link UpdateGroupFragment#newInstance} factory method to create an
+ * instance of this fragment.
  */
 public class UpdateGroupFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -29,13 +30,17 @@ public class UpdateGroupFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    /**
+     * Empty public constructor is a must.
+     * @see <a href="https://developer.android.com/reference/android/app/Fragment#public-constructors_1">
+     *     Android Dcoumentation</a>
+     */
     public UpdateGroupFragment() {
-        // Required empty public constructor
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Use this factory method to create a new instance of this fragment using
+     * the provided parameters.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
