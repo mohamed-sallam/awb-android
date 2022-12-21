@@ -96,7 +96,6 @@ public class GroupAdapter extends ListAdapter<Group, GroupAdapter.GroupViewHolde
         public GroupViewHolder(GroupItemBinding views) {
             super(views.getRoot());
             this.binding = views;
-            // TODO: possible error
             views.getRoot().setOnCreateContextMenuListener(this);
         }
 
