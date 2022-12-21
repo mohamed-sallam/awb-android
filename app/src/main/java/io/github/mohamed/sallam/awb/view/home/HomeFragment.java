@@ -13,10 +13,13 @@ import androidx.fragment.app.Fragment;
 import io.github.mohamed.sallam.awb.R;
 
 /**
- * Class `HomeFragment` displays for us our devices and their groups of .
- * applications We can choose whether the device we want to lock or a specific
- * group in the device to lock for a specific period of time. Users can determine
- * the period of the locking in the home fragment, finally click on the lock button.
+ * Class `HomeFragment` displays user's devices and their groups of applications.
+ * We can choose the device we want to lock. We can select which group in our
+ * devices to lock for a specific period of time. We offer some functionalities
+ * for the user on groups like (Rename - Duplicate - Edit - Remove), he could
+ * access them by right-click on the group. Users can determine the period of
+ * the locking in the home fragment, finally user can apply the locking by the
+ * lock button.
  *
  * A simple {@link Fragment} subclass.
  */
