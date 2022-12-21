@@ -73,7 +73,8 @@ public class GroupRepository implements IGroupRepository {
 
     public void clone(UUID sourceGroupUuid, String groupName) {
         UserDatabase.databaseWriteExecutor.execute(() -> {
-            Group destinationGroup = new Group(groupName);
+            Group destinationGroup = new Group();
+            destinationGroup.name = groupName;
             destinationGroup.deviceUuid = Objects
                                           .requireNonNull(
                                                   groupDao

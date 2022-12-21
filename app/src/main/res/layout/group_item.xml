@@ -2,7 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
         <variable
             name="group"
@@ -10,12 +9,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/group_item"
+        android:id="@+id/groupItem"
+        android:background="@drawable/selector_group"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/card_item"
+            android:id="@+id/groupIconImageView"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_marginStart="8dp"
@@ -30,17 +31,18 @@
             app:srcCompat="@color/dark_gray_flat" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/groupNameEditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="@{group.name}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/card_item"
-            app:layout_constraintStart_toStartOf="@+id/card_item"
-            app:layout_constraintTop_toBottomOf="@+id/card_item"
+            app:layout_constraintEnd_toEndOf="@+id/groupIconImageView"
+            app:layout_constraintStart_toStartOf="@+id/groupIconImageView"
+            app:layout_constraintTop_toBottomOf="@+id/groupIconImageView"
             app:layout_constraintVertical_bias="0.0"
             tools:text="group" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+
