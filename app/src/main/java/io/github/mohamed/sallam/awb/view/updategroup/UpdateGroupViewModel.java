@@ -47,10 +47,21 @@ public class UpdateGroupViewModel extends AndroidViewModel {
         this.groupUuid = groupUuid;
     }
 
+    /**
+     * Gets a group of whitelisted applications specified by the groupUuid
+     *
+     * @return group with its applications as live data.
+     */
     public LiveData<GroupWithWhitelistedApps> getGroupWithWhitelistedApps() {
         return groupRepository.getWithWhitelistedApps(groupUuid);
     }
 
+    /**
+     * Allows a specific application on a group to be not blocked on this group
+     * fragment by simply inserting the application as whitelisted app.
+     *
+     * @param packageName is the name of the application.
+     */
     public void allowApp(String packageName) {
         AppCommand command = appCommands.get(packageName);
         if (command == null) {
@@ -69,6 +80,12 @@ public class UpdateGroupViewModel extends AndroidViewModel {
             appCommands.remove(packageName);
     }
 
+    /**
+     * Blocks a specific application on a group by simply unlisting it from the
+     * whitelist application table
+     *
+     * @param packageName the name of a the application.
+     */
     public void blockApp(String packageName) {
         AppCommand command = appCommands.get(packageName);
         if (command == null) {
@@ -84,11 +101,19 @@ public class UpdateGroupViewModel extends AndroidViewModel {
             appCommands.remove(packageName);
     }
 
+    /**
+     * Saves the changes done by the user on the update group fragment.
+     */
     public void save() {
         for (AppCommand appCommand: appCommands.values())
             appCommand.execute();
     }
 
+    /**
+     * Uses the Command Pattern to save commands, done by the user for the
+     * whitelisted applications till the user confirm the operation, command, to
+     * be done or refuse it. Commands done by the user (e.g. add and delete).
+     */
     private abstract class AppCommand {
         protected String packageName;
         protected Boolean isAllowCommand;
