@@ -26,17 +26,17 @@ public interface DetoxPeriodDao {
     void update(DetoxPeriod detoxPeriod);
 
     /**
-     * a function that gets the id of detox period to remove it from the detox periods table.
+     * Gets the id of detox period to remove it from the detox periods table.
      *
-     * @param id represent the id of a detox period to be removed.
+     * @param id represents the id of a detox period to be removed.
      */
     @Query("DELETE FROM detox_periods_table WHERE id=:id")
     void delete(Integer id);
 
     /**
-     * a function that gets the id of a detox period.
+     * Gets the id of a detox period.
      *
-     * @param id represent the id of a given detox period.
+     * @param id represents the id of a given detox period.
      *
      * @return live data of detox period from detox periods table.
      */
@@ -44,9 +44,9 @@ public interface DetoxPeriodDao {
     LiveData<DetoxPeriod> get(Integer id);
 
     /**
-     * a function that gets the id of a detox period.
+     * Gets the id of a detox period.
      *
-     * @param id represent the id of a given detox period.
+     * @param id represents the id of a given detox period.
      *
      * @return live data of detox period with its group from detox periods table.
      */
@@ -55,9 +55,9 @@ public interface DetoxPeriodDao {
     LiveData<DetoxPeriodAndGroup> getWithGroup(Integer id);
 
     /**
-     * a function that gets the id of a detox period.
+     * Gets the id of a detox period.
      *
-     * @param id represent the id of a given detox period.
+     * @param id represents the id of a given detox period.
      *
      * @return live data of the detox period and its group with whitelisted
      * apps from detox periods table.

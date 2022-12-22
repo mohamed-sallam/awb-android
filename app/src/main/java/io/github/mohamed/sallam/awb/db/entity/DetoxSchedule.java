@@ -10,7 +10,7 @@ public class DetoxSchedule extends DetoxSettings {
 	private Timestamp endDate;
 	private RepeatSchedule repeatSchedule;
 	public DetoxSchedule() {
-		// implementation
+
 	}
 
 	/**

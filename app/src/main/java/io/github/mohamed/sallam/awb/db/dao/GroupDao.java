@@ -26,27 +26,27 @@ public interface GroupDao {
     void insert(Group group);
 
     /**
-     * renames a group of apps.
+     * Renames a group of apps.
      *
-     * @param uuid represent the uuid of a group of apps to be renamed.
+     * @param uuid represents the uuid of a group of apps to be renamed.
      *
-     * @param name represent the new name given to the group of apps.
+     * @param name represents the new name given to the group of apps.
      */
     @Query("UPDATE groups_table SET name = :name WHERE uuid = :uuid")
     void rename(UUID uuid, String name);
 
     /**
-     * removes a selected group of apps from the groups table.
+     * Removes a selected group of apps from the groups table.
      *
-     * @param groupUuid represent the uuid of a group of apps to be deleted.
+     * @param groupUuid represents the uuid of a group of apps to be deleted.
      */
     @Query("DELETE FROM groups_table WHERE uuid=:groupUuid")
     void delete(UUID groupUuid);
 
     /**
-     * gets a certain group.
+     * Gets a certain group.
      *
-     * @param groupUuid represent the uuid of a group of apps to be represented.
+     * @param groupUuid represents the uuid of a group of apps to be represented.
      *
      * @return a live data of a selected group.
      */
@@ -54,9 +54,9 @@ public interface GroupDao {
     LiveData<Group> get(UUID groupUuid);
 
     /**
-     * gets all groups in a certain device.
+     * Gets all groups in a certain device.
      *
-     * @param deviceUuid represent the uuid of a device.
+     * @param deviceUuid represents the uuid of a device.
      *
      * @return a live data of the groups in a selected device.
      */
@@ -64,11 +64,11 @@ public interface GroupDao {
     LiveData<List<Group>> getAllByDevice(UUID deviceUuid);
 
     /**
-     * changes the device in relation with app groups.
+     * Changes the device in relation with app groups.
      *
-     * @param oldDeviceUuid represent the uuid of the old device.
+     * @param oldDeviceUuid represents the uuid of the old device.
      *
-     * @param newDeviceUuid represent the new uuid of the new selected device.
+     * @param newDeviceUuid represents the new uuid of the new selected device.
      */
     @Query("UPDATE groups_table "             +
            "SET   deviceUuid=:newDeviceUuid " +
@@ -76,9 +76,10 @@ public interface GroupDao {
     void replaceDeviceUuid(UUID oldDeviceUuid, UUID newDeviceUuid);
 
     /**
-     * gets a certain group with its whitelisted apps.
+     * Gets a certain group with its whitelisted apps.
      *
-     * @param uuid represent the uuid of a group to get all of its whitelisted apps.
+     * @param uuid represents the uuid of a group to get all of its whitelisted
+     * apps.
      *
      * @return a live data of a group with its whitelisted apps.
      */

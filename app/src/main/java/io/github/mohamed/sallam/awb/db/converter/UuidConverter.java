@@ -7,13 +7,12 @@ import java.util.UUID;
 /**
  * UUID converter class to use it with Room Data classes.
  *
- * @see
- *
  * @author Mohamed Sallam
  */
 public class UuidConverter {
+
     /**
-     * @param uuid represent a group/device uuid.
+     * @param uuid represents a group/device uuid.
      *
      * @return uuid but in a string format.
      */
@@ -23,7 +22,7 @@ public class UuidConverter {
     }
 
     /**
-     * @param string represent the string format of a group/device uuid.
+     * @param string represents the string format of a group/device uuid.
      *
      * @return group/device uuid in UUID format.
      */

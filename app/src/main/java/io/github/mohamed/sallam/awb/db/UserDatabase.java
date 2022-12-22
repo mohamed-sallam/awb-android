@@ -24,9 +24,10 @@ import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.entity.Group;
 
 /**
- * Our Internal Database
+ * Our internal database.
  *
- * @see <a href="techotopia.com/index.php/An_Android_Room_Database_and_Repository_Tutorial">
+ * @see <a href=
+ * "https://www.techotopia.com/index.php/An_Android_Room_Database_and_Repository_Tutorial">
  * An Android Room Database and Repository Tutorial</a>
  *
  * @author Mohamed Sherif

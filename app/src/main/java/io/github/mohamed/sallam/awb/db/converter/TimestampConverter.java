@@ -7,13 +7,12 @@ import java.sql.Timestamp;
 /**
  * Converter Class to convert time from Timestamp to milliseconds (Long) and vice versa.
  *
- * @see
- *
  * @author Mohamed Sherif
  */
 public class TimestampConverter {
+
     /**
-     * @param milliSeconds represent time in milliseconds.
+     * @param milliSeconds represents time in milliseconds.
      *
      * @return time in Timestamp format.
      */
@@ -23,7 +22,7 @@ public class TimestampConverter {
     }
 
     /**
-     * @param timestamp represent time in Timestamp format.
+     * @param timestamp represents time in Timestamp format.
      *
      * @return time in milliseconds format.
      */

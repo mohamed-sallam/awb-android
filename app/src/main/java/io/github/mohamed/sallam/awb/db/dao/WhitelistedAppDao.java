@@ -58,7 +58,8 @@ public interface WhitelistedAppDao {
      * gives the newly created group a copy of the universal unique identifier of
      * the original group.
      *
-     * @param sourceGroupUuid represent the universal unique identifier of the original group.
+     * @param sourceGroupUuid represent the universal unique identifier of the
+     * original group.
      *
      * @param destinationGroupUuid represent the universal unique identifier of the copied group
      * which is a random one created initially with group.

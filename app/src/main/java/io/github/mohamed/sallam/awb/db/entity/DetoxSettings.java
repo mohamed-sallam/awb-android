@@ -10,7 +10,7 @@ import io.github.mohamed.sallam.awb.db.converter.TimestampConverter;
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 
 /**
- * a detox setting of a group of apps.
+ * A detox setting of a group of apps.
  */
 @TypeConverters({UuidConverter.class, TimestampConverter.class})
 @Entity
