@@ -98,12 +98,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="170dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:orientation="horizontal"
-            android:layout_width="323dp"
-            android:layout_height="221dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/addButton"
