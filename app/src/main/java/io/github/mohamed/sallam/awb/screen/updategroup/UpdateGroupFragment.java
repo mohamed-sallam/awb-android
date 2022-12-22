@@ -14,11 +14,15 @@ import androidx.lifecycle.Observer;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.App;
 import io.github.mohamed.sallam.awb.R;
 import io.github.mohamed.sallam.awb.databinding.FragmentUpdateGroupBinding;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
+import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 import io.github.mohamed.sallam.awb.screen.adapter.AppsAdapter;
 
 /**
@@ -51,12 +55,10 @@ public class UpdateGroupFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Intent intent = getActivity().getIntent();
         binding = FragmentUpdateGroupBinding.inflate(inflater, container,false);
         updateGroupViewModel = new UpdateGroupViewModel(getActivity()
                                                         .getApplication(),
-                                                        (UUID) intent.getExtras()
-                                                        .get("UUID")
+                                                        (UUID) getArguments().get("UUID")
         );
         AppsAdapter appsAdapter = new AppsAdapter(getActivity().getApplicationContext()
                 , new AppsAdapter.OnAppListener() {
@@ -69,6 +71,29 @@ public class UpdateGroupFragment extends Fragment {
                     updateGroupViewModel.allowApp(app.getPackageName());
                     app.setSelected(true);
                 }
+            }
+        });
+        updateGroupViewModel.getWhitelistedApps().observe(getViewLifecycleOwner(),
+                new Observer<List<WhitelistedApp>>() {
+            @Override
+            public void onChanged(List<WhitelistedApp> whitelistedApps) {
+                List<App> newList = new ArrayList<>(appsAdapter.getCurrentList());
+                for (App app: newList) {
+                    for (WhitelistedApp whitelistedApp: whitelistedApps) {
+                        if (whitelistedApp.packageName.equals(app.getPackageName())) {
+                            app.setSelected(true);
+                            break;
+                        }
+                    }
+                }
+                appsAdapter.submitList(newList);
+                appsAdapter.notifyDataSetChanged();
+            }
+        });
+        updateGroupViewModel.getApps().observe(getViewLifecycleOwner(), new Observer<List<App>>() {
+            @Override
+            public void onChanged(List<App> apps) {
+                appsAdapter.submitList(apps);
             }
         });
         binding.appsRecyclerView.setAdapter(appsAdapter);

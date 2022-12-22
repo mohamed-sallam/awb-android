@@ -2,6 +2,7 @@ package io.github.mohamed.sallam.awb.screen.home;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,9 +14,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
+import androidx.navigation.Navigation;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -33,6 +35,7 @@ public class HomeFragment extends Fragment implements UpdateGroupNameDialog.Grou
     private GroupAdapter groupAdapter;
     private UpdateGroupNameDialog updateGroupNameDialog;
     private int actionCode = -1;
+    private UUID groupUuid;
 
     /**
      * Initialize the contents of the Activity's standard options menu.
@@ -116,7 +119,6 @@ public class HomeFragment extends Fragment implements UpdateGroupNameDialog.Grou
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        UUID groupUuid;
         try {
             groupUuid = groupAdapter.getLongClickedGroupUuid();
         } catch (Exception e) {
@@ -132,7 +134,11 @@ public class HomeFragment extends Fragment implements UpdateGroupNameDialog.Grou
 
                 break;
             case R.id.editGroupOption:
-
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("UUID", groupUuid);
+                Navigation.findNavController(binding.getRoot())
+                        .navigate(R.id.action_homeFragment_to_updateGroupFragment
+                                , bundle);
                 break;
             case R.id.removeGroupOption:
                 viewModel.deleteGroup(groupUuid);
