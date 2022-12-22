@@ -24,13 +24,15 @@ import io.github.mohamed.sallam.awb.databinding.FragmentHomeBinding;
 import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.screen.adapter.GroupAdapter;
 
-public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDialogListener {
+public class HomeFragment extends Fragment implements UpdateGroupNameDialog.GroupNameDialogListener {
 
     private FragmentHomeBinding binding;
     private Device thisDevice;
     private HomeViewModel viewModel;
     private long duration;
     private GroupAdapter groupAdapter;
+    private UpdateGroupNameDialog updateGroupNameDialog;
+    private int actionCode = -1;
 
     /**
      * Initialize the contents of the Activity's standard options menu.
@@ -54,7 +56,7 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
         binding = FragmentHomeBinding.inflate(Objects.requireNonNull(inflater),
                 container, false);
         viewModel = new HomeViewModel(requireActivity().getApplication());
-
+        updateGroupNameDialog = new UpdateGroupNameDialog();
         binding.minutePicker.setMinValue(0);
         binding.minutePicker.setMaxValue(59);
         binding.minutePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
@@ -74,10 +76,11 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
                 duration += (long) newValue * 3_600_000;
             }
         });
-
         binding.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                actionCode = 0;
+                updateGroupNameDialog.setTitle(getString(R.string.add_group));
                 openDialog();
             }
         });
@@ -94,6 +97,7 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
         groupAdapter = new GroupAdapter();
         binding.recyclerView.setAdapter(groupAdapter);
         registerForContextMenu(binding.recyclerView);
+        binding.recyclerView.setOnCreateContextMenuListener(this);
         viewModel.getAllDevicesWithGroups().observe(getViewLifecycleOwner(), new Observer<List<DeviceWithGroups>>() {
             @Override
             public void onChanged(List<DeviceWithGroups> deviceWithGroups) {
@@ -105,9 +109,10 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
     }
 
     public void openDialog() {
-        AddGroupDialog addGroupDialog = new AddGroupDialog();
-        addGroupDialog.setListener(this);
-        addGroupDialog.show(getChildFragmentManager(), "Dialog");
+        updateGroupNameDialog.setListener(this);
+        updateGroupNameDialog.show(getChildFragmentManager(), "Dialog");
+    }
+
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onContextItemSelected(MenuItem item) {
@@ -119,6 +124,9 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
         }
         switch (item.getItemId()) {
             case R.id.renameGroupOption:
+                actionCode = 1;
+                updateGroupNameDialog.setTitle(getString(R.string.rename_group));
+                openDialog();
                 break;
             case R.id.duplicateGroupOption:
 
@@ -135,6 +143,13 @@ public class HomeFragment extends Fragment implements AddGroupDialog.GroupNameDi
 
     @Override
     public void onSaveGroupName(String groupName) {
-        viewModel.insertGroup(groupName, thisDevice.uuid);
+        switch (actionCode) {
+            case 0:
+                viewModel.insertGroup(groupName, thisDevice.uuid);
+                break;
+            case 1:
+                viewModel.renameGroup(groupUuid, groupName);
+                break;
+        }
     }
 }
