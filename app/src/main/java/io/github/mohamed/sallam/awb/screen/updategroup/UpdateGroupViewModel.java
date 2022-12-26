@@ -1,16 +1,25 @@
-package io.github.mohamed.sallam.awb.view.updategroup;
+package io.github.mohamed.sallam.awb.screen.updategroup;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+import io.github.mohamed.sallam.awb.App;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 import io.github.mohamed.sallam.awb.repo.GroupRepository;
@@ -27,16 +36,52 @@ public class UpdateGroupViewModel extends AndroidViewModel {
     private final GroupRepository groupRepository;
     private final Map<String, AppCommand> appCommands;
     private final UUID groupUuid;
+    private final Application application;
+    private final MutableLiveData<List<App>> apps;
+    private LiveData<List<WhitelistedApp>> whitelistedApps;
+
+    public MutableLiveData<List<App>> getApps() {
+        return apps;
+    }
+
+    public LiveData<List<WhitelistedApp>> getWhitelistedApps() {
+        return whitelistedApps;
+    }
+
+    MutableLiveData<Boolean> navigateBack = new MutableLiveData<Boolean>(false);
 
     public UpdateGroupViewModel(@NonNull Application application, UUID groupUuid) {
         super(application);
+        this.application = application;
+        this.groupUuid = groupUuid;
         groupRepository = new GroupRepository(application);
         appCommands = new LinkedHashMap<>();
-        this.groupUuid = groupUuid;
+        whitelistedApps = groupRepository.getAllWhitelistedAppsByGroupUuid(groupUuid);
+        apps = new MutableLiveData<List<App>>(getAllApps());
     }
 
-    public LiveData<GroupWithWhitelistedApps> getGroupWithWhitelistedApps() {
-        return groupRepository.getWithWhitelistedApps(groupUuid);
+    public void resetNavigation() {
+        navigateBack = null;
+    }
+
+    private List<App> getAllApps() {
+        @SuppressLint("QueryPermissionsNeeded")
+        List<ApplicationInfo> appsData = application.getPackageManager()
+                                                    .getInstalledApplications(
+                                                            PackageManager
+                                                            .GET_META_DATA
+                                                    );
+        List<App> apps = new ArrayList<>();
+        for (ApplicationInfo appInfo : appsData) {
+            if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 1) {
+                App app = new App(appInfo.packageName,
+                        application.getPackageManager().getApplicationLabel(appInfo)
+                        .toString(),
+                        application.getPackageManager().getApplicationIcon(appInfo));
+                apps.add(app);
+            }
+        }
+        return apps;
     }
 
     public void allowApp(String packageName) {
@@ -73,7 +118,7 @@ public class UpdateGroupViewModel extends AndroidViewModel {
     }
 
     public void save() {
-        for (AppCommand appCommand: appCommands.values())
+        for (AppCommand appCommand : appCommands.values())
             appCommand.execute();
     }
 

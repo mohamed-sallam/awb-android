@@ -6,60 +6,60 @@
     <data>
         <variable
             name="HomeViewModel"
-            type="io.github.mohamed.sallam.awb.view.home.HomeViewModel" />
+            type="io.github.mohamed.sallam.awb.screen.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.home.HomeFragment">
-
+        tools:context=".view.home.HomeFragment"
+        tools:ignore="ExtraText">
 
         <TextView
-            android:id="@+id/min_textView"
+            android:id="@+id/minTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/m"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/hrPicker"
-            app:layout_constraintStart_toStartOf="@+id/hrPicker"
-            app:layout_constraintTop_toBottomOf="@+id/hrPicker" />
+            app:layout_constraintEnd_toEndOf="@+id/minutePicker"
+            app:layout_constraintStart_toStartOf="@+id/minutePicker"
+            app:layout_constraintTop_toBottomOf="@+id/minutePicker" />
 
         <NumberPicker
-            android:id="@+id/hrPicker"
+            android:id="@+id/minutePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:gravity="center"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-            app:layout_constraintEnd_toEndOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="@+id/addButton"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/minPicker"
+            app:layout_constraintStart_toEndOf="@+id/hourPicker"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <NumberPicker
-            android:id="@+id/minPicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/min_textView"
-            app:layout_constraintEnd_toStartOf="@+id/hrPicker"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@+id/recyclerView"
-            app:layout_constraintTop_toTopOf="@+id/hrPicker"
-            app:layout_constraintVertical_bias="0.0" />
-
         <TextView
-            android:id="@+id/hr_textView"
+            android:id="@+id/hourTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/h"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/minPicker"
-            app:layout_constraintStart_toStartOf="@+id/minPicker"
-            app:layout_constraintTop_toBottomOf="@+id/minPicker" />
+            app:layout_constraintEnd_toEndOf="@+id/hourPicker"
+            app:layout_constraintStart_toStartOf="@+id/hourPicker"
+            app:layout_constraintTop_toBottomOf="@+id/hourPicker" />
+
+        <NumberPicker
+            android:id="@+id/hourPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/minTextView"
+            app:layout_constraintEnd_toStartOf="@+id/minutePicker"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@+id/recyclerView"
+            app:layout_constraintTop_toTopOf="@+id/minutePicker"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/lockButton"
@@ -73,14 +73,14 @@
             android:textStyle="bold|italic"
             app:icon="@drawable/ic_lock"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-            app:layout_constraintEnd_toEndOf="@+id/hrPicker"
-            app:layout_constraintStart_toStartOf="@+id/minPicker"
-            app:layout_constraintTop_toBottomOf="@+id/min_textView"
+            app:layout_constraintEnd_toEndOf="@+id/minutePicker"
+            app:layout_constraintStart_toStartOf="@+id/hourPicker"
+            app:layout_constraintTop_toBottomOf="@+id/minTextView"
             app:layout_constraintVertical_bias="0.0"
             tools:ignore="MissingConstraints" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/addButton"
             style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
 
             android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
             android:layout_marginEnd="8dp"
             android:background="#420E0E"
             app:backgroundTint="#03A9F4"
-            app:iconTintMode="add"
+            android:text="@string/add"
             app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/recyclerView"
@@ -99,17 +99,18 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="170dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintEnd_toStartOf="@+id/addButton"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:itemCount="4" />
+            tools:itemCount="4"
+            tools:listitem="@layout/group_item"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

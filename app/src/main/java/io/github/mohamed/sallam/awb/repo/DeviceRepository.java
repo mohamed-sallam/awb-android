@@ -1,9 +1,16 @@
 package io.github.mohamed.sallam.awb.repo;
 
 import android.app.Application;
+import android.os.Build;
 
+
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
+import androidx.lifecycle.Observer;
 
+import java.net.Inet4Address;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,12 +22,19 @@ import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 
 public class DeviceRepository implements IDeviceRepository {
-    private DeviceDao deviceDao;
-    private GroupDao groupDao;
+    private final DeviceDao deviceDao;
+    private final GroupDao groupDao;
+    private final LiveData<List<Device>> devices;
+    private final LiveData<List<DeviceWithGroups>> devicesWithGroups;
+    private final LiveData<Device> thisDevice;
 
     public DeviceRepository(Application application) {
         UserDatabase db = UserDatabase.getInstance(application);
         deviceDao = db.deviceDao();
+        groupDao = db.groupDao();
+        devices = deviceDao.getAll();
+        devicesWithGroups = deviceDao.getAllWithGroups();
+        thisDevice = deviceDao.getThisDevice();
     }
 
     //DeviceDao
@@ -41,7 +55,6 @@ public class DeviceRepository implements IDeviceRepository {
             }
         });
     }
-
 
     public void delete(UUID deviceUuid) {
         UserDatabase.databaseWriteExecutor.execute(new Runnable(){
@@ -64,10 +77,14 @@ public class DeviceRepository implements IDeviceRepository {
     }
 
     public LiveData<List<Device>> getAll() {
-        return deviceDao.getAll();
+        return devices;
     }
 
     public LiveData<List<DeviceWithGroups>> getAllWithGroups() {
-        return deviceDao.getAllWithGroups();
+        return devicesWithGroups;
+    }
+
+    public LiveData<Device> getThisDevice() {
+        return thisDevice;
     }
 }

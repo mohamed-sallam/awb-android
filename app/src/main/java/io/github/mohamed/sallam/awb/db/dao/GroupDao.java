@@ -28,7 +28,7 @@ public interface GroupDao {
     @Query("UPDATE groups_table SET name = :name WHERE uuid = :uuid")
     void rename(UUID uuid, String name);
 
-    @Query("DELETE FROM devices_table WHERE uuid=:groupUuid")
+    @Query("DELETE FROM groups_table WHERE uuid=:groupUuid")
     void delete(UUID groupUuid);
 
     @Query("SELECT * FROM groups_table WHERE uuid = :groupUuid LIMIT 1")

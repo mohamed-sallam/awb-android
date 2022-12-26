@@ -1,4 +1,5 @@
 package io.github.mohamed.sallam.awb.db.entity;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -25,4 +26,14 @@ public class Group implements IAggregateRoot {
 	public String name;
 	public UUID deviceUuid;
 
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Group) {
+			Group group = (Group) o;
+			return uuid.equals(group.uuid) &&
+				   name.equals(group.name) &&
+				   deviceUuid.equals(group.deviceUuid);
+		}
+		return false;
+	}
 }

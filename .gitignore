@@ -13,5 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+gradle.properties
 .idea/misc.xml
 .idea/deploymentTargetDropDown.xml
+.idea/shelf

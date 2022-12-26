@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.view.home;
+package io.github.mohamed.sallam.awb.screen.home;
 
 import android.app.Application;
 
@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
+import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 import io.github.mohamed.sallam.awb.repo.DetoxPeriodRepository;
@@ -26,12 +27,14 @@ public class HomeViewModel extends AndroidViewModel {
     private DeviceRepository      deviceRepository;
     private GroupRepository       groupRepository;
     private DetoxPeriodRepository detoxPeriodRepository;
+    private LiveData<Device> thisDevice;
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
         deviceRepository = new DeviceRepository(application);
         groupRepository = new GroupRepository(application);
         detoxPeriodRepository = new DetoxPeriodRepository(application);
+        thisDevice = deviceRepository.getThisDevice();
     }
 
     public LiveData<List<DeviceWithGroups>> getAllDevicesWithGroups() {
@@ -62,5 +65,9 @@ public class HomeViewModel extends AndroidViewModel {
 
     public void duplicateGroup(UUID groupUuid, String newGroupName) {
         groupRepository.clone(groupUuid, newGroupName);
+    }
+
+    public LiveData<Device> getThisDevice() {
+        return thisDevice;
     }
 }
