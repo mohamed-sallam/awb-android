@@ -7,8 +7,10 @@ import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -35,7 +37,17 @@ public class UpdateGroupViewModel extends AndroidViewModel {
     private final Map<String, AppCommand> appCommands;
     private final UUID groupUuid;
     private final Application application;
-    private final List<App> apps;
+    private final MutableLiveData<List<App>> apps;
+    private LiveData<List<WhitelistedApp>> whitelistedApps;
+
+    public MutableLiveData<List<App>> getApps() {
+        return apps;
+    }
+
+    public LiveData<List<WhitelistedApp>> getWhitelistedApps() {
+        return whitelistedApps;
+    }
+
     MutableLiveData<Boolean> navigateBack = new MutableLiveData<Boolean>(false);
 
     public UpdateGroupViewModel(@NonNull Application application, UUID groupUuid) {
@@ -44,18 +56,15 @@ public class UpdateGroupViewModel extends AndroidViewModel {
         this.groupUuid = groupUuid;
         groupRepository = new GroupRepository(application);
         appCommands = new LinkedHashMap<>();
-        apps = getAllApps();
+        whitelistedApps = groupRepository.getAllWhitelistedAppsByGroupUuid(groupUuid);
+        apps = new MutableLiveData<List<App>>(getAllApps());
     }
 
     public void resetNavigation() {
         navigateBack = null;
     }
 
-    public LiveData<GroupWithWhitelistedApps> getGroupWithWhitelistedApps() {
-        return groupRepository.getWithWhitelistedApps(groupUuid);
-    }
-
-    public List<App> getAllApps() {
+    private List<App> getAllApps() {
         @SuppressLint("QueryPermissionsNeeded")
         List<ApplicationInfo> appsData = application.getPackageManager()
                                                     .getInstalledApplications(
@@ -69,13 +78,6 @@ public class UpdateGroupViewModel extends AndroidViewModel {
                         application.getPackageManager().getApplicationLabel(appInfo)
                         .toString(),
                         application.getPackageManager().getApplicationIcon(appInfo));
-                for (WhitelistedApp whitelistedApp: Objects.requireNonNull(
-                        getGroupWithWhitelistedApps().getValue()).whitelistedApps) {
-                    if (whitelistedApp.packageName.equals(app.getPackageName())) {
-                        app.setSelected(true);
-                        break;
-                    }
-                }
                 apps.add(app);
             }
         }

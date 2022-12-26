@@ -111,7 +111,7 @@ public class GroupAdapter extends ListAdapter<Group, GroupAdapter.GroupViewHolde
                          1, R.string.duplicate);
             contextMenu.add(Menu.NONE, R.id.editGroupOption,
                          2, R.string.edit);
-            contextMenu.add(Menu.NONE, R.id.renameGroupOption,
+            contextMenu.add(Menu.NONE, R.id.removeGroupOption,
                          3, R.string.remove);
         }
     }
