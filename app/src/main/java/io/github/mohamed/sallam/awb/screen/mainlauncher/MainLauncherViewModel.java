@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.view.mainlauncher;
+package io.github.mohamed.sallam.awb.screen.mainlauncher;
 
 import android.app.Application;
 

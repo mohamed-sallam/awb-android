@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -25,21 +24,20 @@ import java.util.TreeMap;
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
 import io.github.mohamed.sallam.awb.repo.DetoxPeriodRepository;
-import io.github.mohamed.sallam.awb.view.mainlauncher.MainLauncherActivity;
+import io.github.mohamed.sallam.awb.screen.mainlauncher.MainLauncherActivity;
 
 /**
  * Lock Foreground Service Class
  *
  * @author Mohamed Sherif
+ * @author Yousef Ahmed
+ * @author Mohamed Sallam
  */
 public class LockService extends Service {
     private DetoxPeriodRepository detoxPeriodRepository;
     private LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
             detoxPeriodAndGroupWithWhitelistedApps;
-    //SharedPreferences preferences;
     private CountDownTimer cTimer;
-    MainLauncherActivity mainLauncherActivity;
-    //private static Set<String> sharedPreferencesAppsList = new HashSet<String>();
 
     @Nullable
     @Override
@@ -73,6 +71,22 @@ public class LockService extends Service {
 
         startForeground(1,lockNotification);
 
+        final LockService lockService = this;
+        new CountDownTimer(intent.getLongExtra("duration", 0)
+                                                        , 1000) {
+            public void onTick(long millisUntilFinished) {
+                Intent mainLauncherActivityIntent = new Intent(lockService, MainLauncherActivity.class);
+                mainLauncherActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mainLauncherActivityIntent.putExtra("foregroundApp", getForegroundAppPackageName());
+                startActivity(mainLauncherActivityIntent);
+            }
+
+            public void onFinish() {
+                this.cancel();
+                stopSelf();
+            }
+        }.start();
+
         return START_STICKY;
     }
 
@@ -97,16 +111,16 @@ public class LockService extends Service {
             UsageStatsManager usageStatsManager =
                     (UsageStatsManager)this.getSystemService(Context.USAGE_STATS_SERVICE);
             long currentTime = System.currentTimeMillis();
-            List<UsageStats> whitelist =
+            List<UsageStats> apps =
                     usageStatsManager.queryUsageStats(
                             UsageStatsManager.INTERVAL_DAILY,
-                            currentTime - 1000*1000,
+                            currentTime - 1000 * 1000,
                             currentTime
                     );
-            if (whitelist != null && whitelist.size() > 0) {
+            if (apps != null && apps.size() > 0) {
                 SortedMap<Long, UsageStats> mySortedMap =
                         new TreeMap<Long, UsageStats>();
-                for (UsageStats usageStats : whitelist) {
+                for (UsageStats usageStats : apps) {
                     mySortedMap.put(usageStats.getLastTimeUsed(), usageStats);
                 }
                 if (mySortedMap != null && !mySortedMap.isEmpty()) {
@@ -124,31 +138,5 @@ public class LockService extends Service {
 
         Log.e("adapter", "Current App in foreground is: " + currentAppPackageName);
         return currentAppPackageName;
-    }
-
-    public void openOverlayActivity(Long durationInMillis) {
-        // create an instance of Window class
-        // and display the content on screen
-        mainLauncherActivity = new MainLauncherActivity(this);
-        mainLauncherActivity.open();
-
-        cTimer = new CountDownTimer(durationInMillis, 1000) {
-            public void onTick(long millisUntilFinished) {
-                if(
-                        detoxPeriodAndGroupWithWhitelistedApps.getValue()
-                        .whitelistedApps.contains(getForegroundAppPackageName())
-                ) {
-                    mainLauncherActivity.visibility(View.GONE);
-                } else {
-                    mainLauncherActivity.visibility(View.VISIBLE);
-                }
-            }
-
-            public void onFinish() {
-                if(cTimer!=null)
-                    cTimer.cancel();
-            }
-        };
-        cTimer.start();
     }
 }

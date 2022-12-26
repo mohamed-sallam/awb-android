@@ -1,8 +1,13 @@
 package io.github.mohamed.sallam.awb.screen.home;
 
+import static io.github.mohamed.sallam.awb.util.StatusUtil.isUsageStatGranted;
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +18,7 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.navigation.Navigation;
@@ -21,11 +27,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import io.github.mohamed.sallam.awb.LockService;
 import io.github.mohamed.sallam.awb.R;
 import io.github.mohamed.sallam.awb.databinding.FragmentHomeBinding;
 import io.github.mohamed.sallam.awb.db.entity.Device;
+import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 import io.github.mohamed.sallam.awb.screen.adapter.GroupAdapter;
 
+
+/**
+ * @author Yousef Ahmed
+ * @author Mohamed Sallam
+ */
 public class HomeFragment extends Fragment implements UpdateGroupNameDialog.GroupNameDialogListener {
 
     private FragmentHomeBinding binding;
@@ -105,6 +118,23 @@ public class HomeFragment extends Fragment implements UpdateGroupNameDialog.Grou
             @Override
             public void onChanged(List<DeviceWithGroups> deviceWithGroups) {
                 groupAdapter.submitList(deviceWithGroups.get(0).groups);
+            }
+        });
+
+        binding.lockButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View view) {
+                if (isUsageStatGranted(requireContext().getApplicationContext())) {
+                    Intent lockServiceIntent = new Intent(getActivity(), LockService.class);
+                    lockServiceIntent.putExtra("duration", duration);
+                    viewModel.insertDetoxPeriod(duration, groupUuid);
+                    requireActivity().startService(lockServiceIntent);
+                } else {
+                    startActivity(
+                            new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+                    );
+                }
             }
         });
 
