@@ -2,12 +2,16 @@ package io.github.mohamed.sallam.awb;
 
 import android.app.ActivityManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Binder;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
@@ -35,8 +39,6 @@ import io.github.mohamed.sallam.awb.screen.mainlauncher.MainLauncherActivity;
  */
 public class LockService extends Service {
     private DetoxPeriodRepository detoxPeriodRepository;
-    private LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-            detoxPeriodAndGroupWithWhitelistedApps;
     private CountDownTimer cTimer;
 
     @Nullable
@@ -45,40 +47,52 @@ public class LockService extends Service {
         return null;
     }
 
+    IBinder mBinder = new LocalBinder();
+    public class LocalBinder extends Binder {
+        public LockService getServerInstance() {
+            return LockService.this;
+        }
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
-        detoxPeriodAndGroupWithWhitelistedApps =
-                detoxPeriodRepository.getAndGroupWithWhitelistedApps();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String NOTIFICATION_CHANNEL_ID = "LockChannelID";
+            String channelName = "Background Service";
+            NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_MIN);
+
+            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            assert manager != null;
+            manager.createNotificationChannel(chan);
+
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+            Notification notification = notificationBuilder.setOngoing(true)
+                    .setContentTitle("Detox Period Started")
+                    .setContentText("Lock Service in operation")
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setPriority(NotificationManager.IMPORTANCE_MIN)
+                    .setCategory(Notification.CATEGORY_SERVICE)
+                    .build();
+            startForeground(2, notification);
+        } else {
+            startForeground(1, new Notification());
+        }
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Intent lockNotificationIntent = new Intent(
-                this, MainLauncherActivity.class
-        );
-        PendingIntent pendingLockNotificationIntent = PendingIntent.getActivity(
-                this, 0, lockNotificationIntent, 0
-        );
+        super.onStartCommand(intent, flags, startId);
 
-        Notification lockNotification =
-                new NotificationCompat.Builder(this, "LockChannelID")
-                        .setContentTitle("Detox Period Started")
-                        .setContentText("Lock Service in operation")
-                        .setSmallIcon(R.drawable.ic_lock)
-                        .setContentIntent(pendingLockNotificationIntent)
-                        .build();
+        Intent mainLauncherActivityIntent = new Intent(this, MainLauncherActivity.class);
+        mainLauncherActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mainLauncherActivityIntent);
 
-        startForeground(1,lockNotification);
 
-        final LockService lockService = this;
         new CountDownTimer(intent.getLongExtra("duration", 0)
                                                         , 1000) {
             public void onTick(long millisUntilFinished) {
-                Intent mainLauncherActivityIntent = new Intent(lockService, MainLauncherActivity.class);
-                mainLauncherActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mainLauncherActivityIntent.putExtra("foregroundApp", getForegroundAppPackageName());
-                startActivity(mainLauncherActivityIntent);
+
             }
 
             public void onFinish() {
@@ -96,16 +110,16 @@ public class LockService extends Service {
     }
 
     public void decreaseDetoxPeriod(long subtractedTime) {
-        subtractedTime = -Math.abs(subtractedTime);
-        final DetoxPeriod detoxPeriod = Objects.requireNonNull(
-                detoxPeriodAndGroupWithWhitelistedApps
-                        .getValue()
-        ).detoxPeriodAndGroup.detoxPeriod;
-        detoxPeriod.endDate.setTime(detoxPeriod.endDate.getTime() + subtractedTime);
-        detoxPeriodRepository.update(detoxPeriod);
+//        subtractedTime = -Math.abs(subtractedTime);
+//        final DetoxPeriod detoxPeriod = Objects.requireNonNull(
+//                detoxPeriodAndGroupWithWhitelistedApps
+//                        .getValue()
+//        ).detoxPeriodAndGroup.detoxPeriod;
+//        detoxPeriod.endDate.setTime(detoxPeriod.endDate.getTime() + subtractedTime);
+//        detoxPeriodRepository.update(detoxPeriod);
     }
 
-    private String getForegroundAppPackageName() {
+    public String getForegroundAppPackageName() {
         String currentAppPackageName = "Unknown";
         if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             UsageStatsManager usageStatsManager =

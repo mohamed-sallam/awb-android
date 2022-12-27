@@ -20,9 +20,7 @@ import java.util.Objects;
 import io.github.mohamed.sallam.awb.R;
 
 public class UpdateGroupNameDialog extends AppCompatDialogFragment {
-
     private EditText editTextGroupName;
-    private HomeViewModel homeViewModel;
     private GroupNameDialogListener listener;
     private String title;
 
@@ -80,6 +78,6 @@ public class UpdateGroupNameDialog extends AppCompatDialogFragment {
     }
 
     public interface GroupNameDialogListener {
-        void onSaveGroupName(String GroupName);
+        void onSaveGroupName(String groupName);
     }
 }

@@ -6,10 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
 import io.github.mohamed.sallam.awb.repo.DetoxPeriodRepository;
 import io.github.mohamed.sallam.awb.repo.GroupRepository;
@@ -21,17 +23,17 @@ import io.github.mohamed.sallam.awb.repo.GroupRepository;
  * @author Mohamed Yehia
  */
 public class MainLauncherViewModel extends AndroidViewModel {
-    private DetoxPeriodRepository detoxPeriodRepository;
+    private final DetoxPeriodRepository detoxPeriodRepository;
     private final GroupRepository groupRepository;
-    private LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-            detoxPeriodAndGroupWithWhitelistedApps;
+    private final LiveData<DetoxPeriod> detoxPeriod;
+    private final LiveData<List<WhitelistedApp>> whitelistedApps;
 
-    public MainLauncherViewModel(@NonNull Application application, UUID groupUuid) {
+    public MainLauncherViewModel(@NonNull Application application) {
         super(application);
         detoxPeriodRepository = new DetoxPeriodRepository(application);
         groupRepository = new GroupRepository(application);
-        detoxPeriodAndGroupWithWhitelistedApps = detoxPeriodRepository
-                                                 .getAndGroupWithWhitelistedApps();
+        detoxPeriod = detoxPeriodRepository.get();
+        whitelistedApps = detoxPeriodRepository.getWhitelistedAppsOfCurrentDetoxPeriod();
     }
 
     /**
@@ -43,26 +45,26 @@ public class MainLauncherViewModel extends AndroidViewModel {
      */
     public void increaseDetoxPeriod(long additionalTime) {
         additionalTime = Math.abs(additionalTime);
-        final DetoxPeriod detoxPeriod = Objects.requireNonNull(
-                                            detoxPeriodAndGroupWithWhitelistedApps
-                                            .getValue()
-                                        ).detoxPeriodAndGroup.detoxPeriod;
-        detoxPeriod.endDate.setTime(detoxPeriod.endDate.getTime() + additionalTime);
-        detoxPeriodRepository.update(detoxPeriod);
-    }
 
-    public LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-    getDetoxPeriodAndGroupWithWhitelistedApps() {
-        return detoxPeriodAndGroupWithWhitelistedApps;
+        Objects.requireNonNull(detoxPeriod.getValue()).endDate.setTime(detoxPeriod.getValue().endDate.getTime() + additionalTime);
+        detoxPeriodRepository.update(detoxPeriod.getValue());
     }
 
     public void deleteWhitelistedApp(String packageName) {
         groupRepository.deleteWhitelistedApp(
                 Objects.requireNonNull(
-                        detoxPeriodAndGroupWithWhitelistedApps
+                        detoxPeriod
                         .getValue()
-                ).detoxPeriodAndGroup.group.uuid,
+                ).groupUuid,
                 packageName
         );
+    }
+
+    public LiveData<DetoxPeriod> getDetoxPeriod() {
+        return detoxPeriod;
+    }
+
+    public LiveData<List<WhitelistedApp>> getWhitelistedApps() {
+        return whitelistedApps;
     }
 }

@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import java.util.List;
@@ -39,16 +41,13 @@ import io.github.mohamed.sallam.awb.screen.adapter.GroupAdapter;
  * @author Yousef Ahmed
  * @author Mohamed Sallam
  */
-public class HomeFragment extends Fragment implements UpdateGroupNameDialog.GroupNameDialogListener {
-
+public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private Device thisDevice;
     private HomeViewModel viewModel;
     private long duration;
     private GroupAdapter groupAdapter;
     private UpdateGroupNameDialog updateGroupNameDialog;
-    private int actionCode = -1;
-    private UUID groupUuid;
 
     /**
      * Initialize the contents of the Activity's standard options menu.
@@ -71,7 +70,8 @@ public class HomeFragment extends Fragment implements UpdateGroupNameDialog.Grou
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(Objects.requireNonNull(inflater),
                 container, false);
-        viewModel = new HomeViewModel(requireActivity().getApplication());
+        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+
         updateGroupNameDialog = new UpdateGroupNameDialog();
         binding.minutePicker.setMinValue(0);
         binding.minutePicker.setMaxValue(59);
@@ -95,7 +95,12 @@ public class HomeFragment extends Fragment implements UpdateGroupNameDialog.Grou
         binding.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actionCode = 0;
+                updateGroupNameDialog.setListener(new UpdateGroupNameDialog.GroupNameDialogListener() {
+                    @Override
+                    public void onSaveGroupName(String groupName) {
+                        viewModel.insertGroup(groupName, thisDevice.uuid);
+                    }
+                });
                 updateGroupNameDialog.setTitle(getString(R.string.add_group));
                 openDialog();
             }
@@ -126,9 +131,10 @@ public class HomeFragment extends Fragment implements UpdateGroupNameDialog.Grou
             @Override
             public void onClick(View view) {
                 if (isUsageStatGranted(requireContext().getApplicationContext())) {
+                    Log.d("YousefDuration", duration + "");
                     Intent lockServiceIntent = new Intent(getActivity(), LockService.class);
                     lockServiceIntent.putExtra("duration", duration);
-                    viewModel.insertDetoxPeriod(duration, groupUuid);
+                    viewModel.insertDetoxPeriod(duration, groupAdapter.getSelectedGroupUuid());
                     requireActivity().startService(lockServiceIntent);
                 } else {
                     startActivity(
@@ -142,13 +148,13 @@ public class HomeFragment extends Fragment implements UpdateGroupNameDialog.Grou
     }
 
     public void openDialog() {
-        updateGroupNameDialog.setListener(this);
         updateGroupNameDialog.show(getChildFragmentManager(), "Dialog");
     }
 
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        UUID groupUuid;
         try {
             groupUuid = groupAdapter.getLongClickedGroupUuid();
         } catch (Exception e) {
@@ -156,7 +162,12 @@ public class HomeFragment extends Fragment implements UpdateGroupNameDialog.Grou
         }
         switch (item.getItemId()) {
             case R.id.renameGroupOption:
-                actionCode = 1;
+                updateGroupNameDialog.setListener(new UpdateGroupNameDialog.GroupNameDialogListener() {
+                    @Override
+                    public void onSaveGroupName(String groupName) {
+                        viewModel.renameGroup(groupUuid, groupName);
+                    }
+                });
                 updateGroupNameDialog.setTitle(getString(R.string.rename_group));
                 openDialog();
                 break;
@@ -175,17 +186,5 @@ public class HomeFragment extends Fragment implements UpdateGroupNameDialog.Grou
                 break;
         }
         return super.onContextItemSelected(item);
-    }
-
-    @Override
-    public void onSaveGroupName(String groupName) {
-        switch (actionCode) {
-            case 0:
-                viewModel.insertGroup(groupName, thisDevice.uuid);
-                break;
-            case 1:
-                viewModel.renameGroup(groupUuid, groupName);
-                break;
-        }
     }
 }
