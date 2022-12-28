@@ -1,7 +1,6 @@
 package io.github.mohamed.sallam.awb.screen.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import io.github.mohamed.sallam.awb.App;
 import io.github.mohamed.sallam.awb.R;
-import io.github.mohamed.sallam.awb.databinding.AppItemBinding;
+import io.github.mohamed.sallam.awb.databinding.ItemAppBinding;
 
 public class AppsAdapter extends ListAdapter<App, AppsAdapter.ViewHolder> {
 
@@ -30,7 +29,7 @@ public class AppsAdapter extends ListAdapter<App, AppsAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(
-                AppItemBinding.inflate(LayoutInflater.from(parent.getContext()),
+                ItemAppBinding.inflate(LayoutInflater.from(parent.getContext()),
                         parent,
                         false),
                 onAppListener
@@ -47,10 +46,10 @@ public class AppsAdapter extends ListAdapter<App, AppsAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        AppItemBinding itemBinding;
+        ItemAppBinding itemBinding;
         OnAppListener onAppListener;
 
-        public ViewHolder(AppItemBinding itemBinding, OnAppListener onAppListener) {
+        public ViewHolder(ItemAppBinding itemBinding, OnAppListener onAppListener) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
             this.onAppListener = onAppListener;

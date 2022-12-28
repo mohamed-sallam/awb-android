@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 
 import android.provider.Settings;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -131,7 +130,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (isUsageStatGranted(requireContext().getApplicationContext())) {
-                    Log.d("YousefDuration", duration + "");
                     Intent lockServiceIntent = new Intent(getActivity(), LockService.class);
                     lockServiceIntent.putExtra("duration", duration);
                     viewModel.insertDetoxPeriod(duration, groupAdapter.getSelectedGroupUuid());

@@ -1,6 +1,5 @@
 package io.github.mohamed.sallam.awb.screen.updategroup;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,11 +7,10 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,6 @@ import io.github.mohamed.sallam.awb.App;
 import io.github.mohamed.sallam.awb.R;
 import io.github.mohamed.sallam.awb.databinding.FragmentUpdateGroupBinding;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
-import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 import io.github.mohamed.sallam.awb.screen.adapter.AppsAdapter;
 
 /**
@@ -61,18 +58,15 @@ public class UpdateGroupFragment extends Fragment {
                                                         (UUID) getArguments().get("UUID")
         );
         AppsAdapter appsAdapter = new AppsAdapter(getActivity().getApplicationContext()
-                , new AppsAdapter.OnAppListener() {
-            @Override
-            public void onClick(App app) {
-                if (app.isSelected()){
-                     updateGroupViewModel.blockApp(app.getPackageName());
-                     app.setSelected(false);
-                } else {
-                    updateGroupViewModel.allowApp(app.getPackageName());
-                    app.setSelected(true);
-                }
-            }
-        });
+                , app -> {
+                    if (app.isSelected()){
+                         updateGroupViewModel.blockApp(app.getPackageName());
+                         app.setSelected(false);
+                    } else {
+                        updateGroupViewModel.allowApp(app.getPackageName());
+                        app.setSelected(true);
+                    }
+                });
         updateGroupViewModel.getWhitelistedApps().observe(getViewLifecycleOwner(),
                 new Observer<List<WhitelistedApp>>() {
             @Override
@@ -90,12 +84,7 @@ public class UpdateGroupFragment extends Fragment {
                 appsAdapter.notifyDataSetChanged();
             }
         });
-        updateGroupViewModel.getApps().observe(getViewLifecycleOwner(), new Observer<List<App>>() {
-            @Override
-            public void onChanged(List<App> apps) {
-                appsAdapter.submitList(apps);
-            }
-        });
+        updateGroupViewModel.getApps().observe(getViewLifecycleOwner(), apps -> appsAdapter.submitList(apps));
         binding.appsRecyclerView.setAdapter(appsAdapter);
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
