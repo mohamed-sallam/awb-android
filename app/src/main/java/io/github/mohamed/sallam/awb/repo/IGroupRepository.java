@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 import java.util.UUID;
 
-import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.entity.Group;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 
 /**

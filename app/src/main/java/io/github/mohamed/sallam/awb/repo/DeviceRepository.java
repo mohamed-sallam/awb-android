@@ -1,16 +1,9 @@
 package io.github.mohamed.sallam.awb.repo;
 
 import android.app.Application;
-import android.os.Build;
 
-
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
-import androidx.lifecycle.Observer;
 
-import java.net.Inet4Address;
-import java.net.UnknownHostException;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +11,6 @@ import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.DeviceDao;
 import io.github.mohamed.sallam.awb.db.dao.GroupDao;
 import io.github.mohamed.sallam.awb.db.entity.Device;
-import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 
 /**

@@ -14,14 +14,14 @@ import java.net.UnknownHostException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import io.github.mohamed.sallam.awb.db.dao.WhitelistedAppDao;
 import io.github.mohamed.sallam.awb.db.dao.DetoxPeriodDao;
 import io.github.mohamed.sallam.awb.db.dao.DeviceDao;
 import io.github.mohamed.sallam.awb.db.dao.GroupDao;
-import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
+import io.github.mohamed.sallam.awb.db.dao.WhitelistedAppDao;
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
 import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.entity.Group;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 
 /**
  * Our internal database.

@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.R;
-import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.databinding.GroupItemBinding;
+import io.github.mohamed.sallam.awb.db.entity.Group;
 
 /**
  * Adapter for groups `RecyclerView`.

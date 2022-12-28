@@ -9,10 +9,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.UserDatabase;
-import io.github.mohamed.sallam.awb.db.dao.WhitelistedAppDao;
 import io.github.mohamed.sallam.awb.db.dao.GroupDao;
-import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
+import io.github.mohamed.sallam.awb.db.dao.WhitelistedAppDao;
 import io.github.mohamed.sallam.awb.db.entity.Group;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 
 /**

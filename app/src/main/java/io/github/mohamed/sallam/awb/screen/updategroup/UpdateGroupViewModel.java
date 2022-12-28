@@ -1,5 +1,6 @@
-package io.github.mohamed.sallam.awb.view.updategroup;
+package io.github.mohamed.sallam.awb.screen.updategroup;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -17,6 +18,7 @@ import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.App;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
+import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 import io.github.mohamed.sallam.awb.repo.GroupRepository;
 
 /**

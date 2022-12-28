@@ -9,13 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.fragment.app.FragmentManager;
-
-import java.util.Objects;
 
 import io.github.mohamed.sallam.awb.R;
 

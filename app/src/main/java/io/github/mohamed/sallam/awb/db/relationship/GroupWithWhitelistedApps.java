@@ -5,8 +5,8 @@ import androidx.room.Relation;
 
 import java.util.List;
 
-import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.entity.Group;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 
 /**
  * `GroupWithWhitelistedApps` class is a relationship between two entities `Group`
