@@ -23,11 +23,13 @@ import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.screen.adapter.AppsAdapter;
 
 /**
- * Initialize the contents of the Activity's standard options menu.
+ * class `UpdateGroupFragment` displays the whitelisted applications of a
+ * specific group. User can select and unselect applications on the group through
+ * this fragment. User can search for a specific application, then finally save
+ * the changes.
  *
  * @author Yousef Ahmed
  * @author Abdurrahman Salah
- *
  */
 public class UpdateGroupFragment extends Fragment {
 
