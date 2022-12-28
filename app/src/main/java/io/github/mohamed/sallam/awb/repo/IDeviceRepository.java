@@ -49,4 +49,5 @@ public interface IDeviceRepository extends IRepository<Device> {
      * @return list of devices with its groups as live data.
      */
     LiveData<List<DeviceWithGroups>> getAllWithGroups();  // TODO maybe deleted
+    LiveData<Device> getThisDevice();
 }

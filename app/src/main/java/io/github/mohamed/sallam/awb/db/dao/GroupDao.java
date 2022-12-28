@@ -50,7 +50,7 @@ public interface GroupDao {
      *
      * @return a live data of a selected group.
      */
-    @Query("SELECT * FROM groups_table WHERE uuid = :groupUuid ")
+    @Query("SELECT * FROM groups_table WHERE uuid = :groupUuid")
     LiveData<Group> get(UUID groupUuid);
 
     /**

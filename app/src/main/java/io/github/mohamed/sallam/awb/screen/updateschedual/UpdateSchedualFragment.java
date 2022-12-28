@@ -1,4 +1,4 @@
-package io.github.mohamed.sallam.awb.view.updateschedule;
+package io.github.mohamed.sallam.awb.screen.updateschedual;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
