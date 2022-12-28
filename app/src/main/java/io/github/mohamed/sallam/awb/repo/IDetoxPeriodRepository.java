@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData;
 
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
-import io.github.mohamed.sallam.awb.db.relationship.
-        DetoxPeriodAndGroupWithWhitelistedApps;
+import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
 
 /**
  * {@link IRepository}
@@ -30,29 +29,23 @@ public interface IDetoxPeriodRepository extends IRepository<DetoxPeriod> {
     /**
      * Gets detox periods by id as a live data.
      *
-     * @param id the blocking period id, is the unique identifier for the period.
-     *
      * @return Detox period from database by using `detoxPeriodDao`.
      */
-    LiveData<DetoxPeriod> get(Integer id);
+    LiveData<DetoxPeriod> get();
 
     /**
      * Gets detox-period with group using a relationship `DetoxPeriodAndGroup`.
      *
-     * @param id the blocking period id, is the unique identifier for the period.
-     *
      * @return live data detox period with a group specified to it.
      */
-    LiveData<DetoxPeriodAndGroup> getDetoxPeriodAndGroup(Integer id);
+    LiveData<DetoxPeriodAndGroup> getDetoxPeriodAndGroup();
 
     /**
      * Gets detox-period with group including its applications using
      * relationship `DetoxPeriodAndGroupWithWhitelistedApps`.
      *
-     * @param id the blocking period id, is the unique identifier for the period.
-     *
      * @return detox period for a group with its Whitelisted applications.
      */
     LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-    getAndGroupWithWhitelistedApps(Integer id);
+    getAndGroupWithWhitelistedApps();
 }

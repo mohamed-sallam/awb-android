@@ -13,17 +13,17 @@ import io.github.mohamed.sallam.awb.repo.IAggregateRoot;
 @TypeConverters({UuidConverter.class, TimestampConverter.class})
 @Entity(tableName = "detox_periods_table")
 public class DetoxPeriod extends DetoxSettings implements IAggregateRoot {
-	public Timestamp endDate;
+	// Fields
+	public Timestamp endDate = new Timestamp(0);
 
 	/**
 	 * Sets the period for which the phone is locked.
 	 *
-	 * @param period the period in minutes (i.e. 1 ---> 1minutes) in which the
-	 * phone is locked.
+	 * @param period the period in milliseconds in which the phone is locked.
 	 *
 	 * @author Mohamed Yehia
 	 */
 	public void setPeriod(long period) {
-		endDate.setTime(new Date().getTime() + period * 60_000);
+		endDate.setTime(new Date().getTime() + period);
 	}
 }

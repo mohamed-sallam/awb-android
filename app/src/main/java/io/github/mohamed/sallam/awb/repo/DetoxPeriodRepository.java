@@ -1,13 +1,17 @@
 package io.github.mohamed.sallam.awb.repo;
 
 import android.app.Application;
+
 import androidx.lifecycle.LiveData;
+
+import java.util.List;
+
 import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.DetoxPeriodDao;
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
-import io.github.mohamed.sallam.awb.db.relationship.
-        DetoxPeriodAndGroupWithWhitelistedApps;
+import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
 
 /**
  * {@inheritDoc}
@@ -19,6 +23,10 @@ import io.github.mohamed.sallam.awb.db.relationship.
  */
 public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     private final DetoxPeriodDao detoxPeriodDao;
+    private final LiveData<DetoxPeriodAndGroupWithWhitelistedApps> detoxPeriodAndGroupWithWhitelistedApps;
+    private final LiveData<DetoxPeriodAndGroup> detoxPeriodAndGroup;
+    private final LiveData<DetoxPeriod> detoxPeriod;
+    private LiveData<List<WhitelistedApp>> whitelistedAppsOfCurrentDetoxPeriod;
 
     /**
      * Instantiates an object from `detoxPeriodDao`.
@@ -30,6 +38,10 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     public DetoxPeriodRepository(Application application) {
         UserDatabase db = UserDatabase.getInstance(application);
         detoxPeriodDao = db.detoxPeriodDao();
+        detoxPeriodAndGroupWithWhitelistedApps = detoxPeriodDao.getAndGroupWithWhitelistedApps();
+        detoxPeriodAndGroup = detoxPeriodDao.getWithGroup();
+        detoxPeriod = detoxPeriodDao.get();
+        whitelistedAppsOfCurrentDetoxPeriod = detoxPeriodDao.getWhitelistedAppsOfCurrentDetoxPeriod();
     }
 
     /**
@@ -52,26 +64,28 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     /**
      * Deletes a specific detox period from database. We use it to remove detox
      * period for a specific group.
-     *
-     * @param id is the unique identifier for a detox period object to access it
-     * in database.
      */
-    public void delete(Integer id) {
+    public void delete() {
         UserDatabase.databaseWriteExecutor.execute(
-                () -> detoxPeriodDao.delete(id)
+                detoxPeriodDao::delete
         );
     }
 
-    public LiveData<DetoxPeriod> get(Integer id) {
-        return detoxPeriodDao.get(id);
+    public LiveData<DetoxPeriod> get() {
+        return detoxPeriod;
     }
 
-    public LiveData<DetoxPeriodAndGroup> getDetoxPeriodAndGroup(Integer id) {
-        return detoxPeriodDao.getWithGroup(id);
+    public LiveData<DetoxPeriodAndGroup>
+    getDetoxPeriodAndGroup() {
+        return detoxPeriodAndGroup;
     }
 
     public LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-    getAndGroupWithWhitelistedApps(Integer id) {
-        return detoxPeriodDao.getAndGroupWithWhitelistedApps(id);
+    getAndGroupWithWhitelistedApps() {
+        return detoxPeriodAndGroupWithWhitelistedApps;
+    }
+
+    public LiveData<List<WhitelistedApp>> getWhitelistedAppsOfCurrentDetoxPeriod() {
+        return whitelistedAppsOfCurrentDetoxPeriod;
     }
 }
