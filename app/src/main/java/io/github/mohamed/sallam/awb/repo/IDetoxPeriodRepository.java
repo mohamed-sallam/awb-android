@@ -8,8 +8,8 @@ import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhite
 
 public interface IDetoxPeriodRepository extends IRepository<DetoxPeriod> {
     void update(DetoxPeriod detoxPeriod);
-    LiveData<DetoxPeriod> get(Integer id);
-    LiveData<DetoxPeriodAndGroup> getDetoxPeriodAndGroup(Integer id);
+    LiveData<DetoxPeriod> get();
+    LiveData<DetoxPeriodAndGroup> getDetoxPeriodAndGroup();
     LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-    getAndGroupWithWhitelistedApps(Integer id);
+    getAndGroupWithWhitelistedApps();
 }

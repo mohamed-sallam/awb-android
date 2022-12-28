@@ -7,21 +7,17 @@ import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.App;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
-import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 import io.github.mohamed.sallam.awb.repo.GroupRepository;
 
 /**
@@ -78,7 +74,8 @@ public class UpdateGroupViewModel extends AndroidViewModel {
                         application.getPackageManager().getApplicationLabel(appInfo)
                         .toString(),
                         application.getPackageManager().getApplicationIcon(appInfo));
-                apps.add(app);
+                if (!app.getPackageName().equals(getApplication().getPackageName()))
+                    apps.add(app);
             }
         }
         return apps;

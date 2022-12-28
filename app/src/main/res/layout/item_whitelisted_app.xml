@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="appItem"
+            type="io.github.mohamed.sallam.awb.App" />
+    </data>
+    <LinearLayout
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/whitelistedAppIcon"
+            android:background="@{appItem.icon}"
+            tools:srcCompat="@tools:sample/avatars"
+            android:layout_width="48dp"
+            android:layout_height="48dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/whitelistedAppName"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:text="@{appItem.appName}"
+                android:textStyle="bold"/>
+            <TextView
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/whitelistedAppPackageName"
+                android:textSize="12sp"
+                android:text="@{appItem.packageName}"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

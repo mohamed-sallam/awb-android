@@ -4,18 +4,29 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
+import java.util.List;
+
 import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.DetoxPeriodDao;
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
 
 public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     private final DetoxPeriodDao detoxPeriodDao;
+    private final LiveData<DetoxPeriodAndGroupWithWhitelistedApps> detoxPeriodAndGroupWithWhitelistedApps;
+    private final LiveData<DetoxPeriodAndGroup> detoxPeriodAndGroup;
+    private final LiveData<DetoxPeriod> detoxPeriod;
+    private LiveData<List<WhitelistedApp>> whitelistedAppsOfCurrentDetoxPeriod;
 
     public DetoxPeriodRepository(Application application) {
         UserDatabase db = UserDatabase.getInstance(application);
         detoxPeriodDao = db.detoxPeriodDao();
+        detoxPeriodAndGroupWithWhitelistedApps = detoxPeriodDao.getAndGroupWithWhitelistedApps();
+        detoxPeriodAndGroup = detoxPeriodDao.getWithGroup();
+        detoxPeriod = detoxPeriodDao.get();
+        whitelistedAppsOfCurrentDetoxPeriod = detoxPeriodDao.getWhitelistedAppsOfCurrentDetoxPeriod();
     }
 
     // DetoxPeriodDao
@@ -31,24 +42,27 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
         );
     }
 
-    public void delete(Integer id) {
+    public void delete() {
         UserDatabase.databaseWriteExecutor.execute(
-                () -> detoxPeriodDao.delete(id)
+                detoxPeriodDao::delete
         );
     }
 
-    public LiveData<DetoxPeriod> get(Integer id) {
-        return detoxPeriodDao.get(id);
+    public LiveData<DetoxPeriod> get() {
+        return detoxPeriod;
     }
 
     public LiveData<DetoxPeriodAndGroup>
-    getDetoxPeriodAndGroup(Integer id) {
-        return detoxPeriodDao.getWithGroup(id);
+    getDetoxPeriodAndGroup() {
+        return detoxPeriodAndGroup;
     }
 
     public LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-    getAndGroupWithWhitelistedApps(Integer id) {
-        return detoxPeriodDao.getAndGroupWithWhitelistedApps(id);
+    getAndGroupWithWhitelistedApps() {
+        return detoxPeriodAndGroupWithWhitelistedApps;
     }
 
+    public LiveData<List<WhitelistedApp>> getWhitelistedAppsOfCurrentDetoxPeriod() {
+        return whitelistedAppsOfCurrentDetoxPeriod;
+    }
 }
