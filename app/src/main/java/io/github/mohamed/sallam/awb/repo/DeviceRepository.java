@@ -50,21 +50,11 @@ public class DeviceRepository implements IDeviceRepository {
      * @param device object to be inserted.
      */
     public void insert(Device device) {
-        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            @Override
-            public void run(){
-                deviceDao.insert(device);
-            }
-        });
+        UserDatabase.databaseWriteExecutor.execute(() -> deviceDao.insert(device));
     }
 
     public void update(Device device) {
-        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            @Override
-            public void run(){
-                deviceDao.update(device);
-            }
-        });
+        UserDatabase.databaseWriteExecutor.execute(() -> deviceDao.update(device));
     }
 
     /**
@@ -75,22 +65,14 @@ public class DeviceRepository implements IDeviceRepository {
      * access it in database.
      */
     public void delete(UUID deviceUuid) {
-        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            @Override
-            public void run(){
-                deviceDao.delete(deviceUuid);
-            }
-        });
+        UserDatabase.databaseWriteExecutor.execute(() -> deviceDao.delete(deviceUuid));
     }
 
     public void generateUuid(UUID oldDeviceUuid) {
-        UserDatabase.databaseWriteExecutor.execute(new Runnable(){
-            @Override
-            public void run(){
-                UUID newDeviceUuid = UUID.randomUUID();
-                groupDao.replaceDeviceUuid(oldDeviceUuid, newDeviceUuid);
-                deviceDao.setUuid(oldDeviceUuid, newDeviceUuid);
-            }
+        UserDatabase.databaseWriteExecutor.execute(() -> {
+            UUID newDeviceUuid = UUID.randomUUID();
+            groupDao.replaceDeviceUuid(oldDeviceUuid, newDeviceUuid);
+            deviceDao.setUuid(oldDeviceUuid, newDeviceUuid);
         });
     }
 

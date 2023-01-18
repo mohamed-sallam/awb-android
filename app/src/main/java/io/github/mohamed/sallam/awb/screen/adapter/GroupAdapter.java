@@ -21,8 +21,6 @@ import io.github.mohamed.sallam.awb.db.entity.Group;
 
 /**
  * Adapter for groups `RecyclerView`.
- *
- * @author Abdurrahman Salah
  */
 public class GroupAdapter extends ListAdapter<Group, GroupAdapter.GroupViewHolder> {
     private UUID selectedGroupUuid;
@@ -101,14 +99,15 @@ public class GroupAdapter extends ListAdapter<Group, GroupAdapter.GroupViewHolde
 
         public void bind(Group group) {
             binding.setGroup(group);
+            binding.groupIconImageView.setBackgroundColor((group.uuid.hashCode() & 0xFFFFFF) | (0xFF << 24));
         }
 
         @Override
         public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
             contextMenu.add(Menu.NONE, R.id.renameGroupOption,
                          0, R.string.rename);
-            contextMenu.add(Menu.NONE, R.id.duplicateGroupOption,
-                         1, R.string.duplicate);
+//            contextMenu.add(Menu.NONE, R.id.duplicateGroupOption,
+//                         1, R.string.duplicate);
             contextMenu.add(Menu.NONE, R.id.editGroupOption,
                          2, R.string.edit);
             contextMenu.add(Menu.NONE, R.id.removeGroupOption,

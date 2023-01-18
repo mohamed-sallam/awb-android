@@ -161,16 +161,6 @@ public class LockService extends Service {
         super.onDestroy();
     }
 
-    public void decreaseDetoxPeriod(long subtractedTime) {
-//        subtractedTime = -Math.abs(subtractedTime);
-//        final DetoxPeriod detoxPeriod = Objects.requireNonNull(
-//                detoxPeriodAndGroupWithWhitelistedApps
-//                        .getValue()
-//        ).detoxPeriodAndGroup.detoxPeriod;
-//        detoxPeriod.endDate.setTime(detoxPeriod.endDate.getTime() + subtractedTime);
-//        detoxPeriodRepository.update(detoxPeriod);
-    }
-
     public String getForegroundAppPackageName() {
         String currentAppPackageName = "Unknown";
         if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {

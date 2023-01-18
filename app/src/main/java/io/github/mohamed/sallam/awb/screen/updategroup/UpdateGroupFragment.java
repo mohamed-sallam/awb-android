@@ -29,12 +29,11 @@ import io.github.mohamed.sallam.awb.screen.adapter.AppsAdapter;
  * the changes.
  *
  * @author Yousef Ahmed
- * @author Abdurrahman Salah
  */
 public class UpdateGroupFragment extends Fragment {
-
     private FragmentUpdateGroupBinding binding;
     private UpdateGroupViewModel updateGroupViewModel;
+
     /**
      * Initialize the contents of the Activity's standard options menu.
      *
@@ -70,48 +69,34 @@ public class UpdateGroupFragment extends Fragment {
                     }
                 });
         updateGroupViewModel.getWhitelistedApps().observe(getViewLifecycleOwner(),
-                new Observer<List<WhitelistedApp>>() {
-            @Override
-            public void onChanged(List<WhitelistedApp> whitelistedApps) {
-                List<App> newList = new ArrayList<>(appsAdapter.getCurrentList());
-                for (App app: newList) {
-                    for (WhitelistedApp whitelistedApp: whitelistedApps) {
-                        if (whitelistedApp.packageName.equals(app.getPackageName())) {
-                            app.setSelected(true);
-                            break;
+                whitelistedApps -> {
+                    List<App> newList = new ArrayList<>(appsAdapter.getCurrentList());
+                    for (App app: newList) {
+                        for (WhitelistedApp whitelistedApp: whitelistedApps) {
+                            if (whitelistedApp.packageName.equals(app.getPackageName())) {
+                                app.setSelected(true);
+                                break;
+                            }
                         }
                     }
-                }
-                appsAdapter.submitList(newList);
-                appsAdapter.notifyDataSetChanged();
-            }
-        });
+                    appsAdapter.submitList(newList);
+                    appsAdapter.notifyDataSetChanged();
+                });
         updateGroupViewModel.getApps().observe(getViewLifecycleOwner(), apps -> appsAdapter.submitList(apps));
         binding.appsRecyclerView.setAdapter(appsAdapter);
-        binding.saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateGroupViewModel.save();
-                updateGroupViewModel.navigateBack.setValue(true);
-            }
+        binding.saveButton.setOnClickListener(v -> {
+            updateGroupViewModel.save();
+            updateGroupViewModel.navigateBack.setValue(true);
         });
         updateGroupViewModel.navigateBack.observe(getViewLifecycleOwner(),
-                new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean navigate) {
-                if (navigate) {
-                    Navigation.findNavController(binding.getRoot()).
-                            navigate(R.id.action_updateGroupFragment_to_homeFragment);
-                    updateGroupViewModel.resetNavigation();
-                }
-            }
-        });
-        binding.cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateGroupViewModel.navigateBack.setValue(true);
-            }
-        });
+                navigate -> {
+                    if (navigate) {
+                        Navigation.findNavController(binding.getRoot()).
+                                navigate(R.id.action_updateGroupFragment_to_homeFragment);
+                        updateGroupViewModel.resetNavigation();
+                    }
+                });
+        binding.cancelButton.setOnClickListener(v -> updateGroupViewModel.navigateBack.setValue(true));
         return binding.getRoot();
     }
 }
