@@ -2,10 +2,10 @@
 <h2 align="center"><b>Awb</b></h2>
 <h4 align="center">A free and open-source Android app to quit digital addiction.</h4>
 
-<p align="center"><a href="https://github.com/mohamed-sallam/awb-android/releases/"><img src="https://raw.githubusercontent.com/VishnuSanal/Quotes/master/Screenshots/get-it-on-github.svg" alt="Get it on GitHub" height=80/></a></p>
+<p align="center"><a href="https://github.com/mohamed-sallam/awb-android-prototype/releases/"><img src="https://raw.githubusercontent.com/VishnuSanal/Quotes/master/Screenshots/get-it-on-github.svg" alt="Get it on GitHub" height=80/></a></p>
 
 <p align="center">
-<a href="https://github.com/mohamed-sallam/awb-android/releases/" alt="GitHub release"><img src="https://img.shields.io/badge/release-v1.0.0-blue" ></a>
+<a href="https://github.com/mohamed-sallam/awb-android-prototype/releases/" alt="GitHub release"><img src="https://img.shields.io/badge/release-v1.0.0-blue" ></a>
 <a href="https://www.mozilla.org/en-US/MPL/2.0/" alt="License: MPLv2"><img src="https://img.shields.io/badge/Licenses-MPL v2-blue"></a>
 </p>
 <hr>
