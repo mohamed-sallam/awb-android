@@ -5,7 +5,7 @@
 <p align="center"><a href="https://github.com/mohamed-sallam/awb-android/releases/"><img src="https://raw.githubusercontent.com/VishnuSanal/Quotes/master/Screenshots/get-it-on-github.svg" alt="حمّله من جت هب" height=80/></a></p>
 
 <p align="center">
-<a href="https://github.com/mohamed-sallam/awb-android/releases/" alt="GitHub release"><img src="https://img.shields.io/badge/ﺭﺍﺪﺻﻹﺍ-v1.0.0-blue" ></a>
+<a href="https://github.com/mohamed-sallam/awb-android-prototype/releases/" alt="GitHub release"><img src="https://img.shields.io/badge/ﺭﺍﺪﺻﻹﺍ-v1.0.0-blue" ></a>
 <a href="https://www.mozilla.org/en-US/MPL/2.0/" alt="الرخصة: MPLv2"><img src="https://img.shields.io/badge/ﺔﺼﺧﺮﻟﺍ-MPL v2-blue"></a>
 </p>
 <hr>
