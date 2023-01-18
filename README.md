@@ -2,7 +2,7 @@
 <h2 align="center"><b>أَوْب</b></h2>
 <h4 align="center">تطبيق أندرويد حر ومفتوح المصدر للإقلاع عن الإدمان الرقمي.</h4>
 
-<p align="center"><a href="https://github.com/mohamed-sallam/awb-android/releases/"><img src="https://raw.githubusercontent.com/VishnuSanal/Quotes/master/Screenshots/get-it-on-github.svg" alt="حمّله من جت هب" height=80/></a></p>
+<p align="center"><a href="https://github.com/mohamed-sallam/awb-android-prototype/releases/"><img src="https://raw.githubusercontent.com/VishnuSanal/Quotes/master/Screenshots/get-it-on-github.svg" alt="حمّله من جت هب" height=80/></a></p>
 
 <p align="center">
 <a href="https://github.com/mohamed-sallam/awb-android-prototype/releases/" alt="GitHub release"><img src="https://img.shields.io/badge/ﺭﺍﺪﺻﻹﺍ-v1.0.0-blue" ></a>
