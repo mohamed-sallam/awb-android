@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,6 +36,16 @@ import io.github.mohamed.sallam.awb.screen.adapter.GroupAdapter;
 
 
 /**
+ * Class `HomeFragment` displays user's devices and their groups of applications.
+ * We can choose the device we want to lock. We can select which group in our
+ * devices to lock for a specific period of time. We offer some functionalities
+ * for the user on groups like (Rename - Duplicate - Edit - Remove), he could
+ * access them by right-click on the group. Users can determine the period of
+ * the locking in the home fragment, finally user can apply the locking by the
+ * lock button.
+ *
+ * A simple {@link Fragment} subclass.
+ *
  * @author Yousef Ahmed
  * @author Mohamed Sallam
  */
@@ -74,71 +83,45 @@ public class HomeFragment extends Fragment {
         updateGroupNameDialog = new UpdateGroupNameDialog();
         binding.minutePicker.setMinValue(0);
         binding.minutePicker.setMaxValue(59);
-        binding.minutePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker numberPicker, int oldValue, int newValue) {
-                duration -= (long) oldValue * 60_000;
-                duration += (long) newValue * 60_000;
-            }
+        binding.minutePicker.setOnValueChangedListener((numberPicker, oldValue, newValue) -> {
+            duration -= (long) oldValue * 60_000;
+            duration += (long) newValue * 60_000;
         });
 
         binding.hourPicker.setMinValue(0);
         binding.hourPicker.setMaxValue(24);
-        binding.hourPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker numberPicker, int oldValue, int newValue) {
-                duration -= (long) oldValue * 3_600_000;
-                duration += (long) newValue * 3_600_000;
-            }
+        binding.hourPicker.setOnValueChangedListener((numberPicker, oldValue, newValue) -> {
+            duration -= (long) oldValue * 3_600_000;
+            duration += (long) newValue * 3_600_000;
         });
-        binding.addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateGroupNameDialog.setListener(new UpdateGroupNameDialog.GroupNameDialogListener() {
-                    @Override
-                    public void onSaveGroupName(String groupName) {
-                        viewModel.insertGroup(groupName, thisDevice.uuid);
-                    }
-                });
-                updateGroupNameDialog.setTitle(getString(R.string.add_group));
-                openDialog();
-            }
+        binding.addButton.setOnClickListener(v -> {
+            updateGroupNameDialog.setListener(groupName -> viewModel.insertGroup(groupName, thisDevice.uuid));
+            updateGroupNameDialog.setTitle(getString(R.string.add_group));
+            openDialog();
         });
-        viewModel.getThisDevice().observe(getViewLifecycleOwner(), new Observer<Device>() {
-            @Override
-            public void onChanged(Device device) {
-                if (device == null) {
-                    Toast.makeText(getActivity(), "yooooooo, no device no life :(", Toast.LENGTH_SHORT).show();
-                } else {
-                    thisDevice = device;
-                }
+        viewModel.getThisDevice().observe(getViewLifecycleOwner(), device -> {
+            if (device == null) {
+                Toast.makeText(getActivity(), "yooooooo, no device no life :(", Toast.LENGTH_SHORT).show();
+            } else {
+                thisDevice = device;
             }
         });
         groupAdapter = new GroupAdapter();
         binding.recyclerView.setAdapter(groupAdapter);
         registerForContextMenu(binding.recyclerView);
         binding.recyclerView.setOnCreateContextMenuListener(this);
-        viewModel.getAllDevicesWithGroups().observe(getViewLifecycleOwner(), new Observer<List<DeviceWithGroups>>() {
-            @Override
-            public void onChanged(List<DeviceWithGroups> deviceWithGroups) {
-                groupAdapter.submitList(deviceWithGroups.get(0).groups);
-            }
-        });
+        viewModel.getAllDevicesWithGroups().observe(getViewLifecycleOwner(), deviceWithGroups -> groupAdapter.submitList(deviceWithGroups.get(0).groups));
 
-        binding.lockButton.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View view) {
-                if (isUsageStatGranted(requireContext().getApplicationContext())) {
-                    Intent lockServiceIntent = new Intent(getActivity(), LockService.class);
-                    lockServiceIntent.putExtra("duration", duration);
-                    viewModel.insertDetoxPeriod(duration, groupAdapter.getSelectedGroupUuid());
-                    requireActivity().startService(lockServiceIntent);
-                } else {
-                    startActivity(
-                            new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-                    );
-                }
+        binding.lockButton.setOnClickListener(view -> {
+            if (isUsageStatGranted(requireContext().getApplicationContext())) {
+                Intent lockServiceIntent = new Intent(getActivity(), LockService.class);
+                lockServiceIntent.putExtra("duration", duration);
+                viewModel.insertDetoxPeriod(duration, groupAdapter.getSelectedGroupUuid());
+                requireActivity().startService(lockServiceIntent);
+            } else {
+                startActivity(
+                        new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+                );
             }
         });
 
@@ -160,12 +143,7 @@ public class HomeFragment extends Fragment {
         }
         switch (item.getItemId()) {
             case R.id.renameGroupOption:
-                updateGroupNameDialog.setListener(new UpdateGroupNameDialog.GroupNameDialogListener() {
-                    @Override
-                    public void onSaveGroupName(String groupName) {
-                        viewModel.renameGroup(groupUuid, groupName);
-                    }
-                });
+                updateGroupNameDialog.setListener(groupName -> viewModel.renameGroup(groupUuid, groupName));
                 updateGroupNameDialog.setTitle(getString(R.string.rename_group));
                 openDialog();
                 break;

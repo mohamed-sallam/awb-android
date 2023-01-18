@@ -9,13 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
-import androidx.fragment.app.FragmentManager;
-
-import java.util.Objects;
 
 import io.github.mohamed.sallam.awb.R;
 
@@ -47,12 +42,7 @@ public class UpdateGroupNameDialog extends AppCompatDialogFragment {
 
         builder.setView(view)
                 .setTitle(getTitle())
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dismiss();
-                    }
-                })
+                .setNegativeButton("Cancel", (dialog, which) -> dismiss())
                 .setPositiveButton("Save", null);
 
         return builder.create();
@@ -63,15 +53,12 @@ public class UpdateGroupNameDialog extends AppCompatDialogFragment {
         super.onResume();
         final AlertDialog dialog = (AlertDialog)getDialog();
         if (dialog != null) {
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (editTextGroupName.getText().length() == 0) {
-                        editTextGroupName.setError("Group name is empty");
-                    } else {
-                        listener.onSaveGroupName(editTextGroupName.getText().toString());
-                        dismiss();
-                    }
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+                if (editTextGroupName.getText().length() == 0) {
+                    editTextGroupName.setError("Group name is empty");
+                } else {
+                    listener.onSaveGroupName(editTextGroupName.getText().toString());
+                    dismiss();
                 }
             });
         }

@@ -10,7 +10,7 @@ public class DetoxSchedule extends DetoxSettings {
 	private Timestamp endDate;
 	private RepeatSchedule repeatSchedule;
 	public DetoxSchedule() {
-		// implementation
+
 	}
 
 	/**
@@ -99,14 +99,5 @@ public class DetoxSchedule extends DetoxSettings {
 	 */
 	public RepeatSchedule getRepeatSchedule() {
 		return repeatSchedule;
-	}
-
-	/**
-	 * Locks the phone according to detox setting.
-	 *
-	 * @author Mohamed Yehia
-	 */
-	public void Lock() {
-		// implementation
 	}
 }

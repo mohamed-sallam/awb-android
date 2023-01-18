@@ -14,8 +14,8 @@ import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 import io.github.mohamed.sallam.awb.repo.IAggregateRoot;
 
 /**
- * Class Device has methods to add and delete whitelisted apps groups for the device
- * and generate a unique id for the device.
+ * Class `Device` to define the structure of a device object. It represents a table
+ * on our database contains all devices created on the application by the user
  *
  * @author Abdalrhman Hemida
  * @author Mohamed Sallam
@@ -40,6 +40,8 @@ public class Device implements IAggregateRoot {
      * Enum to optimize the interactions with operating system names by
      * assigning constant names to a group of numeric integer values. It makes
      * constant values more readable.
+     *
+     * @see
      *
      * @author Abdalrhman Hemida
      */

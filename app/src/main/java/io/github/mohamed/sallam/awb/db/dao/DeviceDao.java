@@ -29,20 +29,41 @@ public interface DeviceDao {
     @Update
     void update(Device device);
 
-
+    /**
+     * Gets the uuid of a device to remove it from the devices table.
+     *
+     * @param deviceUuid represents the uuid of a device to be removed.
+     */
     @Query("DELETE FROM devices_table WHERE uuid=:deviceUuid")
     void delete(UUID deviceUuid);
 
+    /**
+     * Set a new uuid for a device and update the devices table.
+     *
+     * @param oldUuid represents the device uuid before update.
+     *
+     * @param newUuid represents the device uuid after update.
+     */
     @Query("UPDATE devices_table SET uuid=:newUuid WHERE uuid=:oldUuid")
     void setUuid(UUID oldUuid, UUID newUuid);
 
+    /**
+     * Gets all devices from the devices table.
+     *
+     * @return a live data of the list of devices from devices table.
+     */
     @Query("SELECT * FROM devices_table")
     LiveData<List<Device>> getAll();
 
-    @Query("SELECT * FROM devices_table WHERE thisDevice LIMIT 1")
-    LiveData<Device> getThisDevice();
-
+    /**
+     * Gets all devices with its groups from the devices table.
+     *
+     * @return a live data of the list of devices with its groups from devices table.
+     */
     @Transaction
     @Query("SELECT * FROM devices_table")
     LiveData<List<DeviceWithGroups>> getAllWithGroups();
+
+    @Query("SELECT * FROM devices_table WHERE thisDevice LIMIT 1")
+    LiveData<Device> getThisDevice();
 }

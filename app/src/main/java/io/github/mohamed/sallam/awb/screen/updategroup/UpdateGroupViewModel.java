@@ -18,13 +18,17 @@ import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.App;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
+import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 import io.github.mohamed.sallam.awb.repo.GroupRepository;
 
 /**
- * UpdateGroupFragment ViewModel. It uses Command Pattern to queue applications
- * blocking and whitelisting til user save these command by clicking <save> or
- * discard them by clicking <cancel>.
- * Source: refactoring.guru/design-patterns/command
+ * Update group ViewModel is responsible for preparing, holding and managing
+ * the data used in update group fragment.
+ * ViewModel uses Command Pattern to queue applications blocking and whitelisting
+ * till user saves these command by clicking <save> or discard them by clicking
+ * <cancel>.
+ *
+ * @see <a href =”https://refactoring.guru/design-patterns/command”>Command</a>
  *
  * @author Mohamed Sallam
  */
@@ -46,6 +50,15 @@ public class UpdateGroupViewModel extends AndroidViewModel {
 
     MutableLiveData<Boolean> navigateBack = new MutableLiveData<Boolean>(false);
 
+    /**
+     * Instantiation of required repositories in order to access the
+     * required methods to hande the data used in `UpdateGroupFragment`.
+     *
+     * @param application is the context where the `Application` class in Android
+     * is the base class within an Android app that contains all other.
+     * @param groupUuid unique identifier for the group we are dealing with.
+     *
+     */
     public UpdateGroupViewModel(@NonNull Application application, UUID groupUuid) {
         super(application);
         this.application = application;
@@ -58,6 +71,15 @@ public class UpdateGroupViewModel extends AndroidViewModel {
 
     public void resetNavigation() {
         navigateBack = null;
+    }
+
+    /**
+     * Gets a group of whitelisted applications specified by the groupUuid
+     *
+     * @return group with its applications as live data.
+     */
+    public LiveData<GroupWithWhitelistedApps> getGroupWithWhitelistedApps() {
+        return groupRepository.getWithWhitelistedApps(groupUuid);
     }
 
     private List<App> getAllApps() {
@@ -81,6 +103,12 @@ public class UpdateGroupViewModel extends AndroidViewModel {
         return apps;
     }
 
+    /**
+     * Allows a specific application on a group to be not blocked on this group
+     * fragment by simply inserting the application as whitelisted app.
+     *
+     * @param packageName is the name of the application.
+     */
     public void allowApp(String packageName) {
         AppCommand command = appCommands.get(packageName);
         if (command == null) {
@@ -99,6 +127,12 @@ public class UpdateGroupViewModel extends AndroidViewModel {
             appCommands.remove(packageName);
     }
 
+    /**
+     * Blocks a specific application on a group by simply unlisting it from the
+     * whitelist application table
+     *
+     * @param packageName the name of a the application.
+     */
     public void blockApp(String packageName) {
         AppCommand command = appCommands.get(packageName);
         if (command == null) {
@@ -114,11 +148,19 @@ public class UpdateGroupViewModel extends AndroidViewModel {
             appCommands.remove(packageName);
     }
 
+    /**
+     * Saves the changes done by the user on the update group fragment.
+     */
     public void save() {
         for (AppCommand appCommand : appCommands.values())
             appCommand.execute();
     }
 
+    /**
+     * Uses the Command Pattern to save commands, done by the user for the
+     * whitelisted applications till the user confirm the operation, command, to
+     * be done or refuse it. Commands done by the user (e.g. add and delete).
+     */
     private abstract class AppCommand {
         protected String packageName;
         protected Boolean isAllowCommand;

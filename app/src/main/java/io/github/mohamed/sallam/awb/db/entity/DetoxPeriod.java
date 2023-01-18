@@ -16,7 +16,6 @@ public class DetoxPeriod extends DetoxSettings implements IAggregateRoot {
 	// Fields
 	public Timestamp endDate = new Timestamp(0);
 
-	// Methods
 	/**
 	 * Sets the period for which the phone is locked.
 	 *
@@ -26,14 +25,5 @@ public class DetoxPeriod extends DetoxSettings implements IAggregateRoot {
 	 */
 	public void setPeriod(long period) {
 		endDate.setTime(new Date().getTime() + period);
-	}
-
-	/**
-	 * Locks the phone according to detox setting.
-	 *
-	 * @author Mohamed Yehia
-	 */
-	public void Lock() {
-		// implementation
 	}
 }

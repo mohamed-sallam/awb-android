@@ -33,7 +33,11 @@ import java.sql.Timestamp;
  *   }
  * });
  * ```
- * Source: stackoverflow.com/a/27604405
+ *
+ *  @see <a href =”
+ *  https://stackoverflow.com/questions/27603813/convert-enum-type-from-rust-to-java/27604405#27604405
+ *  ”>Convert enum type from Rust to Java</a>
+ *
  * @author Mohamed Sallam
  */
 public interface Duration {

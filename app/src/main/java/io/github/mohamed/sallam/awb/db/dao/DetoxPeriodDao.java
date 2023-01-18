@@ -28,16 +28,35 @@ public interface DetoxPeriodDao {
     @Update
     void update(DetoxPeriod detoxPeriod);
 
+    /**
+     * Gets the id of detox period to remove it from the detox periods table.
+     */
     @Query("DELETE FROM detox_periods_table")
     void delete();
 
+    /**
+     * Gets the id of a detox period.
+     *
+     * @return live data of detox period from detox periods table.
+     */
     @Query("SELECT * FROM detox_periods_table WHERE id = (SELECT MAX(id) FROM detox_periods_table) LIMIT 1")
     LiveData<DetoxPeriod> get();
 
+    /**
+     * Gets the id of a detox period.
+     *
+     * @return live data of detox period with its group from detox periods table.
+     */
     @Transaction
     @Query("SELECT * FROM detox_periods_table WHERE id = (SELECT MAX(id) FROM detox_periods_table) LIMIT 1")
     LiveData<DetoxPeriodAndGroup> getWithGroup();
 
+    /**
+     * Gets the id of a detox period.
+     *
+     * @return live data of the detox period and its group with whitelisted
+     * apps from detox periods table.
+     */
     @Transaction
     @Query("SELECT * FROM detox_periods_table WHERE id = (SELECT MAX(id) FROM detox_periods_table) LIMIT 1")
     LiveData<DetoxPeriodAndGroupWithWhitelistedApps>

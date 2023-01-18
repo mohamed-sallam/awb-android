@@ -1,6 +1,7 @@
 package io.github.mohamed.sallam.awb.screen.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,6 @@ import io.github.mohamed.sallam.awb.R;
 import io.github.mohamed.sallam.awb.databinding.ItemAppBinding;
 
 public class AppsAdapter extends ListAdapter<App, AppsAdapter.ViewHolder> {
-
     private final OnAppListener onAppListener;
     private final Context context;
 
@@ -53,12 +53,9 @@ public class AppsAdapter extends ListAdapter<App, AppsAdapter.ViewHolder> {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
             this.onAppListener = onAppListener;
-            itemBinding.item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onAppListener.onClick(itemBinding.getAppItem());
-                    validateBackgroundColor(itemBinding.getAppItem());
-                }
+            itemBinding.item.setOnClickListener(v -> {
+                onAppListener.onClick(itemBinding.getAppItem());
+                validateBackgroundColor(itemBinding.getAppItem());
             });
         }
 
@@ -67,8 +64,7 @@ public class AppsAdapter extends ListAdapter<App, AppsAdapter.ViewHolder> {
                 itemBinding.item.setBackgroundColor(context.getResources()
                         .getColor(R.color.flat_green));
             } else {
-                itemBinding.item.setBackgroundColor(context.getResources()
-                        .getColor(R.color.flat_red));
+                itemBinding.item.setBackgroundColor(Color.TRANSPARENT);
             }
         }
 
