@@ -18,5 +18,5 @@ package io.github.mohamed.sallam.awb.repo;
  *
  * @author Abdalrhman Hemida
  */
-public interface IAggregateRoot {
+public interface AggregateRoot {
 }

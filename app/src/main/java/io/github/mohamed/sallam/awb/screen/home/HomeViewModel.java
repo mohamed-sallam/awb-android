@@ -13,9 +13,9 @@ import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
 import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
-import io.github.mohamed.sallam.awb.repo.DetoxPeriodRepository;
-import io.github.mohamed.sallam.awb.repo.DeviceRepository;
-import io.github.mohamed.sallam.awb.repo.GroupRepository;
+import io.github.mohamed.sallam.awb.repo.DetoxPeriodRepositoryImpl;
+import io.github.mohamed.sallam.awb.repo.DeviceRepositoryImpl;
+import io.github.mohamed.sallam.awb.repo.GroupRepositoryImpl;
 
 /**
  * Home fragment ViewModel is responsible for preparing, holding and managing
@@ -28,9 +28,9 @@ import io.github.mohamed.sallam.awb.repo.GroupRepository;
  * @author Yousef Ahmed
  */
 public class HomeViewModel extends AndroidViewModel {
-    private DeviceRepository      deviceRepository;
-    private GroupRepository       groupRepository;
-    private DetoxPeriodRepository detoxPeriodRepository;
+    private DeviceRepositoryImpl deviceRepository;
+    private GroupRepositoryImpl groupRepository;
+    private DetoxPeriodRepositoryImpl detoxPeriodRepository;
     private LiveData<Device> thisDevice;
 
     /**
@@ -42,9 +42,9 @@ public class HomeViewModel extends AndroidViewModel {
      */
     public HomeViewModel(@NonNull Application application) {
         super(application);
-        deviceRepository = new DeviceRepository(application);
-        groupRepository = new GroupRepository(application);
-        detoxPeriodRepository = new DetoxPeriodRepository(application);
+        deviceRepository = new DeviceRepositoryImpl(application);
+        groupRepository = new GroupRepositoryImpl(application);
+        detoxPeriodRepository = new DetoxPeriodRepositoryImpl(application);
         thisDevice = deviceRepository.getThisDevice();
     }
 

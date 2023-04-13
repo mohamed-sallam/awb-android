@@ -1,116 +1,91 @@
 package io.github.mohamed.sallam.awb.repo;
 
-import android.app.Application;
-
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
-import io.github.mohamed.sallam.awb.db.UserDatabase;
-import io.github.mohamed.sallam.awb.db.dao.GroupDao;
-import io.github.mohamed.sallam.awb.db.dao.WhitelistedAppDao;
 import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 
 /**
- * {@inheritDoc}
+ * {@link IRepository}
  *
- * {@link IGroupRepository}
+ * `IGroupRepository` interface is responsible for handling and declaring
+ * group operations (insert - update - delete - rename - clone - getters).
+ * On class `GroupRepository` we add the full logic and implementation to execute
+ * a specific operation by using DAOs methods.
  *
  * @author Abdalrhman Hemida
  * @author Mohamed Yehia
  */
-public class GroupRepository implements IGroupRepository {
-    private final GroupDao groupDao;
-    private final WhitelistedAppDao whitelistedAppDao;
+public interface GroupRepository extends IRepository<Group> {
 
     /**
-     * Instantiate an object from `GroupDao` and `WhitelistedAppDao` to access
-     * DAOs methods.
+     * Renames a specific group of whitelisted apps
      *
-     * @param application is the context where The Application class in Android
-     * is the base class within an Android app that contains all other
-     * components such as activities and services.
+     * @param uuid is the unique identifier for the group,same as id.
+     * @param name new name of the group.
      */
-    public GroupRepository(Application application) {
-        UserDatabase db = UserDatabase.getInstance(application);
-        groupDao = db.groupDao();
-        whitelistedAppDao = db.whitelistedAppDao();
-    }
+    void rename(UUID uuid, String name);
 
     /**
-     * {@inheritDoc}
+     * Gets all groups from database for a specific device.
      *
-     * @param group object to be inserted.
+     * @param deviceUuid is the unique identifier for the device to access it
+     * on database.
+     *
+     * @return list of groups as live data.
      */
-    public void insert(Group group) {
-        UserDatabase.databaseWriteExecutor.execute(
-                () -> groupDao.insert(group)
-        );
-    }
-
-    public void rename(UUID uuid, String name) {
-        UserDatabase.databaseWriteExecutor.execute(
-                () -> groupDao.rename(uuid, name)
-        );
-    }
-
+    LiveData<List<Group>> getAllByDevice(UUID deviceUuid);
 
     /**
-     * Deletes a specific group from database. We use it to remove
-     * a group of whitelisted apps.
+     * Gets a specific group from database with its whitelisted applications
+     * using relationship {@link GroupWithWhitelistedApps}.
      *
-     * @param groupUuid is the unique identifier for a group to
-     * access it in database.
+     * @param uuid is the unique identifier for the device to access it
+     * on database.
+     *
+     * @return group with its applications as live data.
      */
-    public void delete(UUID groupUuid) {
-        UserDatabase.databaseWriteExecutor.execute(() -> {
-            groupDao.delete(groupUuid);
-            whitelistedAppDao.deleteByGroupUuid(groupUuid);
-        });
-    }
+    LiveData<GroupWithWhitelistedApps> getWithWhitelistedApps(UUID uuid);
 
-    public LiveData<List<Group>> getAllByDevice(UUID deviceUuid) {
-        return groupDao.getAllByDevice(deviceUuid);
-    }
+    /**
+     * Inserts an application on the database, Use it when you want to select
+     * an application to be whitelisted on the database while the process of
+     * creating a group.
+     *
+     * @param whitelistedApp
+     */
+    void insertWhitelistedApp(WhitelistedApp whitelistedApp);
 
-    public LiveData<GroupWithWhitelistedApps> getWithWhitelistedApps(UUID uuid) {
-        return groupDao.getWithWhitelistedApps(uuid);
-    }
+    /**
+     * Deletes a specific application on a group by using the application name
+     * and the group id.
+     *
+     * @param groupUuid the unique identifier for a group to access it in database.
+     * @param packageName is the whitelisted application name.
+     */
+    void deleteWhitelistedApp(UUID groupUuid, String packageName);  // TODO: declared while working on RecyclerView
 
-    // WhitelistedAppDao
-    public void insertWhitelistedApp(WhitelistedApp whitelistedApp) {
-        UserDatabase.databaseWriteExecutor.execute(
-                () -> whitelistedAppDao.insert(whitelistedApp)
-        );
-    }
+    /**
+     * Gets all whitelisted applications for a specific group from database.
+     *
+     * @param groupUuid the unique identifier for a group to access it in database.
+     *
+     * @return list of whitelisted applications as live data.
+     */
+    LiveData<List<WhitelistedApp>> getAllWhitelistedAppsByGroupUuid(UUID groupUuid);
 
-    public void deleteWhitelistedApp(UUID groupUuid, String packageName) {
-        UserDatabase.databaseWriteExecutor.execute(
-                () -> whitelistedAppDao.delete(groupUuid, packageName)
-        );
-    }
-
-    public LiveData<List<WhitelistedApp>>
-    getAllWhitelistedAppsByGroupUuid(UUID groupUuid) {
-        return whitelistedAppDao.getAllByGroupUuid(groupUuid);
-    }
-
-    public void clone(UUID sourceGroupUuid, String groupName) {
-        UserDatabase.databaseWriteExecutor.execute(() -> {
-            Group destinationGroup = new Group();
-            destinationGroup.name = groupName;
-            destinationGroup.deviceUuid = Objects
-                                          .requireNonNull(
-                                                  groupDao
-                                                  .get(sourceGroupUuid)
-                                                  .getValue())
-                                          .deviceUuid;
-            whitelistedAppDao.clone(sourceGroupUuid, destinationGroup.uuid);
-            groupDao.insert(destinationGroup);
-        });
-    }
+    /**
+     * Clones a group with its whitelisted applications to a new group. Use it
+     * when you need to make a copy of a group so we can edit it without
+     * touching the original group.
+     *
+     * @param sourceGroupUuid the unique identifier for the original group we
+     * take a copy from.
+     * @param newGroupName the name of the new copied group.
+     */
+    void clone(UUID sourceGroupUuid, String newGroupName);
 }

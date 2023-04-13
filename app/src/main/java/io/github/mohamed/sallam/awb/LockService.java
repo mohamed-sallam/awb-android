@@ -35,7 +35,7 @@ import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
-import io.github.mohamed.sallam.awb.repo.DetoxPeriodRepository;
+import io.github.mohamed.sallam.awb.repo.DetoxPeriodRepositoryImpl;
 import io.github.mohamed.sallam.awb.screen.adapter.WhitelistedAppAdapter;
 
 /**
@@ -46,13 +46,13 @@ import io.github.mohamed.sallam.awb.screen.adapter.WhitelistedAppAdapter;
  * @author Mohamed Sallam
  */
 public class LockService extends Service {
-    private final DetoxPeriodRepository detoxPeriodRepository;
+    private final DetoxPeriodRepositoryImpl detoxPeriodRepository;
     private final WindowManager.LayoutParams mainLauncherParameters;
     private final List<App> whitelistedApps;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public LockService() {
-        detoxPeriodRepository = new DetoxPeriodRepository(getApplication());
+        detoxPeriodRepository = new DetoxPeriodRepositoryImpl(getApplication());
         mainLauncherParameters = new WindowManager.LayoutParams(
                             -1,
                             -1,

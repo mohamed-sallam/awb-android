@@ -8,7 +8,7 @@ import androidx.room.TypeConverters;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
-import io.github.mohamed.sallam.awb.repo.IAggregateRoot;
+import io.github.mohamed.sallam.awb.repo.AggregateRoot;
 
 /**
  * Class `Group` to define the structure of a Group object. It represents a table
@@ -19,7 +19,7 @@ import io.github.mohamed.sallam.awb.repo.IAggregateRoot;
  */
 @TypeConverters({UuidConverter.class})
 @Entity(tableName = "groups_table")
-public class Group implements IAggregateRoot {
+public class Group implements AggregateRoot {
 	// Fields
 	@NonNull
 	@PrimaryKey
