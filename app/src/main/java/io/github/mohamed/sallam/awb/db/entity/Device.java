@@ -11,7 +11,7 @@ import androidx.room.TypeConverters;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
-import io.github.mohamed.sallam.awb.repo.IAggregateRoot;
+import io.github.mohamed.sallam.awb.repo.AggregateRoot;
 
 /**
  * Class `Device` to define the structure of a device object. It represents a table
@@ -22,7 +22,7 @@ import io.github.mohamed.sallam.awb.repo.IAggregateRoot;
  */
 @TypeConverters({UuidConverter.class})
 @Entity(tableName = "devices_table")
-public class Device implements IAggregateRoot {
+public class Device implements AggregateRoot {
     // Fields
     @NonNull
     @PrimaryKey

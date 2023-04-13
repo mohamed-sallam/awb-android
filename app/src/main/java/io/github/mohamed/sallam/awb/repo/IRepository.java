@@ -38,11 +38,11 @@ package io.github.mohamed.sallam.awb.repo;
  * Generics used to provide compile-time type checking and removing risk of
  * `ClassCastException` that was common while working with collection classes.
  *
- * {@link IAggregateRoot} to define the aggregate roots to extend.
+ * {@link AggregateRoot} to define the aggregate roots to extend.
  *
  * @author Abdalrhman Hemida
  */
-public interface IRepository<T extends IAggregateRoot> {
+public interface IRepository<T extends AggregateRoot> {
 
     /**
      * Inserts an object into the database.

@@ -19,7 +19,7 @@ import java.util.UUID;
 import io.github.mohamed.sallam.awb.App;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
-import io.github.mohamed.sallam.awb.repo.GroupRepository;
+import io.github.mohamed.sallam.awb.repo.GroupRepositoryImpl;
 
 /**
  * Update group ViewModel is responsible for preparing, holding and managing
@@ -33,7 +33,7 @@ import io.github.mohamed.sallam.awb.repo.GroupRepository;
  * @author Mohamed Sallam
  */
 public class UpdateGroupViewModel extends AndroidViewModel {
-    private final GroupRepository groupRepository;
+    private final GroupRepositoryImpl groupRepository;
     private final Map<String, AppCommand> appCommands;
     private final UUID groupUuid;
     private final Application application;
@@ -63,7 +63,7 @@ public class UpdateGroupViewModel extends AndroidViewModel {
         super(application);
         this.application = application;
         this.groupUuid = groupUuid;
-        groupRepository = new GroupRepository(application);
+        groupRepository = new GroupRepositoryImpl(application);
         appCommands = new LinkedHashMap<>();
         whitelistedApps = groupRepository.getAllWhitelistedAppsByGroupUuid(groupUuid);
         apps = new MutableLiveData<List<App>>(getAllApps());

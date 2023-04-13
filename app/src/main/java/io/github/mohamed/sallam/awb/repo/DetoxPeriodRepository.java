@@ -1,91 +1,51 @@
 package io.github.mohamed.sallam.awb.repo;
 
-import android.app.Application;
-
 import androidx.lifecycle.LiveData;
 
-import java.util.List;
-
-import io.github.mohamed.sallam.awb.db.UserDatabase;
-import io.github.mohamed.sallam.awb.db.dao.DetoxPeriodDao;
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
-import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
 import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
 
 /**
- * {@inheritDoc}
+ * {@link IRepository}
  *
- * {@link IDetoxPeriodRepository}
+ * `IDetoxPeriodRepository` interface is responsible for handling and declaring
+ * detox period operations (insert - update - delete - getters). On class
+ * `DetoxPeriodRepository` we add the full logic and implementation to execute
+ * a specific operation by using DAOs methods.
  *
  * @author Abdalrhman Hemida
  * @author Mohamed Yehia
  */
-public class DetoxPeriodRepository implements IDetoxPeriodRepository {
-    private final DetoxPeriodDao detoxPeriodDao;
-    private final LiveData<DetoxPeriodAndGroupWithWhitelistedApps> detoxPeriodAndGroupWithWhitelistedApps;
-    private final LiveData<DetoxPeriodAndGroup> detoxPeriodAndGroup;
-    private final LiveData<DetoxPeriod> detoxPeriod;
-    private LiveData<List<WhitelistedApp>> whitelistedAppsOfCurrentDetoxPeriod;
+public interface DetoxPeriodRepository extends IRepository<DetoxPeriod> {
 
     /**
-     * Instantiates an object from `detoxPeriodDao`.
-     *
-     * @param application is the context where The Application class in Android
-     * is the base class within an Android app that contains all other
-     * components such as activities and services.
-     */
-    public DetoxPeriodRepository(Application application) {
-        UserDatabase db = UserDatabase.getInstance(application);
-        detoxPeriodDao = db.detoxPeriodDao();
-        detoxPeriodAndGroupWithWhitelistedApps = detoxPeriodDao.getAndGroupWithWhitelistedApps();
-        detoxPeriodAndGroup = detoxPeriodDao.getWithGroup();
-        detoxPeriod = detoxPeriodDao.get();
-        whitelistedAppsOfCurrentDetoxPeriod = detoxPeriodDao.getWhitelistedAppsOfCurrentDetoxPeriod();
-    }
-
-    /**
-     * {@inheritDoc}
+     * Updates detox periods in database.
      *
      * @param detoxPeriod object of the blocking period.
      */
-    public void insert(DetoxPeriod detoxPeriod) {
-        UserDatabase.databaseWriteExecutor.execute(
-                () -> detoxPeriodDao.insert(detoxPeriod)
-        );
-    }
-
-    public void update(DetoxPeriod detoxPeriod) {
-        UserDatabase.databaseWriteExecutor.execute(
-                () -> detoxPeriodDao.update(detoxPeriod)
-        );
-    }
+    void update(DetoxPeriod detoxPeriod);
 
     /**
-     * Deletes a specific detox period from database. We use it to remove detox
-     * period for a specific group.
+     * Gets detox periods by id as a live data.
+     *
+     * @return Detox period from database by using `detoxPeriodDao`.
      */
-    public void delete() {
-        UserDatabase.databaseWriteExecutor.execute(
-                detoxPeriodDao::delete
-        );
-    }
+    LiveData<DetoxPeriod> get();
 
-    public LiveData<DetoxPeriod> get() {
-        return detoxPeriod;
-    }
+    /**
+     * Gets detox-period with group using a relationship `DetoxPeriodAndGroup`.
+     *
+     * @return live data detox period with a group specified to it.
+     */
+    LiveData<DetoxPeriodAndGroup> getDetoxPeriodAndGroup();
 
-    public LiveData<DetoxPeriodAndGroup>
-    getDetoxPeriodAndGroup() {
-        return detoxPeriodAndGroup;
-    }
-
-    public LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-    getAndGroupWithWhitelistedApps() {
-        return detoxPeriodAndGroupWithWhitelistedApps;
-    }
-
-    public LiveData<List<WhitelistedApp>> getWhitelistedAppsOfCurrentDetoxPeriod() {
-        return whitelistedAppsOfCurrentDetoxPeriod;
-    }
+    /**
+     * Gets detox-period with group including its applications using
+     * relationship `DetoxPeriodAndGroupWithWhitelistedApps`.
+     *
+     * @return detox period for a group with its Whitelisted applications.
+     */
+    LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
+    getAndGroupWithWhitelistedApps();
 }
