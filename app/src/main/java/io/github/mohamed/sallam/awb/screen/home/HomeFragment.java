@@ -104,8 +104,8 @@ public class HomeFragment extends Fragment {
         binding.recyclerView.setAdapter(groupAdapter);
         registerForContextMenu(binding.recyclerView);
         binding.recyclerView.setOnCreateContextMenuListener(this);
-        viewModel.getAllGroupsByDeviceUuid(thisDevice.uuid).observe(getViewLifecycleOwner(),
-                                                                    groups -> groupAdapter.submitList(groups));
+        viewModel.getAllGroupsForThisDevice().observe(getViewLifecycleOwner(),
+                                                groups -> groupAdapter.submitList(groups));
 
         binding.lockButton.setOnClickListener(view -> {
             if (isUsageStatGranted(requireContext().getApplicationContext())) {

@@ -108,4 +108,8 @@ public class GroupRepository implements IGroupRepository {
             groupDao.insert(destinationGroup);
         });
     }
+
+    public LiveData<List<Group>> getAllForThisDevice() {
+        return groupDao.getAllForThisDevice();
+    }
 }

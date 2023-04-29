@@ -47,8 +47,8 @@ public class HomeViewModel extends AndroidViewModel {
         thisDevice = deviceRepository.getThisDevice();
     }
 
-    public LiveData<List<Group>> getAllGroupsByDeviceUuid(UUID deviceUuid) {
-        return groupRepository.getAllByDevice(deviceUuid);
+    public LiveData<List<Group>> getAllGroupsForThisDevice() {
+        return groupRepository.getAllForThisDevice();
     }
 
     /**

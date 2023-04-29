@@ -76,4 +76,6 @@ public interface IGroupRepository extends IRepository<Group> {
      * @param newGroupName the name of the new copied group.
      */
     void clone(UUID sourceGroupUuid, String newGroupName);
+
+    LiveData<List<Group>> getAllForThisDevice();
 }

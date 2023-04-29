@@ -72,4 +72,10 @@ public interface GroupDao {
            "SET   deviceUuid=:newDeviceUuid " +
            "WHERE deviceUuid=:oldDeviceUuid"  )
     void replaceDeviceUuid(UUID oldDeviceUuid, UUID newDeviceUuid);
+
+    @Query("SELECT g.* " +
+            "FROM groups_table g " +
+            "JOIN devices_table d ON g.deviceUuid = d.uuid " +
+            "WHERE d.thisDevice")
+    LiveData<List<Group>> getAllForThisDevice();
 }
