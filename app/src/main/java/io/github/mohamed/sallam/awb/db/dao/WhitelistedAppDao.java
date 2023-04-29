@@ -69,6 +69,4 @@ public interface WhitelistedAppDao {
            "FROM whitelisted_apps_table " +
            "WHERE groupUuid = :sourceGroupUuid")
     void clone(UUID sourceGroupUuid, UUID destinationGroupUuid);
-
-
 }

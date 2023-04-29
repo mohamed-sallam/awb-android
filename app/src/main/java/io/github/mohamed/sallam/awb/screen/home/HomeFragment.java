@@ -4,7 +4,6 @@ import static io.github.mohamed.sallam.awb.util.StatusUtil.isUsageStatGranted;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -13,17 +12,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.NumberPicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -31,7 +26,6 @@ import io.github.mohamed.sallam.awb.LockService;
 import io.github.mohamed.sallam.awb.R;
 import io.github.mohamed.sallam.awb.databinding.FragmentHomeBinding;
 import io.github.mohamed.sallam.awb.db.entity.Device;
-import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 import io.github.mohamed.sallam.awb.screen.adapter.GroupAdapter;
 
 
@@ -110,7 +104,8 @@ public class HomeFragment extends Fragment {
         binding.recyclerView.setAdapter(groupAdapter);
         registerForContextMenu(binding.recyclerView);
         binding.recyclerView.setOnCreateContextMenuListener(this);
-        viewModel.getAllDevicesWithGroups().observe(getViewLifecycleOwner(), deviceWithGroups -> groupAdapter.submitList(deviceWithGroups.get(0).groups));
+        viewModel.getAllGroupsByDeviceUuid(thisDevice.uuid).observe(getViewLifecycleOwner(),
+                                                                    groups -> groupAdapter.submitList(groups));
 
         binding.lockButton.setOnClickListener(view -> {
             if (isUsageStatGranted(requireContext().getApplicationContext())) {

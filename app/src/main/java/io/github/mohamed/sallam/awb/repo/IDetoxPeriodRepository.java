@@ -3,8 +3,6 @@ package io.github.mohamed.sallam.awb.repo;
 import androidx.lifecycle.LiveData;
 
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
-import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
-import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
 
 /**
  * {@link IRepository}
@@ -18,7 +16,6 @@ import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhite
  * @author Mohamed Yehia
  */
 public interface IDetoxPeriodRepository extends IRepository<DetoxPeriod> {
-
     /**
      * Updates detox periods in database.
      *
@@ -32,20 +29,4 @@ public interface IDetoxPeriodRepository extends IRepository<DetoxPeriod> {
      * @return Detox period from database by using `detoxPeriodDao`.
      */
     LiveData<DetoxPeriod> get();
-
-    /**
-     * Gets detox-period with group using a relationship `DetoxPeriodAndGroup`.
-     *
-     * @return live data detox period with a group specified to it.
-     */
-    LiveData<DetoxPeriodAndGroup> getDetoxPeriodAndGroup();
-
-    /**
-     * Gets detox-period with group including its applications using
-     * relationship `DetoxPeriodAndGroupWithWhitelistedApps`.
-     *
-     * @return detox period for a group with its Whitelisted applications.
-     */
-    LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-    getAndGroupWithWhitelistedApps();
 }

@@ -12,7 +12,6 @@ import java.util.UUID;
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
 import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.entity.Group;
-import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 import io.github.mohamed.sallam.awb.repo.DetoxPeriodRepository;
 import io.github.mohamed.sallam.awb.repo.DeviceRepository;
 import io.github.mohamed.sallam.awb.repo.GroupRepository;
@@ -48,14 +47,8 @@ public class HomeViewModel extends AndroidViewModel {
         thisDevice = deviceRepository.getThisDevice();
     }
 
-    /**
-     * Gets all devices with its groups from database using relationship
-     * `DeviceWithGroups`.
-     *
-     * @return list of devices with its groups as live data.
-     */
-    public LiveData<List<DeviceWithGroups>> getAllDevicesWithGroups() {
-        return deviceRepository.getAllWithGroups();
+    public LiveData<List<Group>> getAllGroupsByDeviceUuid(UUID deviceUuid) {
+        return groupRepository.getAllByDevice(deviceUuid);
     }
 
     /**

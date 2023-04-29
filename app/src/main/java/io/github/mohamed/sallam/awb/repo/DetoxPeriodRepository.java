@@ -10,8 +10,6 @@ import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.DetoxPeriodDao;
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
-import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroup;
-import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhitelistedApps;
 
 /**
  * {@inheritDoc}
@@ -23,8 +21,6 @@ import io.github.mohamed.sallam.awb.db.relationship.DetoxPeriodAndGroupWithWhite
  */
 public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     private final DetoxPeriodDao detoxPeriodDao;
-    private final LiveData<DetoxPeriodAndGroupWithWhitelistedApps> detoxPeriodAndGroupWithWhitelistedApps;
-    private final LiveData<DetoxPeriodAndGroup> detoxPeriodAndGroup;
     private final LiveData<DetoxPeriod> detoxPeriod;
     private LiveData<List<WhitelistedApp>> whitelistedAppsOfCurrentDetoxPeriod;
 
@@ -38,8 +34,6 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     public DetoxPeriodRepository(Application application) {
         UserDatabase db = UserDatabase.getInstance(application);
         detoxPeriodDao = db.detoxPeriodDao();
-        detoxPeriodAndGroupWithWhitelistedApps = detoxPeriodDao.getAndGroupWithWhitelistedApps();
-        detoxPeriodAndGroup = detoxPeriodDao.getWithGroup();
         detoxPeriod = detoxPeriodDao.get();
         whitelistedAppsOfCurrentDetoxPeriod = detoxPeriodDao.getWhitelistedAppsOfCurrentDetoxPeriod();
     }
@@ -73,16 +67,6 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
 
     public LiveData<DetoxPeriod> get() {
         return detoxPeriod;
-    }
-
-    public LiveData<DetoxPeriodAndGroup>
-    getDetoxPeriodAndGroup() {
-        return detoxPeriodAndGroup;
-    }
-
-    public LiveData<DetoxPeriodAndGroupWithWhitelistedApps>
-    getAndGroupWithWhitelistedApps() {
-        return detoxPeriodAndGroupWithWhitelistedApps;
     }
 
     public LiveData<List<WhitelistedApp>> getWhitelistedAppsOfCurrentDetoxPeriod() {

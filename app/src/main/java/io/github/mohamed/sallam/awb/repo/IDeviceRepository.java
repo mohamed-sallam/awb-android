@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.entity.Device;
-import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 
 /**
  * {@link IRepository}
@@ -44,12 +43,5 @@ public interface IDeviceRepository extends IRepository<Device> {
      */
     LiveData<List<Device>> getAll();
 
-    /**
-     * Gets all devices with its groups from database using relationship
-     * `DeviceWithGroups`.
-     *
-     * @return list of devices with its groups as live data.
-     */
-    LiveData<List<DeviceWithGroups>> getAllWithGroups();  // TODO maybe deleted
     LiveData<Device> getThisDevice();
 }

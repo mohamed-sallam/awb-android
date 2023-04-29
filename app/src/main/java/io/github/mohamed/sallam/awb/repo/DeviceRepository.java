@@ -11,7 +11,6 @@ import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.DeviceDao;
 import io.github.mohamed.sallam.awb.db.dao.GroupDao;
 import io.github.mohamed.sallam.awb.db.entity.Device;
-import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 
 /**
  * {@inheritDoc}
@@ -25,7 +24,6 @@ public class DeviceRepository implements IDeviceRepository {
     private final DeviceDao deviceDao;
     private final GroupDao groupDao;
     private final LiveData<List<Device>> devices;
-    private final LiveData<List<DeviceWithGroups>> devicesWithGroups;
     private final LiveData<Device> thisDevice;
 
     /**
@@ -40,7 +38,6 @@ public class DeviceRepository implements IDeviceRepository {
         deviceDao = db.deviceDao();
         groupDao = db.groupDao();
         devices = deviceDao.getAll();
-        devicesWithGroups = deviceDao.getAllWithGroups();
         thisDevice = deviceDao.getThisDevice();
     }
 
@@ -78,10 +75,6 @@ public class DeviceRepository implements IDeviceRepository {
 
     public LiveData<List<Device>> getAll() {
         return devices;
-    }
-
-    public LiveData<List<DeviceWithGroups>> getAllWithGroups() {
-        return devicesWithGroups;
     }
 
     public LiveData<Device> getThisDevice() {

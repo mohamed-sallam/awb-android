@@ -13,7 +13,6 @@ import io.github.mohamed.sallam.awb.db.dao.GroupDao;
 import io.github.mohamed.sallam.awb.db.dao.WhitelistedAppDao;
 import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
-import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 
 /**
  * {@inheritDoc}
@@ -75,10 +74,6 @@ public class GroupRepository implements IGroupRepository {
 
     public LiveData<List<Group>> getAllByDevice(UUID deviceUuid) {
         return groupDao.getAllByDevice(deviceUuid);
-    }
-
-    public LiveData<GroupWithWhitelistedApps> getWithWhitelistedApps(UUID uuid) {
-        return groupDao.getWithWhitelistedApps(uuid);
     }
 
     // WhitelistedAppDao

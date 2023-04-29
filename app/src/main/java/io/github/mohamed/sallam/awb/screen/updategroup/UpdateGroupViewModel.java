@@ -18,7 +18,6 @@ import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.App;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
-import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 import io.github.mohamed.sallam.awb.repo.GroupRepository;
 
 /**
@@ -71,15 +70,6 @@ public class UpdateGroupViewModel extends AndroidViewModel {
 
     public void resetNavigation() {
         navigateBack = null;
-    }
-
-    /**
-     * Gets a group of whitelisted applications specified by the groupUuid
-     *
-     * @return group with its applications as live data.
-     */
-    public LiveData<GroupWithWhitelistedApps> getGroupWithWhitelistedApps() {
-        return groupRepository.getWithWhitelistedApps(groupUuid);
     }
 
     private List<App> getAllApps() {

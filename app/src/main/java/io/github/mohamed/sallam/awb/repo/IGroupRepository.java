@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
-import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 
 /**
  * {@link IRepository}
@@ -39,17 +38,6 @@ public interface IGroupRepository extends IRepository<Group> {
      * @return list of groups as live data.
      */
     LiveData<List<Group>> getAllByDevice(UUID deviceUuid);
-
-    /**
-     * Gets a specific group from database with its whitelisted applications
-     * using relationship {@link GroupWithWhitelistedApps}.
-     *
-     * @param uuid is the unique identifier for the device to access it
-     * on database.
-     *
-     * @return group with its applications as live data.
-     */
-    LiveData<GroupWithWhitelistedApps> getWithWhitelistedApps(UUID uuid);
 
     /**
      * Inserts an application on the database, Use it when you want to select

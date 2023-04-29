@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Transaction;
 import androidx.room.TypeConverters;
 
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 import io.github.mohamed.sallam.awb.db.entity.Group;
-import io.github.mohamed.sallam.awb.db.relationship.GroupWithWhitelistedApps;
 
 /**
  * Group Data Access Object.
@@ -74,16 +72,4 @@ public interface GroupDao {
            "SET   deviceUuid=:newDeviceUuid " +
            "WHERE deviceUuid=:oldDeviceUuid"  )
     void replaceDeviceUuid(UUID oldDeviceUuid, UUID newDeviceUuid);
-
-    /**
-     * Gets a certain group with its whitelisted apps.
-     *
-     * @param uuid represents the uuid of a group to get all of its whitelisted
-     * apps.
-     *
-     * @return a live data of a group with its whitelisted apps.
-     */
-    @Transaction
-    @Query("SELECT * FROM groups_table WHERE uuid=:uuid")
-    LiveData<GroupWithWhitelistedApps> getWithWhitelistedApps(UUID uuid);
 }

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Transaction;
 import androidx.room.TypeConverters;
 import androidx.room.Update;
 
@@ -13,7 +12,6 @@ import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.converter.UuidConverter;
 import io.github.mohamed.sallam.awb.db.entity.Device;
-import io.github.mohamed.sallam.awb.db.relationship.DeviceWithGroups;
 
 /**
  * Device Data Access Object.
@@ -54,15 +52,6 @@ public interface DeviceDao {
      */
     @Query("SELECT * FROM devices_table")
     LiveData<List<Device>> getAll();
-
-    /**
-     * Gets all devices with its groups from the devices table.
-     *
-     * @return a live data of the list of devices with its groups from devices table.
-     */
-    @Transaction
-    @Query("SELECT * FROM devices_table")
-    LiveData<List<DeviceWithGroups>> getAllWithGroups();
 
     @Query("SELECT * FROM devices_table WHERE thisDevice LIMIT 1")
     LiveData<Device> getThisDevice();
