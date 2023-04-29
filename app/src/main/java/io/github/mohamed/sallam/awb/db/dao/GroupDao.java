@@ -58,7 +58,7 @@ public interface GroupDao {
      *
      * @return a live data of the groups in a selected device.
      */
-    @Query("SELECT * FROM groups_table WHERE uuid = :deviceUuid")
+    @Query("SELECT * FROM groups_table WHERE deviceUuid = :deviceUuid")
     LiveData<List<Group>> getAllByDevice(UUID deviceUuid);
 
     /**
