@@ -64,4 +64,31 @@ public class DeviceDaoTest extends UserDatabaseTest {
         assertEquals(devices.get(1).uuid, insertedDevices.get(1).uuid);
     }
 
+    @Test
+    public void updateDevice() throws InterruptedException {
+        Device device = new Device();
+        device.name = "Device 1";
+        device.thisDevice = true;
+        device.operatingSystemName = "Android";
+        device.operatingSystemType = Device.Os.ANDROID;
+        device.ipAddressV4 = "192.168.1.100";
+        device.secretKey = "secret1";
+
+        getDeviceDao().insert(device);
+
+        Device updatedDevice = new Device();
+        updatedDevice.uuid = device.uuid;
+        updatedDevice.name = "Updated Device";
+
+        getDeviceDao().update(updatedDevice);
+
+        LiveData<List<Device>> liveData = getDeviceDao().getAll();
+        List<Device> insertedDevices = liveData.getValue();
+
+        assertNotNull(insertedDevices);
+        assertTrue(insertedDevices.size() == 1);
+        assertEquals(updatedDevice.uuid, insertedDevices.get(0).uuid);
+        assertEquals(updatedDevice.name, insertedDevices.get(0).name);
+    }
+
 }
