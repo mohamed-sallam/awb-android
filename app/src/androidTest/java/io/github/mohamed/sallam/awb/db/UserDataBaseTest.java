@@ -1,2 +1,4 @@
-package io.github.mohamed.sallam.awb.db;public class UserDataBaseTest {
+package io.github.mohamed.sallam.awb.db;
+
+public class UserDatabaseTest {
 }
