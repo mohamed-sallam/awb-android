@@ -38,6 +38,9 @@ android {
 }
 
 dependencies {
+    //-- ------ FOR InstantTaskExecutorRule;
+    implementation 'androidx.arch.core:core-testing:2.1.0'
+
 
     implementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
