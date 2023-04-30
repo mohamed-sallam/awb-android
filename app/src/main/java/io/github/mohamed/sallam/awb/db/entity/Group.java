@@ -2,6 +2,7 @@ package io.github.mohamed.sallam.awb.db.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -26,6 +27,23 @@ public class Group implements IAggregateRoot {
 	public UUID uuid = UUID.randomUUID();
 	public String name;
 	public UUID deviceUuid;
+
+	public Group() {
+	}
+
+	@Ignore
+	public Group(@NonNull UUID uuid, String name, UUID deviceUuid) {
+		this.uuid = uuid;
+		this.name = name;
+		this.deviceUuid = deviceUuid;
+	}
+
+	@Ignore
+	public Group(Group group) {
+		this.name = group.name;
+		this.deviceUuid = group.deviceUuid;
+		this.uuid = group.uuid;
+	}
 
 	@Override
 	public boolean equals(Object o) {
