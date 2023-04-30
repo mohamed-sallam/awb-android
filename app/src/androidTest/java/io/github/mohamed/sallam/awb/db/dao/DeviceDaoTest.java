@@ -1,6 +1,5 @@
 package io.github.mohamed.sallam.awb.db.dao;
 
-public class DeviceDaoTest {
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -19,4 +18,10 @@ import java.util.List;
 
 import io.github.mohamed.sallam.awb.db.UserDatabaseTest;
 import io.github.mohamed.sallam.awb.db.entity.Device;
+
+@RunWith(AndroidJUnit4.class)
+@SmallTest
+public class DeviceDaoTest extends UserDatabaseTest {
+    }
+
 }
