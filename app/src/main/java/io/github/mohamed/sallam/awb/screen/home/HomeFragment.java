@@ -1,6 +1,6 @@
 package io.github.mohamed.sallam.awb.screen.home;
 
-import static io.github.mohamed.sallam.awb.util.StatusUtil.isUsageStatGranted;
+import static io.github.mohamed.sallam.awb.LockService.isUsageStatGranted;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

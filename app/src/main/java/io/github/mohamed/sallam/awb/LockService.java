@@ -1,7 +1,11 @@
 package io.github.mohamed.sallam.awb;
 
+import static android.app.AppOpsManager.MODE_ALLOWED;
+import static android.app.AppOpsManager.OPSTR_GET_USAGE_STATS;
+
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.AppOpsManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -205,4 +209,23 @@ public class LockService extends Service {
         }
         return (String) (applicationInfo != null ? packageManager.getApplicationLabel(applicationInfo) : "(unknown)");
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static boolean isUsageStatGranted(Context context) {
+        AppOpsManager appOps = (AppOpsManager) context
+                .getSystemService(Context.APP_OPS_SERVICE);
+        int mode = appOps.checkOpNoThrow(OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(),
+                context.getPackageName());
+        if (mode == AppOpsManager.MODE_DEFAULT) {
+            return (
+                    context.checkCallingOrSelfPermission(
+                            android.Manifest.permission.PACKAGE_USAGE_STATS
+                    ) == PackageManager.PERMISSION_GRANTED
+            );
+        } else {
+            return (mode == MODE_ALLOWED);
+        }
+    }
+
 }
