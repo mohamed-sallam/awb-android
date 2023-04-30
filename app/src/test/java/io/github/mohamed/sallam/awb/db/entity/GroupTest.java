@@ -1,12 +1,11 @@
 package io.github.mohamed.sallam.awb.db.entity;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import static io.github.mohamed.sallam.awb.util.TestUtil.TEST_GROUP_1;
 
-import junit.framework.TestCase;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
