@@ -22,6 +22,10 @@ import io.github.mohamed.sallam.awb.db.entity.Device;
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class DeviceDaoTest extends UserDatabaseTest {
+
+    @Rule
+    public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
+
     }
 
 }
