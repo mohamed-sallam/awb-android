@@ -19,15 +19,26 @@ import java.util.List;
 import io.github.mohamed.sallam.awb.db.UserDatabaseTest;
 import io.github.mohamed.sallam.awb.db.entity.Device;
 
+/**
+ * Testing Device Data Access Object.
+ *
+ * @author Mohamed Sherif
+ */
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class DeviceDaoTest extends UserDatabaseTest {
 
+    /**
+     * Insures that the tests runs in the main thread.
+     */
     @Rule
     public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
 
+    /**
+     * Test Case of the `insert` Method.
+     */
     @Test
-    public void insertAndGetAllDevices() throws InterruptedException {
+    public void insertAndGetAllDevices() {
         List<Device> devices = new ArrayList<>();
 
         // create a few Device objects
@@ -64,8 +75,11 @@ public class DeviceDaoTest extends UserDatabaseTest {
         assertEquals(devices.get(1).uuid, insertedDevices.get(1).uuid);
     }
 
+    /**
+     * Test Case of the `update` Method.
+     */
     @Test
-    public void updateDevice() throws InterruptedException {
+    public void updateDevice() {
         Device device = new Device();
         device.name = "Device 1";
         device.thisDevice = true;
@@ -91,8 +105,11 @@ public class DeviceDaoTest extends UserDatabaseTest {
         assertEquals(updatedDevice.name, insertedDevices.get(0).name);
     }
 
+    /**
+     * Test Case of the `delete` Method.
+     */
     @Test
-    public void deleteDevice() throws InterruptedException {
+    public void deleteDevice() {
         List<Device> devices = new ArrayList<>();
 
         // create a few Device objects
