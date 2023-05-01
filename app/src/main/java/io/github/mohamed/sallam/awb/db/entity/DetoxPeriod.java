@@ -24,6 +24,9 @@ public class DetoxPeriod extends DetoxSettings implements IAggregateRoot {
 	 * @author Mohamed Yehia
 	 */
 	public void setPeriod(long period) {
+		if (period < 0)
+			throw new IllegalArgumentException("No Negative Period is Allowed!");
 		endDate.setTime(new Date().getTime() + period);
 	}
+
 }
