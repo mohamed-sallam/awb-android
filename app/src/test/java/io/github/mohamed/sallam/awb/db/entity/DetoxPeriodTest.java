@@ -21,11 +21,9 @@ public class DetoxPeriodTest {
         assertEquals(expectedEndDate, detoxPeriod.endDate);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void setPeriod_insertsNegativePeriod_throwIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new DetoxPeriod().setPeriod(-10_000L)
-        );
+        new DetoxPeriod().setPeriod(-10_000L);
     }
 
     @Test
