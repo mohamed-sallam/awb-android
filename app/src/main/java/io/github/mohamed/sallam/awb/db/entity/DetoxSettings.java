@@ -1,6 +1,7 @@
 package io.github.mohamed.sallam.awb.db.entity;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -19,4 +20,19 @@ abstract public class DetoxSettings {
 	public Integer id;
 	public static final String AWB_VERSION = "0.1.0v";
 	public UUID groupUuid;
+
+	public DetoxSettings(){
+	}
+
+	@Ignore
+	public DetoxSettings(Integer id, UUID groupUuid){
+		this.id = id;
+		this.groupUuid = groupUuid;
+	}
+
+	@Ignore
+	public DetoxSettings(DetoxSettings detoxSettings){
+		this.id = detoxSettings.id;
+		this.groupUuid = detoxSettings.groupUuid;
+	}
 }
