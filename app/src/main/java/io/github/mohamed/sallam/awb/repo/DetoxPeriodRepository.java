@@ -38,6 +38,11 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
         whitelistedAppsOfCurrentDetoxPeriod = detoxPeriodDao.getWhitelistedAppsOfCurrentDetoxPeriod();
     }
 
+    public DetoxPeriodRepository(DetoxPeriodDao detoxPeriodDao){
+        this.detoxPeriodDao = detoxPeriodDao;
+        this.detoxPeriod = null;
+    }
+
     /**
      * {@inheritDoc}
      *
