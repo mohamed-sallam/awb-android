@@ -10,6 +10,7 @@ import java.util.UUID;
 import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.DeviceDao;
 import io.github.mohamed.sallam.awb.db.dao.GroupDao;
+import io.github.mohamed.sallam.awb.db.dao.WhitelistedAppDao;
 import io.github.mohamed.sallam.awb.db.entity.Device;
 
 /**
@@ -39,6 +40,13 @@ public class DeviceRepository implements IDeviceRepository {
         groupDao = db.groupDao();
         devices = deviceDao.getAll();
         thisDevice = deviceDao.getThisDevice();
+    }
+
+    public DeviceRepository(GroupDao groupDao, DeviceDao deviceDao) {
+        this.groupDao = groupDao;
+        this.deviceDao = deviceDao;
+        devices = null;
+        thisDevice = null;
     }
 
     /**
