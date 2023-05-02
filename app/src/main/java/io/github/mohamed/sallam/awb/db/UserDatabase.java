@@ -43,7 +43,7 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract DeviceDao      deviceDao();
     public abstract GroupDao       groupDao();
     public static final ExecutorService databaseWriteExecutor =
-            Executors.newFixedThreadPool(2);
+            Executors.newFixedThreadPool(1);
 
     public static synchronized UserDatabase getInstance(final Context context) {
         if (instance == null){
