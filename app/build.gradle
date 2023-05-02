@@ -27,19 +27,25 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_9
+        targetCompatibility JavaVersion.VERSION_1_9
     }
 
     sourceSets {
-        androidTest.java.srcDirs += "src/test-common/java"
-        test.java.srcDirs += "src/test-common/java"
+        main.java.srcDirs += "src/test-common/java"
     }
 }
 
 dependencies {
-    implementation 'androidx.arch.core:core-testing:2.1.0'
-    androidTestImplementation 'androidx.arch.core:core-testing:2.1.0'
+    // AndroidX test
+    def androidx_test_version = "1.4.0"
+    androidTestImplementation "androidx.test:core:$androidx_test_version"
+    androidTestImplementation "androidx.test:runner:$androidx_test_version"
+
+    // Architecture components testing
+    def androidx_arch_test_version = "2.0.1"
+    androidTestImplementation "androidx.arch.core:core-testing:$androidx_arch_test_version"
+    implementation "androidx.arch.core:core-testing:$androidx_arch_test_version"
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
