@@ -40,6 +40,11 @@ public class GroupRepository implements IGroupRepository {
         whitelistedAppDao = db.whitelistedAppDao();
     }
 
+    public GroupRepository(GroupDao groupDao, WhitelistedAppDao whitelistedAppDao) {
+        this.groupDao = groupDao;
+        this.whitelistedAppDao = whitelistedAppDao;
+    }
+
     /**
      * {@inheritDoc}
      *
