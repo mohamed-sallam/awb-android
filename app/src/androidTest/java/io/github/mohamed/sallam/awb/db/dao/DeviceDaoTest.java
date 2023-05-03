@@ -2,10 +2,8 @@ package io.github.mohamed.sallam.awb.db.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.LiveData;
 import androidx.test.filters.SmallTest;
 import androidx.test.runner.AndroidJUnit4;
 
@@ -23,11 +21,6 @@ import io.github.mohamed.sallam.awb.util.LiveDataTestUtil;
 import io.github.mohamed.sallam.awb.util.TestUtil;
 import kotlinx.coroutines.ExperimentalCoroutinesApi;
 
-/**
- * Testing Device Data Access Object.
- *
- * @author Mohamed Sherif
- */
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4.class)
 @SmallTest
@@ -56,7 +49,7 @@ public class DeviceDaoTest extends UserDatabaseTest {
         devices.add(device2);
 
         // Act
-        for(int i=0; i<2; i++){
+        for(int i = 0; i < 2; i++){
             deviceDao.insert(devices.get(i));
         }
 
@@ -65,7 +58,7 @@ public class DeviceDaoTest extends UserDatabaseTest {
 
         // Assert
         assertNotNull(insertedDevices);
-        assertTrue(insertedDevices.size() == 2);
+        assertEquals(2, insertedDevices.size());
         assertEquals(devices.get(0).uuid, insertedDevices.get(0).uuid);
         assertEquals(devices.get(1).uuid, insertedDevices.get(1).uuid);
     }
@@ -74,7 +67,7 @@ public class DeviceDaoTest extends UserDatabaseTest {
     public void updateDevice() throws InterruptedException {
         // Arrange
         Device device = new Device(TestUtil.TEST_DEVICE_1);
-        Device updatedDevice = new Device(TestUtil.TEST_DEVICE_2);;
+        Device updatedDevice = new Device(TestUtil.TEST_DEVICE_2);
         updatedDevice.uuid = device.uuid;
         updatedDevice.name = "Updated Device";
 
@@ -87,7 +80,7 @@ public class DeviceDaoTest extends UserDatabaseTest {
 
         // Assert
         assertNotNull(insertedDevices);
-        assertTrue(insertedDevices.size() == 1);
+        assertEquals(1, insertedDevices.size());
         assertEquals(updatedDevice.uuid, insertedDevices.get(0).uuid);
         assertEquals(updatedDevice.name, insertedDevices.get(0).name);
     }
@@ -103,7 +96,7 @@ public class DeviceDaoTest extends UserDatabaseTest {
         devices.add(device1);
         devices.add(device2);
 
-        for(int i=0; i<2; i++){
+        for(int i = 0; i < 2; i++) {
             deviceDao.insert(devices.get(i));
         }
 
@@ -115,7 +108,7 @@ public class DeviceDaoTest extends UserDatabaseTest {
 
         // Assert
         assertNotNull(insertedDevices);
-        assertTrue(insertedDevices.size() == 1);
+        assertEquals(1, insertedDevices.size());
         assertEquals(devices.get(1).uuid, insertedDevices.get(0).uuid);
     }
 }
