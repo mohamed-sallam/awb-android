@@ -97,18 +97,18 @@ public class HomeViewModel extends AndroidViewModel {
         detoxPeriodRepository.insert(detoxPeriod);
     }
 
-    /**
-     * Copy a group with its whitelisted applications to a new group. Use it
-     * when you need to make a copy of a group so we can edit it without
-     * touching the original group.
-     *
-     * @param groupUuid the unique identifier for the group to access the
-     * group we want to copy from
-     * @param newGroupName the new group name, the copied one.
-     */
-    public void duplicateGroup(UUID groupUuid, String newGroupName) {
-        groupRepository.clone(groupUuid, newGroupName);
-    }
+//    /**
+//     * Copy a group with its whitelisted applications to a new group. Use it
+//     * when you need to make a copy of a group so we can edit it without
+//     * touching the original group.
+//     *
+//     * @param groupUuid the unique identifier for the group to access the
+//     * group we want to copy from
+//     * @param newGroupName the new group name, the copied one.
+//     */
+//    public void duplicateGroup(UUID groupUuid, String newGroupName) {
+//        groupRepository.clone(groupUuid, newGroupName);
+//    }
 
     public LiveData<Device> getThisDevice() {
         return thisDevice;

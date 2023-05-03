@@ -66,16 +66,16 @@ public interface IGroupRepository extends IRepository<Group> {
      */
     LiveData<List<WhitelistedApp>> getAllWhitelistedAppsByGroupUuid(UUID groupUuid);
 
-    /**
-     * Clones a group with its whitelisted applications to a new group. Use it
-     * when you need to make a copy of a group so we can edit it without
-     * touching the original group.
-     *
-     * @param sourceGroupUuid the unique identifier for the original group we
-     * take a copy from.
-     * @param newGroupName the name of the new copied group.
-     */
-    void clone(UUID sourceGroupUuid, String newGroupName);
+//    /**
+//     * Clones a group with its whitelisted applications to a new group. Use it
+//     * when you need to make a copy of a group so we can edit it without
+//     * touching the original group.
+//     *
+//     * @param sourceGroupUuid the unique identifier for the original group we
+//     * take a copy from.
+//     * @param newGroupName the name of the new copied group.
+//     */
+//    void clone(UUID sourceGroupUuid, String newGroupName);
 
     LiveData<List<Group>> getAllForThisDevice();
 }
