@@ -1,6 +1,8 @@
 package io.github.mohamed.sallam.awb.db.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
@@ -31,5 +33,15 @@ public class WhitelistedApp {
     public Integer id;
     public String packageName;
     public UUID groupUuid;
+
+    public WhitelistedApp() {
+    }
+
+    @Ignore
+    public WhitelistedApp(@NonNull Integer id, String packageName, UUID groupUuid) {
+        this.id = id;
+        this.packageName = packageName;
+        this.groupUuid = groupUuid;
+    }
 }
 

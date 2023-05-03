@@ -23,6 +23,7 @@ import java.util.UUID;
 import io.github.mohamed.sallam.awb.db.dao.GroupDao;
 import io.github.mohamed.sallam.awb.db.dao.WhitelistedAppDao;
 import io.github.mohamed.sallam.awb.db.entity.Group;
+import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.util.LiveDataTestUtil;
 import io.github.mohamed.sallam.awb.util.TestUtil;
 
@@ -65,6 +66,7 @@ public class GroupRepositoryTest {
 
         // Assert
         verify(groupDao).rename(uuid, name);
+        verifyNoMoreInteractions(groupDao);
     }
 
     @Test
@@ -78,6 +80,8 @@ public class GroupRepositoryTest {
         // Assert
         verify(groupDao).delete(groupUuid);
         verify(whitelistedAppDao).deleteByGroupUuid(groupUuid);
+        verifyNoMoreInteractions(groupDao);
+        verifyNoMoreInteractions(whitelistedAppDao);
     }
 
     @Test
@@ -98,39 +102,65 @@ public class GroupRepositoryTest {
         assertEquals(groups, result);
     }
 
-//    @Test
-//    public void testInsertWhitelistedApp() {
-//        WhitelistedApp whitelistedApp = new WhitelistedApp();
-//        groupRepository.insertWhitelistedApp(whitelistedApp);
-//        verify(whitelistedAppDao).insert(whitelistedApp);
-//    }
+    @Test
+    public void testInsertWhitelistedApp() {
+        // Arrange
+        WhitelistedApp whitelistedApp = TestUtil.TEST_WHITELISTED_APP_1;
 
-//    @Test
-//    public void testDeleteWhitelistedApp() {
-//        UUID groupUuid = UUID.randomUUID();
-//        String packageName = "com.example.app";
-//        groupRepository.deleteWhitelistedApp(groupUuid, packageName);
-//        verify(whitelistedAppDao).delete(groupUuid, packageName);
-//    }
-//
-//    @Test
-//    public void testGetAllWhitelistedAppsByGroupUuid() throws InterruptedException {
-//        UUID groupUuid = UUID.randomUUID();
-//        List<WhitelistedApp> whitelistedApps = new ArrayList<>();
-//        whitelistedApps.add(new WhitelistedApp());
-//        LiveData<List<WhitelistedApp>> liveData = new MutableLiveData<>(whitelistedApps);
-//        when(whitelistedAppDao.getAllByGroupUuid(groupUuid)).thenReturn(liveData);
-//
-//        LiveDataTestUtil<List<WhitelistedApp>> liveDataTestUtil = new LiveDataTestUtil<>();
-//        List<WhitelistedApp> result = liveDataTestUtil.getValue(groupRepository.getAllWhitelistedAppsByGroupUuid(groupUuid));
-//        assertEquals(whitelistedApps, result);
-//    }
+        // Act
+        groupRepository.insertWhitelistedApp(whitelistedApp);
 
-//    @Test
-//    public void testClone() {
-//    }
-//
-//    @Test
-//    public void getAllForThisDevice() {
-//    }
+        // Assert
+        verify(whitelistedAppDao).insert(whitelistedApp);
+        verifyNoMoreInteractions(whitelistedAppDao);
+    }
+
+    @Test
+    public void testDeleteWhitelistedApp() {
+        // Arrange
+        UUID groupUuid = TestUtil.TEST_UUID_3;
+        String packageName = "com.example.app";
+
+        // Act
+        groupRepository.deleteWhitelistedApp(groupUuid, packageName);
+
+        // Assert
+        verify(whitelistedAppDao).delete(groupUuid, packageName);
+        verifyNoMoreInteractions(whitelistedAppDao);
+    }
+
+    @Test
+    public void testGetAllWhitelistedAppsByGroupUuid() throws InterruptedException {
+        // Arrange
+        UUID groupUuid = TestUtil.TEST_UUID_3;
+        List<WhitelistedApp> whitelistedApps = new ArrayList<>();
+        whitelistedApps.add(TestUtil.TEST_WHITELISTED_APP_1);
+        LiveData<List<WhitelistedApp>> liveData = new MutableLiveData<>(whitelistedApps);
+        when(whitelistedAppDao.getAllByGroupUuid(groupUuid)).thenReturn(liveData);
+
+        // Act
+        List<WhitelistedApp> result = new LiveDataTestUtil<List<WhitelistedApp>>().getValue(
+                groupRepository.getAllWhitelistedAppsByGroupUuid(groupUuid)
+        );
+
+        // Assert
+        assertEquals(whitelistedApps, result);
+    }
+
+    @Test
+    public void testGetAllForThisDevice() throws InterruptedException {
+        // Arrange
+        List<Group> groups = new ArrayList<>();
+        groups.add(TestUtil.TEST_GROUP_1);
+        LiveData<List<Group>> liveData = new MutableLiveData<>(groups);
+        when(groupDao.getAllForThisDevice()).thenReturn(liveData);
+
+        // Act
+        List<Group> result = new LiveDataTestUtil<List<Group>>().getValue(
+                groupRepository.getAllForThisDevice()
+        );
+
+        // Assert
+        assertEquals(groups, result);
+    }
 }
