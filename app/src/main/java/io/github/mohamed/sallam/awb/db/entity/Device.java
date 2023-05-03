@@ -5,6 +5,7 @@ import static io.github.mohamed.sallam.awb.db.entity.Device.Os.UNKNOWN;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -35,6 +36,34 @@ public class Device implements IAggregateRoot {
     public String ipAddressV4;
     public String secretKey;
     public static final String AWB_VERSION = "0.1.0v";
+
+    public Device(){
+
+    }
+
+    @Ignore
+    public Device(
+            UUID uuid, String name, boolean thisDevice,
+            String operatingSystemName, Os operatingSystemType,
+            String ipAddressV4, String secretKey
+    ){
+        this.uuid = uuid;
+        this.name = name;
+        this.thisDevice = thisDevice;
+        this.operatingSystemName = operatingSystemName;
+        this.operatingSystemType = operatingSystemType;
+        this.ipAddressV4 = ipAddressV4;
+        this.secretKey = secretKey;
+    }
+
+    @Ignore
+    public Device(Device device){
+        this(
+                device.uuid, device.name, device.thisDevice,
+                device.operatingSystemName, device.operatingSystemType,
+                device.ipAddressV4, device.secretKey
+        );
+    }
 
     /**
      * Enum to optimize the interactions with operating system names by
