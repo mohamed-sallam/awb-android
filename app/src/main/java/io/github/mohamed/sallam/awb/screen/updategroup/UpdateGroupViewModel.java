@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -31,11 +32,10 @@ import io.github.mohamed.sallam.awb.repo.GroupRepository;
  *
  * @author Mohamed Sallam
  */
-public class UpdateGroupViewModel extends AndroidViewModel {
+public class UpdateGroupViewModel extends ViewModel {
     private final GroupRepository groupRepository;
     private final Map<String, AppCommand> appCommands;
     private final UUID groupUuid;
-    private final Application application;
     private final MutableLiveData<List<App>> apps;
     private LiveData<List<WhitelistedApp>> whitelistedApps;
 
@@ -59,20 +59,26 @@ public class UpdateGroupViewModel extends AndroidViewModel {
      *
      */
     public UpdateGroupViewModel(@NonNull Application application, UUID groupUuid) {
-        super(application);
-        this.application = application;
         this.groupUuid = groupUuid;
         groupRepository = new GroupRepository(application);
         appCommands = new LinkedHashMap<>();
         whitelistedApps = groupRepository.getAllWhitelistedAppsByGroupUuid(groupUuid);
-        apps = new MutableLiveData<List<App>>(getAllApps());
+        apps = new MutableLiveData<List<App>>(getAllApps(application));
+    }
+
+    public UpdateGroupViewModel(GroupRepository groupRepository, UUID groupUuid) {
+        this.groupUuid = groupUuid;
+        this.groupRepository = groupRepository;
+        appCommands = new LinkedHashMap<>();
+        whitelistedApps = groupRepository.getAllWhitelistedAppsByGroupUuid(groupUuid);
+        apps = new MutableLiveData<List<App>>();
     }
 
     public void resetNavigation() {
         navigateBack = null;
     }
 
-    private List<App> getAllApps() {
+    private List<App> getAllApps(Application application) {
         @SuppressLint("QueryPermissionsNeeded")
         List<ApplicationInfo> appsData = application.getPackageManager()
                                                     .getInstalledApplications(
@@ -86,7 +92,7 @@ public class UpdateGroupViewModel extends AndroidViewModel {
                         application.getPackageManager().getApplicationLabel(appInfo)
                         .toString(),
                         application.getPackageManager().getApplicationIcon(appInfo));
-                if (!app.getPackageName().equals(getApplication().getPackageName()))
+                if (!app.getPackageName().equals(application.getPackageName()))
                     apps.add(app);
             }
         }
