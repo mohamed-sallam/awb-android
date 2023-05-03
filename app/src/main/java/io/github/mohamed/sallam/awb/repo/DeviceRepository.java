@@ -2,7 +2,9 @@ package io.github.mohamed.sallam.awb.repo;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 import java.util.UUID;
@@ -42,11 +44,11 @@ public class DeviceRepository implements IDeviceRepository {
         thisDevice = deviceDao.getThisDevice();
     }
 
-    public DeviceRepository(GroupDao groupDao, DeviceDao deviceDao) {
+    public DeviceRepository(GroupDao groupDao, DeviceDao deviceDao, Device device, @NonNull LiveData<List<Device>> liveDataDevices) {
         this.groupDao = groupDao;
         this.deviceDao = deviceDao;
-        devices = null;
-        thisDevice = null;
+        devices = liveDataDevices;
+        thisDevice = new MutableLiveData<>(device);
     }
 
     /**

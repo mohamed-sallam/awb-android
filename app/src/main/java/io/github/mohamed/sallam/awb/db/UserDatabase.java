@@ -42,8 +42,8 @@ public abstract class UserDatabase extends RoomDatabase {
     public abstract DetoxPeriodDao detoxPeriodDao();
     public abstract DeviceDao      deviceDao();
     public abstract GroupDao       groupDao();
-    public static final ExecutorService databaseWriteExecutor =
-            Executors.newFixedThreadPool(1);
+    public static ExecutorService databaseWriteExecutor =
+            Executors.newFixedThreadPool(2);
 
     public static synchronized UserDatabase getInstance(final Context context) {
         if (instance == null){
