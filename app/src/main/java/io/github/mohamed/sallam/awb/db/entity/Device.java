@@ -40,22 +40,28 @@ public class Device implements IAggregateRoot {
     public Device() {
     }
     @Ignore
-    public Device(@NonNull UUID uuid, String name, String operatingSystemName, String secretKey) {
+    public Device(
+            UUID uuid, String name, boolean thisDevice,
+            String operatingSystemName, Os operatingSystemType,
+            String ipAddressV4, String secretKey
+    ){
         this.uuid = uuid;
         this.name = name;
-        this.thisDevice = true;
+        this.thisDevice = thisDevice;
         this.operatingSystemName = operatingSystemName;
+        this.operatingSystemType = operatingSystemType;
+        this.ipAddressV4 = ipAddressV4;
         this.secretKey = secretKey;
     }
+
     @Ignore
     public Device(Device device) {
-        this.uuid = device.uuid;
-        this.name = device.name;
-        this.thisDevice = true;
-        this.operatingSystemName = device.operatingSystemName;
-        this.secretKey = device.secretKey;
+        this(
+                device.uuid, device.name, device.thisDevice,
+                device.operatingSystemName, device.operatingSystemType,
+                device.ipAddressV4, device.secretKey
+        );
     }
-
     /**
      * Enum to optimize the interactions with operating system names by
      * assigning constant names to a group of numeric integer values. It makes

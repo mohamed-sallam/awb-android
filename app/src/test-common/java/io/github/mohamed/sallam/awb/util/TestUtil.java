@@ -35,10 +35,6 @@ public class TestUtil {
     public static final WhitelistedApp TEST_WHITELISTED_APP_2 = new WhitelistedApp(456, "app2", TEST_UUID_3);
     public static final WhitelistedApp TEST_WHITELISTED_APP_3 = new WhitelistedApp(789, "app3", TEST_UUID_3);
     public static final List<WhitelistedApp> TEST_WHITELISTED_APPS_LIST = List.of(TEST_WHITELISTED_APP_1, TEST_WHITELISTED_APP_2, TEST_WHITELISTED_APP_3);
-
-    public static final Device TEST_DEVICE_1 = new Device(TEST_UUID_1, "device1", "ANDROID", "SecretKeyTest");
-    public static final Device TEST_DEVICE_2 = new Device(TEST_UUID_1, "device2", "ANDROID", "SecretKeyTest");
-
     public static final List<Device> TEST_DEVICE_LIST = List.of(TEST_DEVICE_1, TEST_DEVICE_2);
 
     public static final DetoxPeriod TEST_DETOX_PERIOD_1 = new DetoxPeriod(10, TEST_UUID_2, 10_000L);
