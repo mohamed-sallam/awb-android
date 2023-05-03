@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
+import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.entity.Group;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 
@@ -12,6 +13,16 @@ public class TestUtil {
     public static final UUID TEST_UUID_2 = UUID.randomUUID();
 
     public static final UUID TEST_UUID_1_DEVICE = UUID.randomUUID();
+    public static final Device TEST_DEVICE_1 = new Device(
+            UUID.randomUUID(), "Device 1", true,
+            "Android", Device.Os.ANDROID,
+            "192.168.1.100", "secret1"
+    );
+    public static final Device TEST_DEVICE_2 = new Device(
+            UUID.randomUUID(), "Device 2", false,
+            "Windows", Device.Os.WINDOWS,
+            "192.168.1.101", "secret2"
+    );
     public static final Group TEST_GROUP_1 = new Group(TEST_UUID_1, "group1", TEST_UUID_1_DEVICE);
 
     public static final UUID TEST_UUID_3 = UUID.randomUUID();
