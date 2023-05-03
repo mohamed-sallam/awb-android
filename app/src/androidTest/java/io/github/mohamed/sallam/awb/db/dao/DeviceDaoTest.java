@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.db.UserDatabaseTest;
 import io.github.mohamed.sallam.awb.db.entity.Device;
@@ -110,5 +111,25 @@ public class DeviceDaoTest extends UserDatabaseTest {
         assertNotNull(insertedDevices);
         assertEquals(1, insertedDevices.size());
         assertEquals(devices.get(1).uuid, insertedDevices.get(0).uuid);
+    }
+
+    @Test
+    public void setUuidTest() throws InterruptedException {
+        // Arrange
+        Device device = new Device(TestUtil.TEST_DEVICE_1);
+        UUID oldUuid = device.uuid;
+        deviceDao.insert(device);
+        UUID newUuid = UUID.randomUUID();
+
+        // Act
+        deviceDao.setUuid(oldUuid, newUuid);
+
+        LiveDataTestUtil<List<Device>> liveDataTestUtil = new LiveDataTestUtil<>();
+        List<Device> insertedDevices = liveDataTestUtil.getValue(deviceDao.getAll());
+
+        // Assert
+        assertNotNull(insertedDevices);
+        assertEquals(1, insertedDevices.size());
+        assertEquals(oldUuid, insertedDevices.get(0).uuid);
     }
 }
