@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import androidx.test.filters.SmallTest;
 import androidx.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,12 +19,16 @@ import java.util.List;
 
 import io.github.mohamed.sallam.awb.db.UserDatabaseTest;
 import io.github.mohamed.sallam.awb.db.entity.Device;
+import io.github.mohamed.sallam.awb.util.LiveDataTestUtil;
+import io.github.mohamed.sallam.awb.util.TestUtil;
+import kotlinx.coroutines.ExperimentalCoroutinesApi;
 
 /**
  * Testing Device Data Access Object.
  *
  * @author Mohamed Sherif
  */
+@ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class DeviceDaoTest extends UserDatabaseTest {
@@ -31,38 +36,34 @@ public class DeviceDaoTest extends UserDatabaseTest {
     @Rule
     public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
 
+    private DeviceDao deviceDao;
+
+    @Before
+    public void setup() {
+        super.setup();
+        deviceDao = userDatabase.deviceDao();
+    }
+
     @Test
-    public void insertAndGetAllDevices() {
+    public void insertAndGetAllDevices() throws InterruptedException {
+        // Arrange
         List<Device> devices = new ArrayList<>();
 
-        // create a few Device objects
-        Device device1 = new Device();
-        device1.name = "Device 1";
-        device1.thisDevice = true;
-        device1.operatingSystemName = "Android";
-        device1.operatingSystemType = Device.Os.ANDROID;
-        device1.ipAddressV4 = "192.168.1.100";
-        device1.secretKey = "secret1";
+        Device device1 = new Device(TestUtil.TEST_DEVICE_1);
+        Device device2 = new Device(TestUtil.TEST_DEVICE_1);
 
-        Device device2 = new Device();
-        device2.name = "Device 2";
-        device2.thisDevice = false;
-        device2.operatingSystemName = "Windows";
-        device2.operatingSystemType = Device.Os.WINDOWS;
-        device2.ipAddressV4 = "192.168.1.101";
-        device2.secretKey = "secret2";
-
-        // add the devices to the list
         devices.add(device1);
         devices.add(device2);
 
+        // Act
         for(int i=0; i<2; i++){
-            getDeviceDao().insert(devices.get(i));
+            deviceDao.insert(devices.get(i));
         }
 
-        LiveData<List<Device>> liveData = getDeviceDao().getAll();
-        List<Device> insertedDevices = liveData.getValue();
+        LiveDataTestUtil<List<Device>> liveDataTestUtil = new LiveDataTestUtil<>();
+        List<Device> insertedDevices = liveDataTestUtil.getValue(deviceDao.getAll());
 
+        // Assert
         assertNotNull(insertedDevices);
         assertTrue(insertedDevices.size() == 2);
         assertEquals(devices.get(0).uuid, insertedDevices.get(0).uuid);
@@ -70,26 +71,21 @@ public class DeviceDaoTest extends UserDatabaseTest {
     }
 
     @Test
-    public void updateDevice() {
-        Device device = new Device();
-        device.name = "Device 1";
-        device.thisDevice = true;
-        device.operatingSystemName = "Android";
-        device.operatingSystemType = Device.Os.ANDROID;
-        device.ipAddressV4 = "192.168.1.100";
-        device.secretKey = "secret1";
-
-        getDeviceDao().insert(device);
-
-        Device updatedDevice = new Device();
+    public void updateDevice() throws InterruptedException {
+        // Arrange
+        Device device = new Device(TestUtil.TEST_DEVICE_1);
+        Device updatedDevice = new Device(TestUtil.TEST_DEVICE_2);;
         updatedDevice.uuid = device.uuid;
         updatedDevice.name = "Updated Device";
 
-        getDeviceDao().update(updatedDevice);
+        // Act
+        deviceDao.insert(device);
+        deviceDao.update(updatedDevice);
 
-        LiveData<List<Device>> liveData = getDeviceDao().getAll();
-        List<Device> insertedDevices = liveData.getValue();
+        LiveDataTestUtil<List<Device>> liveDataTestUtil = new LiveDataTestUtil<>();
+        List<Device> insertedDevices = liveDataTestUtil.getValue(deviceDao.getAll());
 
+        // Assert
         assertNotNull(insertedDevices);
         assertTrue(insertedDevices.size() == 1);
         assertEquals(updatedDevice.uuid, insertedDevices.get(0).uuid);
@@ -97,39 +93,27 @@ public class DeviceDaoTest extends UserDatabaseTest {
     }
 
     @Test
-    public void deleteDevice() {
+    public void deleteDevice() throws InterruptedException {
+        // Arrange
         List<Device> devices = new ArrayList<>();
 
-        // create a few Device objects
-        Device device1 = new Device();
-        device1.name = "Device 1";
-        device1.thisDevice = true;
-        device1.operatingSystemName = "Android";
-        device1.operatingSystemType = Device.Os.ANDROID;
-        device1.ipAddressV4 = "192.168.1.100";
-        device1.secretKey = "secret1";
-
+        Device device1 = new Device(TestUtil.TEST_DEVICE_1);
         Device device2 = new Device();
-        device2.name = "Device 2";
-        device2.thisDevice = false;
-        device2.operatingSystemName = "Windows";
-        device2.operatingSystemType = Device.Os.WINDOWS;
-        device2.ipAddressV4 = "192.168.1.101";
-        device2.secretKey = "secret2";
 
-        // add the devices to the list
         devices.add(device1);
         devices.add(device2);
 
         for(int i=0; i<2; i++){
-            getDeviceDao().insert(devices.get(i));
+            deviceDao.insert(devices.get(i));
         }
 
-        getDeviceDao().delete(devices.get(0).uuid);
+        // Act
+        deviceDao.delete(devices.get(0).uuid);
 
-        LiveData<List<Device>> liveData = getDeviceDao().getAll();
-        List<Device> insertedDevices = liveData.getValue();
+        LiveDataTestUtil<List<Device>> liveDataTestUtil = new LiveDataTestUtil<>();
+        List<Device> insertedDevices = liveDataTestUtil.getValue(deviceDao.getAll());
 
+        // Assert
         assertNotNull(insertedDevices);
         assertTrue(insertedDevices.size() == 1);
         assertEquals(devices.get(1).uuid, insertedDevices.get(0).uuid);
