@@ -91,7 +91,7 @@ public class DeviceDaoTest extends UserDatabaseTest {
         List<Device> devices = new ArrayList<>();
 
         Device device1 = new Device(TestUtil.TEST_DEVICE_1);
-        Device device2 = new Device();
+        Device device2 = new Device(TestUtil.TEST_DEVICE_2);
 
         devices.add(device1);
         devices.add(device2);
