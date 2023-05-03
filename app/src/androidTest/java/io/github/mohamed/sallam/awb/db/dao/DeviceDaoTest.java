@@ -28,15 +28,9 @@ import io.github.mohamed.sallam.awb.db.entity.Device;
 @SmallTest
 public class DeviceDaoTest extends UserDatabaseTest {
 
-    /**
-     * Insures that the tests runs in the main thread.
-     */
     @Rule
     public InstantTaskExecutorRule rule = new InstantTaskExecutorRule();
 
-    /**
-     * Test Case of the `insert` Method.
-     */
     @Test
     public void insertAndGetAllDevices() {
         List<Device> devices = new ArrayList<>();
@@ -75,9 +69,6 @@ public class DeviceDaoTest extends UserDatabaseTest {
         assertEquals(devices.get(1).uuid, insertedDevices.get(1).uuid);
     }
 
-    /**
-     * Test Case of the `update` Method.
-     */
     @Test
     public void updateDevice() {
         Device device = new Device();
@@ -105,9 +96,6 @@ public class DeviceDaoTest extends UserDatabaseTest {
         assertEquals(updatedDevice.name, insertedDevices.get(0).name);
     }
 
-    /**
-     * Test Case of the `delete` Method.
-     */
     @Test
     public void deleteDevice() {
         List<Device> devices = new ArrayList<>();
