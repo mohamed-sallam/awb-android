@@ -99,20 +99,20 @@ public class GroupRepository implements IGroupRepository {
         return whitelistedAppDao.getAllByGroupUuid(groupUuid);
     }
 
-    public void clone(UUID sourceGroupUuid, String groupName) {
-        UserDatabase.databaseWriteExecutor.execute(() -> {
-            Group destinationGroup = new Group();
-            destinationGroup.name = groupName;
-            destinationGroup.deviceUuid = Objects
-                                          .requireNonNull(
-                                                  groupDao
-                                                  .get(sourceGroupUuid)
-                                                  .getValue())
-                                          .deviceUuid;
-            whitelistedAppDao.clone(sourceGroupUuid, destinationGroup.uuid);
-            groupDao.insert(destinationGroup);
-        });
-    }
+//    public void clone(UUID sourceGroupUuid, String groupName) {
+//        UserDatabase.databaseWriteExecutor.execute(() -> {
+//            Group destinationGroup = new Group();
+//            destinationGroup.name = groupName;
+//            destinationGroup.deviceUuid = Objects
+//                                          .requireNonNull(
+//                                                  groupDao
+//                                                  .get(sourceGroupUuid)
+//                                                  .getValue())
+//                                          .deviceUuid;
+//            whitelistedAppDao.clone(sourceGroupUuid, destinationGroup.uuid);
+//            groupDao.insert(destinationGroup);
+//        });
+//    }
 
     public LiveData<List<Group>> getAllForThisDevice() {
         return groupDao.getAllForThisDevice();

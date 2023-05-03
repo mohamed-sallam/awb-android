@@ -13,10 +13,10 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 @SmallTest
 public class UserDatabaseTest {
-    private UserDatabase userDatabase;
+    protected UserDatabase userDatabase;
 
     @Before
-    public void setup(){
+    public void setup() {
         userDatabase = Room.inMemoryDatabaseBuilder(
                 ApplicationProvider.getApplicationContext(),
                 UserDatabase.class
