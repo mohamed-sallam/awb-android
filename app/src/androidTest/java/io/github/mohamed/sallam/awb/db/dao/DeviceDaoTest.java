@@ -150,4 +150,18 @@ public class DeviceDaoTest extends UserDatabaseTest {
         assertEquals(true, insertedDevices.contains(device1));
         assertEquals(true, insertedDevices.contains(device2));
     }
+
+    @Test
+    public void getThisDeviceTest() throws InterruptedException {
+        // Arrange
+        Device device = new Device(TestUtil.TEST_DEVICE_1);
+        deviceDao.insert(device);
+
+        // Act
+        LiveDataTestUtil<Device> liveDataTestUtil = new LiveDataTestUtil<>();
+        Device retrievedDevice = liveDataTestUtil.getValue(deviceDao.getThisDevice());
+
+        // Assert
+        assertEquals(device, retrievedDevice);
+    }
 }
