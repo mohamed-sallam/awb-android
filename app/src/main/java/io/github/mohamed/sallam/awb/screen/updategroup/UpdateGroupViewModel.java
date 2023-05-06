@@ -66,12 +66,13 @@ public class UpdateGroupViewModel extends ViewModel {
         apps = new MutableLiveData<List<App>>(getAllApps(application));
     }
 
-    public UpdateGroupViewModel(GroupRepository groupRepository, UUID groupUuid) {
+    public UpdateGroupViewModel(GroupRepository groupRepository, UUID groupUuid,
+                                @NonNull LiveData<List<App>> liveDataApps, LiveData<List<WhitelistedApp>> whitelistedApps) {
         this.groupUuid = groupUuid;
         this.groupRepository = groupRepository;
         appCommands = new LinkedHashMap<>();
-        whitelistedApps = groupRepository.getAllWhitelistedAppsByGroupUuid(groupUuid);
-        apps = new MutableLiveData<List<App>>();
+        this.whitelistedApps = whitelistedApps;
+        apps = new MutableLiveData<>(liveDataApps.getValue());
     }
 
     public void resetNavigation() {

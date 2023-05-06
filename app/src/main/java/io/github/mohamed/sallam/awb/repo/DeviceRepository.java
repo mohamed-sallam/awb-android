@@ -44,7 +44,8 @@ public class DeviceRepository implements IDeviceRepository {
         thisDevice = deviceDao.getThisDevice();
     }
 
-    public DeviceRepository(GroupDao groupDao, DeviceDao deviceDao, Device device, @NonNull LiveData<List<Device>> liveDataDevices) {
+    public DeviceRepository(GroupDao groupDao, DeviceDao deviceDao, Device device,
+                            @NonNull LiveData<List<Device>> liveDataDevices) {
         this.groupDao = groupDao;
         this.deviceDao = deviceDao;
         devices = liveDataDevices;
