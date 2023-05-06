@@ -2,7 +2,9 @@ package io.github.mohamed.sallam.awb.repo;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -21,8 +23,8 @@ import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
  */
 public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     private final DetoxPeriodDao detoxPeriodDao;
-    private final LiveData<DetoxPeriod> detoxPeriod;
-    private LiveData<List<WhitelistedApp>> whitelistedAppsOfCurrentDetoxPeriod;
+    private final LiveData<DetoxPeriod> detoxPeriods;
+    private LiveData<List<WhitelistedApp>> whitelistedAppsOfCurrentDetoxPeriods;
 
     /**
      * Instantiates an object from `detoxPeriodDao`.
@@ -34,13 +36,15 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     public DetoxPeriodRepository(Application application) {
         UserDatabase db = UserDatabase.getInstance(application);
         detoxPeriodDao = db.detoxPeriodDao();
-        detoxPeriod = detoxPeriodDao.get();
-        whitelistedAppsOfCurrentDetoxPeriod = detoxPeriodDao.getWhitelistedAppsOfCurrentDetoxPeriod();
+        detoxPeriods = detoxPeriodDao.get();
+        whitelistedAppsOfCurrentDetoxPeriods = detoxPeriodDao.getWhitelistedAppsOfCurrentDetoxPeriod();
     }
 
-    public DetoxPeriodRepository(DetoxPeriodDao detoxPeriodDao){
+    public DetoxPeriodRepository(DetoxPeriodDao detoxPeriodDao, DetoxPeriod detoxPeriod,
+                                 @NonNull LiveData<List<WhitelistedApp>> liveDataWhitelistedAppsOfCurrentDetoxPeriods){
         this.detoxPeriodDao = detoxPeriodDao;
-        this.detoxPeriod = null;
+        this.detoxPeriods = new MutableLiveData<>(detoxPeriod);
+        this.whitelistedAppsOfCurrentDetoxPeriods = liveDataWhitelistedAppsOfCurrentDetoxPeriods;
     }
 
     /**
@@ -71,10 +75,10 @@ public class DetoxPeriodRepository implements IDetoxPeriodRepository {
     }
 
     public LiveData<DetoxPeriod> get() {
-        return detoxPeriod;
+        return detoxPeriods;
     }
 
     public LiveData<List<WhitelistedApp>> getWhitelistedAppsOfCurrentDetoxPeriod() {
-        return whitelistedAppsOfCurrentDetoxPeriod;
+        return whitelistedAppsOfCurrentDetoxPeriods;
     }
 }
