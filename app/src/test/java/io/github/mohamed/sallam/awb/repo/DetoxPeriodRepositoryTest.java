@@ -12,12 +12,12 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.github.mohamed.sallam.awb.db.UserDatabase;
 import io.github.mohamed.sallam.awb.db.dao.DetoxPeriodDao;
 import io.github.mohamed.sallam.awb.db.entity.DetoxPeriod;
-import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.util.LiveDataTestUtil;
 import io.github.mohamed.sallam.awb.util.MainThreadExecutorService;
@@ -31,7 +31,6 @@ public class DetoxPeriodRepositoryTest {
     private DetoxPeriod detoxPeriod;
     private DetoxPeriodDao detoxPeriodDao;
     private DetoxPeriodRepository detoxPeriodRepository;
-    LiveData<List<Device>> liveDataDevices = new MutableLiveData<>(TestUtil.TEST_DEVICE_LIST);
 
     @Before
     public void setUp() {
@@ -94,7 +93,20 @@ public class DetoxPeriodRepositoryTest {
         assertEquals(liveDataDetoxPeriod.getValue(), result);
     }
 
-    public  void testGetWhitelistedAppsOfCurrentDetoxPeriod(){
+    @Test
+    public  void testGetWhitelistedAppsOfCurrentDetoxPeriod() throws InterruptedException {
+        // Arrange
+        List<WhitelistedApp> whitelistedAppList = new ArrayList<>();
+        whitelistedAppList.add(TestUtil.TEST_WHITELISTED_APP_1);
+        whitelistedAppList.add(TestUtil.TEST_WHITELISTED_APP_2);
+        LiveData<List<WhitelistedApp>> liveDataDevices = new MutableLiveData<>(whitelistedAppList);
 
+        // Act
+        List<WhitelistedApp> result = new LiveDataTestUtil<List<WhitelistedApp>>().getValue(
+                detoxPeriodRepository.getWhitelistedAppsOfCurrentDetoxPeriod()
+        );
+
+        // Assert
+        assertEquals(liveDataDevices.getValue(), result);
     }
 }
