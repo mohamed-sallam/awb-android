@@ -1,8 +1,5 @@
 package io.github.mohamed.sallam.awb.screen.updategroup;
-
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import static io.github.mohamed.sallam.awb.util.TestUtil.TEST_UUID_1;
 import static io.github.mohamed.sallam.awb.util.TestUtil.TEST_APPS_LIST;
@@ -16,20 +13,16 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
 import io.github.mohamed.sallam.awb.App;
 import io.github.mohamed.sallam.awb.db.UserDatabase;
-import io.github.mohamed.sallam.awb.db.entity.Device;
 import io.github.mohamed.sallam.awb.db.entity.WhitelistedApp;
 import io.github.mohamed.sallam.awb.repo.GroupRepository;
-import io.github.mohamed.sallam.awb.util.LiveDataTestUtil;
 import io.github.mohamed.sallam.awb.util.MainThreadExecutorService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -76,6 +69,13 @@ public class UpdateGroupViewModelTest {
         Assert.assertTrue(updateGroupViewModel.appCommands.get(packageName).isAllowCommand);
     }
 
+    @Test
+    public void testAllowAppIsBlocked() {
+        String packageName = "com.example.app1";
+        updateGroupViewModel.blockApp(packageName);
+        updateGroupViewModel.allowApp(packageName);
+        Assert.assertEquals(0, updateGroupViewModel.appCommands.size());
+    }
 
     @Test
     public void testBlockApp() {
@@ -83,6 +83,14 @@ public class UpdateGroupViewModelTest {
         updateGroupViewModel.blockApp(packageName);
         Assert.assertEquals(1, updateGroupViewModel.appCommands.size());
         Assert.assertFalse(updateGroupViewModel.appCommands.get(packageName).isAllowCommand);
+    }
+
+    @Test
+    public void testBlockAppIsAllowed() {
+        String packageName = "com.example.app1";
+        updateGroupViewModel.allowApp(packageName);
+        updateGroupViewModel.blockApp(packageName);
+        Assert.assertEquals(0, updateGroupViewModel.appCommands.size());
     }
 
 //    @Test
