@@ -51,7 +51,7 @@ public class UpdateGroupViewModelTest {
     /**
      * Test the getApps method of UpdateGroupViewModel.
      * Scenario: Verify that the method returns a list of apps that matches the TEST_APPS_LIST.
-     * Expected result: The list of apps returned by the method matches the TEST_APPS_LIST.
+     * Expected result: The list of apps returned by the method matches the TEST_APPS_LIST inserted.
      */
     @Test
     public void testGetApps() {
@@ -61,8 +61,10 @@ public class UpdateGroupViewModelTest {
 
     /**
      * Test the getWhitelistedApps method of UpdateGroupViewModel.
-     * Scenario: Verify that the method returns a list of whitelisted apps that matches the TEST_WHITELISTED_APPS_LIST.
-     * Expected result: The list of whitelisted apps returned by the method matches the TEST_WHITELISTED_APPS_LIST.
+     * Scenario: Verify that the method returns a list of whitelisted apps that matches
+     *           the TEST_WHITELISTED_APPS_LIST.
+     * Expected result: The list of whitelisted apps returned by the method matches
+     *                  the TEST_WHITELISTED_APPS_LIST inserted.
      */
     @Test
     public void testGetWhitelistedApps() {
@@ -73,8 +75,10 @@ public class UpdateGroupViewModelTest {
 
     /**
      * Test the allowApp method of UpdateGroupViewModel.
-     * Scenario: Verify that the method adds an AppCommand for the given package name to the appCommands map, with isAllowCommand set to true.
-     * Expected result: The appCommands map should contain an AppCommand for the given package name, with isAllowCommand set to true.
+     * Scenario: Verify that the method adds an AppCommand for the given package name to the
+     *           appCommands map, with isAllowCommand set to true.
+     * Expected result: The appCommands map should contain an AppCommand for the given package name,
+     *                  with isAllowCommand set to true.
      */
     @Test
     public void testAllowApp() {
@@ -88,7 +92,7 @@ public class UpdateGroupViewModelTest {
      * Test the allowApp method of UpdateGroupViewModel when the app is blocked.
      * Scenario: Verify that the method does not add an AppCommand for a blocked package name
      *           to the appCommands map but delete/free the package to not have any command.
-     * Expected result: The appCommands map should not contain any AppCommand for the given package name.
+     * Expected result: AppCommands map should not contain any AppCommand for the given package name.
      */
     @Test
     public void testAllowAppIsBlocked() {
@@ -117,7 +121,7 @@ public class UpdateGroupViewModelTest {
      * Test the blockApp method of UpdateGroupViewModel.
      * Scenario: Verify that the method does not add an AppCommand for an allowed package name
      *           to the appCommands map but delete/free the package to not have any command.
-     * Expected result: The appCommands map should not contain any AppCommand for the given package name.
+     * Expected result: AppCommands map should not contain any AppCommand for the given package name.
      */
     @Test
     public void testBlockAppIsAllowed() {
