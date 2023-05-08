@@ -48,12 +48,22 @@ public class UpdateGroupViewModelTest {
                                                         groupUuid, apps, whitelistedApps);
     }
 
+    /**
+     * Test the getApps method of UpdateGroupViewModel.
+     * Scenario: Verify that the method returns a list of apps that matches the TEST_APPS_LIST.
+     * Expected result: The list of apps returned by the method matches the TEST_APPS_LIST.
+     */
     @Test
     public void testGetApps() {
         List<App> expectedApps = new ArrayList<>(TEST_APPS_LIST);
         Assert.assertEquals(expectedApps, updateGroupViewModel.getApps().getValue());
     }
 
+    /**
+     * Test the getWhitelistedApps method of UpdateGroupViewModel.
+     * Scenario: Verify that the method returns a list of whitelisted apps that matches the TEST_WHITELISTED_APPS_LIST.
+     * Expected result: The list of whitelisted apps returned by the method matches the TEST_WHITELISTED_APPS_LIST.
+     */
     @Test
     public void testGetWhitelistedApps() {
         List<WhitelistedApp> expectedWhitelistedApps = new ArrayList<>(TEST_WHITELISTED_APPS_LIST);
@@ -61,6 +71,11 @@ public class UpdateGroupViewModelTest {
                             updateGroupViewModel.getWhitelistedApps().getValue());
     }
 
+    /**
+     * Test the allowApp method of UpdateGroupViewModel.
+     * Scenario: Verify that the method adds an AppCommand for the given package name to the appCommands map, with isAllowCommand set to true.
+     * Expected result: The appCommands map should contain an AppCommand for the given package name, with isAllowCommand set to true.
+     */
     @Test
     public void testAllowApp() {
         String packageName = "com.example.app1";
@@ -69,6 +84,12 @@ public class UpdateGroupViewModelTest {
         Assert.assertTrue(updateGroupViewModel.appCommands.get(packageName).isAllowCommand);
     }
 
+    /**
+     * Test the allowApp method of UpdateGroupViewModel when the app is blocked.
+     * Scenario: Verify that the method does not add an AppCommand for a blocked package name
+     *           to the appCommands map but delete/free the package to not have any command.
+     * Expected result: The appCommands map should not contain any AppCommand for the given package name.
+     */
     @Test
     public void testAllowAppIsBlocked() {
         String packageName = "com.example.app1";
@@ -77,6 +98,13 @@ public class UpdateGroupViewModelTest {
         Assert.assertEquals(0, updateGroupViewModel.appCommands.size());
     }
 
+    /**
+     * Test the blockApp method of UpdateGroupViewModel.
+     * Scenario: Verify that the method adds an AppCommand for the given package name to
+     *           the appCommands map, with isAllowCommand set to false.
+     * Expected result: The appCommands map should contain an AppCommand for the given package name,
+     *                  with isAllowCommand set to false.
+     */
     @Test
     public void testBlockApp() {
         String packageName = "com.example.app1";
@@ -85,6 +113,12 @@ public class UpdateGroupViewModelTest {
         Assert.assertFalse(updateGroupViewModel.appCommands.get(packageName).isAllowCommand);
     }
 
+    /**
+     * Test the blockApp method of UpdateGroupViewModel.
+     * Scenario: Verify that the method does not add an AppCommand for an allowed package name
+     *           to the appCommands map but delete/free the package to not have any command.
+     * Expected result: The appCommands map should not contain any AppCommand for the given package name.
+     */
     @Test
     public void testBlockAppIsAllowed() {
         String packageName = "com.example.app1";
