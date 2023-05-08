@@ -34,7 +34,7 @@ import io.github.mohamed.sallam.awb.repo.GroupRepository;
  */
 public class UpdateGroupViewModel extends ViewModel {
     private final GroupRepository groupRepository;
-    private final Map<String, AppCommand> appCommands;
+    final Map<String, AppCommand> appCommands;
     private final UUID groupUuid;
     private final MutableLiveData<List<App>> apps;
     private LiveData<List<WhitelistedApp>> whitelistedApps;
@@ -158,7 +158,7 @@ public class UpdateGroupViewModel extends ViewModel {
      * whitelisted applications till the user confirm the operation, command, to
      * be done or refuse it. Commands done by the user (e.g. add and delete).
      */
-    private abstract class AppCommand {
+    abstract static class AppCommand {
         protected String packageName;
         protected Boolean isAllowCommand;
 

@@ -47,11 +47,12 @@ public class UpdateGroupViewModelTest {
         groupRepository = mock(GroupRepository.class);
         groupUuid = TEST_UUID_1;
         MutableLiveData<List<App>> apps = new MutableLiveData<>(TEST_APPS_LIST);
+
         MutableLiveData<List<WhitelistedApp>> whitelistedApps =
                 new MutableLiveData<>(TEST_WHITELISTED_APPS_LIST);
+
         updateGroupViewModel = new UpdateGroupViewModel(groupRepository,
                                                         groupUuid, apps, whitelistedApps);
-
     }
 
     @Test
@@ -67,19 +68,24 @@ public class UpdateGroupViewModelTest {
                             updateGroupViewModel.getWhitelistedApps().getValue());
     }
 
+    @Test
+    public void testAllowApp() {
+        String packageName = "com.example.app1";
+        updateGroupViewModel.allowApp(packageName);
+        Assert.assertEquals(1, updateGroupViewModel.appCommands.size());
+        Assert.assertTrue(updateGroupViewModel.appCommands.get(packageName).isAllowCommand);
+    }
+
+
+    @Test
+    public void testBlockApp() {
+        String packageName = "com.example.app1";
+        updateGroupViewModel.blockApp(packageName);
+        Assert.assertEquals(1, updateGroupViewModel.appCommands.size());
+        Assert.assertFalse(updateGroupViewModel.appCommands.get(packageName).isAllowCommand);
+    }
+
 //    @Test
-//    public void resetNavigation() {
-//    }
-//
-//    @Test
-//    public void allowApp() {
-//    }
-//
-//    @Test
-//    public void blockApp() {
-//    }
-//
-//    @Test
-//    public void save() {
+//    public void testSave() {
 //    }
 }
